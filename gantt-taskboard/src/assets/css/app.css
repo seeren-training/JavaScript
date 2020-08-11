@@ -1,0 +1,17 @@
+.fixed.bottom-left,
+.fixed.bottom-right {
+    position: fixed;
+    bottom: 1em;
+}
+
+.fixed.bottom-right {
+    right: 1em;
+}
+
+.fixed.bottom-left {
+    left: 1em;
+}
+
+.chip {
+    cursor: pointer;
+}
