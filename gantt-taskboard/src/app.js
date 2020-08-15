@@ -97,7 +97,6 @@ const displayTask = (task) => {
     <a class="fixed bottom-left btn-floating btn-large waves-effect waves-light red">
         <i class="material-icons">keyboard_backspace</i>
     </a>`;
-    document.querySelector(".fixed.bottom-left").addEventListener("click", displayTaskList);
     if (1 < taskList.length) {
         document.querySelector(".taskboard-footer").innerHTML += `
         <a class="fixed bottom-right btn-floating btn-large waves-effect waves-light red">
@@ -107,6 +106,7 @@ const displayTask = (task) => {
             deleteTask(task);
         });
     }
+    document.querySelector(".fixed.bottom-left").addEventListener("click", displayTaskList);
 };
 
 const displayTaskList = () => {
