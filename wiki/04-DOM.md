@@ -219,7 +219,7 @@ const id = elem.id;
 La méthode setAttribute `affecte à un élément l'attribut` dont le nom est passé en premier paramètre la valeur passée en second paramètre et renvoie undefined.
 
 ```js
-elem.getAttribute("id", "foo"); 
+elem.setAttribute("id", "foo"); 
 ```
 
 ```js
@@ -261,7 +261,7 @@ const child = elem.removeChild(child);
 La méthode replaceChild d'un nœud `remplace un enfant passé en second paramètre par le nœud passé en premier paramètre` et renvoie l'enfant remplacé. Si le premier paramètre n'est pas un nœud ou le second paramètre n'est pas un enfant, une erreur de type NotFoundError sera levée.
 
 ```js
-const child = elem.removeChild(node, child); 
+const child = elem.replaceChild(node, child); 
 ```
 
 ___
