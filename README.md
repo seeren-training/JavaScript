@@ -4,11 +4,9 @@
 
 35 heures
 
-___
+## Public concerné
 
-## Prérequis
-
-Avoir participé au module HTML/CSS et Algo
+Développeurs, architectes ou chefs de projets techniques.
 
 ___
 
