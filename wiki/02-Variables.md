@@ -16,18 +16,17 @@ Il existe 3 mot clef permettant de déclarer une variable.
 
 ### 🏷️ **Var**
 
-🔗[var](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/var)
-
 ```js
 var foo;
 ```
+
+[Var](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/var)
 
 Par défaut sa valeur vaut `undefined`.
 
 ```js
 var foo = true;
 ```
-
 
 Il est possible de déclarer plusieurs variables en les séparent par une virgule.
 
@@ -46,13 +45,13 @@ console.log(foo); // true
 
 Une variable en dehors d'une fonction est dite "globale", elle est ajoutée en propriété au contexte d'exécution
 
-### 🏷️ **✔️ Let**
-
-🔗[let](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/let)
+### 🏷️ **Let**
 
 ```js
 let foo = true;
 ```
+
+[Let](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/let)
 
 La déclaration avec let est la même qu'avec var. Let appartient à la version es6 et empêche la collision de variables ou le télescopage.
 
@@ -65,11 +64,11 @@ console.log(foo); // ReferenceError: foo is not defined
 
 ### 🏷️ **✔️ Const**
 
-🔗[const](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/const)
-
 ```js
 const foo = true;
 ```
+
+[Const](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/const)
 
 Une constante doit avoir une valeur assignée à la déclaration et ne permet pas de ré affectation.
 
@@ -82,7 +81,7 @@ ___
 
 ## 📑 Types
 
-🔗[types](https://developer.mozilla.org/fr/docs/Web/JavaScript/Structures_de_donn%C3%A9es)
+[Types](https://developer.mozilla.org/fr/docs/Web/JavaScript/Structures_de_donn%C3%A9es)
 
 ### 🏷️ **Primitifs**
 
@@ -122,7 +121,7 @@ console.log("Hello");
 console.log('Hello');
 ```
 
-A partir de la version es6 le **✔️ template literal** fait son apparition. Il permet l'**interpolation** et les **sauts de lignes**.
+A partir de la version es6 le **template literal** fait son apparition. Il permet l'**interpolation** et les **sauts de lignes**.
 
 ```js
 const name = "John";
@@ -159,15 +158,13 @@ ___
 
 Le reste des valeurs possible sont de type objet, que ce soit les tableaux, les fonctions, les classes etc.
 
-![image](https://raw.githubusercontent.com/seeren-training/JavaScript/master/wiki/resources/object.png)
-
 Tous les objets possèdent une valeur qui est modifiée par référence: quand vous passerez un objet en argument et que vous le modifiez, vous ne modifiez pas une copie comme pour les types primitifs, il sera modifié dans le contexte d'appel.
 
 ### 🏷️ **Déclaration**
 
 Il existe de nombreux objets intégrés et vous pouvez en définir également.
 
-* Instancier un `constructeur`.
+* Instancier un constructeur.
 
 ```js
 function Foo () { }
@@ -179,13 +176,13 @@ class Foo { }
 const obj = new Foo();
 ```
 
-* Obtenir un objet avec un `prototype` donné.
+* Obtenir un objet avec un prototype donné.
 
 ```js
 const obj = Object.create(new Foo);
 ```
 
-* ✔️ Obtenir un objet grâce a un initialisateur, c'est un objet `autoconstruit`, un `littéral`.
+* Obtenir un objet grâce a un initialisateur, c'est un objet autoconstruit.
 
 ```js
 const apple = {
@@ -322,9 +319,4 @@ ___
 👨🏻‍💻 Manipulation
 
 
-Déclarez un ou plusieurs tableaux pour réunir les valeurs appartenant à un thème commun.
-
-Complétez sommairement votre document html afin de pouvoir le dynamiser dans une prochaine étape, coder les structures d'affichage avec des informations par défaut.
-
-___
-
+Déclarez un ou plusieurs tableaux pour réunir les valeurs appartenant à un thème commun. Complétez sommairement votre document html afin de pouvoir le dynamiser dans une prochaine étape, coder les structures d'affichage avec des informations par défaut.

@@ -72,12 +72,6 @@ Pour comparer une égalité non stricte, les valeurs seront converties. Un type 
 
 Les opérateurs logiques en JavaScript ne renvoient pas uniquement des valeurs booléennes contrairement à d'autres langages.
 
-|Opération|Syntaxe|Exemple|
-|---|---|---|
-|Et|&&|a && x|
-|Ou|\|\||a \|\| x|
-|Non|!|!a|
-
 #### &&
 
 Utilisé avec des opérandes boolean, l'opérateur && renvoie true si les deux opérandes valent true, sinon il renvoie false. Utilisé avec des opérandes non boolean l'opérateur renvoie la première opérande si elle peut être convertie à false, sinon il renvoie la deuxième.
@@ -99,8 +93,6 @@ Le flux d'instructions peut être encapsulé dans des blocs qui s’exécutent s
 ### 🏷️ **if else**
 
 La structure if vérifie une condition dans ses parenthèses puis exécute les instructions dans le bloc délimité par ses accolades si la condition vaut true.
-
-![image](https://raw.githubusercontent.com/seeren-training/JavaScript/master/wiki/resources/if.jpg)
 
 > Si la condition vaut false le code ne sera pas exécuté. Dans le cas d’absence d'opérateurs, les valeurs chaine de caractères vide, 0, false, null, undefined ou NaN sont équivalentes à false.
 
@@ -176,8 +168,6 @@ try {
 }
 ```
 
-![image](https://raw.githubusercontent.com/seeren-training/JavaScript/master/wiki/resources/exception.png)
-
 Le bloc finally s'utilise pour exécuter des instructions après avoir essayé d'exécuter des instructions ou après avoir attrapé une erreur. Il est utile pour effectuer un traitement qu'il y ait eu des erreurs ou non.
 
 ```js
@@ -203,8 +193,6 @@ Bien que l'on puisse lever n'importe quel type d'exception, l'instruction try ca
 
 #### Error
 
-> var Error = new Error([message[, fileName[, lineNumber]]]);
-
 ```js
 throw new Error('Some error');
 ```
@@ -214,11 +202,7 @@ ___
 
 Une itération sert à répéter l'exécution d'instructions, pour parcourir un tableau ou un objet en peu de lignes il existe des structures itératives.
 
-![image](https://raw.githubusercontent.com/seeren-training/JavaScript/master/wiki/resources/for.jpg)
-
 ### 🏷️ **for**
-
-> for ([initiale]; [condition]; [increment]) [{}]
 
 La boucle for s'appuie sur une expression initiale, une condition et une expression d'incrément pour effectuer une itération. Les expressions et la condition sont optionnelles, mais sans elles il faudra vérifier la condition d'itération à l'intérieur du bloc d'instruction.
 
@@ -229,8 +213,6 @@ for (let i = 0; i < 5; i++) {
 ```
 
 ### 🏷️ **for in**
-
-> for (var key in objet) {}
 
 Il boucle sur l'objet ou le tableau en s'appuyant sur ses propriétés ou clefs en peuplant la première opérande du in par la propriété ou la clef rencontrée pendant l'itération.
 
@@ -243,8 +225,6 @@ for (const key in objet) {
 La bonne pratique correspond à vérifier que la propriété appartient bien au prototype du sujet d'itération et pas à un prototype hérité.
 
 ### 🏷️ **for of**
-
-> for (var value of iterable) {}
 
 La boucle for peut itérer tous les objets itérables selon leurs mécanismes d'itération. Il parcourt la seconde opérande sur la valeur de ses propriétés qu'il affecte à la première opérande.
 
@@ -309,8 +289,6 @@ Les fonctions sont des objets Function qui permettent d'encapsuler des instructi
 
 Une fonction peut être une expression ou une instruction, dans les deux cas elles sont un objet Function, elle peut aussi utiliser le constructeur Function pour obtenir une instance de cet objet.
 
-> function identifiant([param1[, param2[, ...,paramN]]]) {}
-
 En utilisant une instruction de fonction nommée, l'objet sera créé au runtime et sera accessible avant sa déclaration dans le programme.
 
 ```js
@@ -321,8 +299,6 @@ function maFonction() {
 ```
 
 #### return
-
-> return [expression = undefined]; 
 
 L'instruction return renvoie la valeur de l'expression qui lui succède et met fin à l'exécution des instructions d'une fonction. L'expression de retour est optionnelle et sa valeur par défaut est undefined.
 
@@ -412,6 +388,4 @@ ___
 
 👨🏻‍💻 Manipulation
 
-Créez des fonctions sans instructions qui vous permettrons d'atteindre vos objectifs fonctionnels. Discutons-en!
-
-___
+Créez des fonctions sans instructions qui vous permettrons d'atteindre vos objectifs fonctionnels. Discutons-en!.

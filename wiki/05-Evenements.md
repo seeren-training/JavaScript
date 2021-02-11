@@ -6,11 +6,11 @@
 
 Les évènements sont une des deux étapes manquantes pour pouvoir modifier pertinemment un document. La partie précédente a détaillé le DOM et la modification de ses nœuds, les évènements vont nous permettre d'effectuer ces modifications suite à un évènement, une action de l'utilisateur ou du navigateur.
 
-![image](https://raw.githubusercontent.com/seeren-training/JavaScript/master/wiki/resources/event.png)
-
 ___
 
 ## 📑 Définition
+
+![image](https://raw.githubusercontent.com/seeren-training/JavaScript/master/wiki/resources/event.png)
 
 > Un évènement est toujours déclenché, il survient suite à une action souris ou clavier de l'utilisateur, soit suite à un changement d'état du document ou d'objets. 
 
@@ -98,7 +98,7 @@ L'avantage de passer par les écouteurs est la possibilité d'en ajouter plusieu
 
 La méthode addEventListener permet d'assigner un écouteur pour un élément possédant la propriété fournie en premier paramètre sans son suffixe, le second paramètre est la fonction de rappel, le troisième paramètre est un boolean pour initier la capture ou non.
 
-> element.addEventListener(type, listener[, capture]);
+* element.addEventListener(type, listener[, capture]);
 
 En passant une fonction pour un type d'évènement, **le contexte d’exécution de la fonction sera l'objet en cours de manipulation** et donc l'élément sur lequel nous avons ajouté un écouteur évènementiel.
 
@@ -116,7 +116,7 @@ elem.addEventListener("click", callback);
 
 La méthode removeEventListener permet de détacher un écouteur.
 
-> element.removeEventListener(type, listener[, capture]);
+* element.removeEventListener(type, listener[, capture]);
 
 Attention, pour détacher un écouteur, il faut que l'argument 2 ait été attaché au préalable.
 
@@ -124,7 +124,7 @@ Attention, pour détacher un écouteur, il faut que l'argument 2 ait été attac
 elem.removeEventListener("click", callback);
 ```
 
-**Dans le cas de l'utilisation d'une fonction fléchée, ne perdez pas sa référence entre l'ajout et sa suppression.**
+Dans le cas de l'utilisation d'une fonction fléchée, ne perdez pas sa référence entre l'ajout et sa suppression.
 
 ___
 
@@ -142,11 +142,9 @@ elem.onclick = onclick;
 
 Event possède des propriétés intéressantes pour connaitre la cible de l'évènement ou bien les coordonnées d'un click par exemple. Il possède également des méthodes indispensables pour annuler **l'évènement par défaut**.
 
-
 ### 🏷️ **preventDefault**
 
 La méthode preventDefault annule l'évènement initié. Dans le cas d'un lien, il annule l'action de suivre le lien ou dans le cas d'un formulaire il annule son envoi.
-
 
 ```js
 const callback = (event) => {
@@ -159,5 +157,3 @@ ___
 👨🏻‍💻 Manipulation
 
 Ajouter des écouteurs sur les éléments permettant une interaction et modifier le document en conséquence. Produisez une partie de votre logique d'affichage.
-
-___

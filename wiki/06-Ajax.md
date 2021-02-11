@@ -30,9 +30,9 @@ const xhr = new XMLHttpRequest();
 
 ### 🏷️ **URL/Méthode**
 
-🔗 [Méthode](https://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M%C3%A9thodes)
-
 La méthode open spécifie la méthode, la cible et le mode de communication de la requête. Le premier argument correspond à une **méthode** HTTP comme GET, POST, PUT, DELETE, OPTIONS, HEAD ou une autre méthode. Le deuxième paramètre indique la cible de la requête soit l'**URL** distante, les paramètres suivants sont optionnels.
+
+🔗 [Méthode](https://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M%C3%A9thodes)
 
 ```js
 xhr.open(
@@ -56,7 +56,7 @@ L'interface XMLHttpRequestEventTarget décrit les **écouteurs d'évènement** d
 |ontimeout|Quand la valeur de timeout est atteinte après l'envoie|
 |onuploadprogress|Quand l'envoie de la requête progresse|
 
-**Avant d'envoyer votre requête vous devez spécifier une fonction de rappel si vous souhaitez exploiter la réponse.**
+Avant d'envoyer votre requête vous devez spécifier une fonction de rappel si vous souhaitez exploiter la réponse.
 
 ```js
 xhr.onload = () => {
@@ -87,9 +87,9 @@ xhr.send(json);
 
 ### 🏷️ **Status**
 
-🔗 [status code](https://fr.wikipedia.org/wiki/Liste_des_codes_HTTP)
-
 La réponse possède un code qui vous renseigne sur le traitement de la requête. **Elle ne peut être peuplée d'information que dans les écouteurs relatifs à sa récéption!**
+
+[Status code](https://fr.wikipedia.org/wiki/Liste_des_codes_HTTP)
 
 ```js
 const status = xhr.status;
@@ -113,20 +113,8 @@ ___
 
 👨🏻‍💻 Manipulation
 
-En fonction de votre problématique, il faut effectuer des lectures/écritures vers une source de donnée externe.
+En fonction de votre problématique, il faut effectuer des lectures/écritures vers une source de donnée externe. Vous pouvez utiliser un service de stockage en ligne gratuit qui accepte lecture et mise à jour. Formulez une requête pour lire de la donnée, exploitez la réponse pour mettre à jour la valeur de vos variables et le DOM qui le exploite. Pensez expérience de l'utilisateur et utilisez des indicateurs de chargement. Gérez les erreurs!
 
-Vous pouvez utiliser un service de stockage en ligne gratuit qui accepte lecture et mise à jour.
+🔗 [JsonBin](https://jsonbin.io)
 
-🔗 [jsonbin](https://jsonbin.io)
-
-Formulez une requête pour lire de la donnée, exploitez la réponse pour mettre à jour la valeur de vos variables et le DOM qui le exploite.
-
-Pensez expérience de l'utilisateur et utilisez des indicateurs de chargement.
-
-Gérez les erreurs!
-
-___
-
-**L'objectif de JavaScript est atteint, vous devez répéter l'actualisation de l'interface après manipulation de données externes pour fournir les objectifs utilisateurs attendus.**
-
-___
+> L'objectif de JavaScript est atteint, vous devez répéter l'actualisation de l'interface après manipulation de données externes pour fournir les objectifs utilisateurs attendus.

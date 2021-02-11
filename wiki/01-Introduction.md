@@ -10,9 +10,9 @@ ___
 
 ## 📑 Historique
 
-🔗 [The Birth and Death of Javascript](https://www.destroyallsoftware.com/talks/the-birth-and-death-of-javascript)
-
 ![image](https://raw.githubusercontent.com/seeren-training/JavaScript/master/wiki/resources/the-birth-and-death-of-javascript.poster.png)
+
+🔗 [The Birth and Death of Javascript](https://www.destroyallsoftware.com/talks/the-birth-and-death-of-javascript)
 
 ___
 
@@ -45,7 +45,7 @@ JavaScript possède plusieurs paradigmes possible et la forme de son utilisation
 
 > JavaScript est un langage orienté objet à prototype
 
-#### es < 6
+#### ES < 6
 
 ```js
 function Eleve() {
@@ -57,7 +57,7 @@ Eleve.prototype.name = "J.Doe";
 alert(eleveDefaut.name); // affiche "J.Doe"
 ```
 
-**L'héritage se met en place en étendant la chaine de prototype d'un constructeur**. Si l'instance ne possède pas la propriété ou la méthode recherchée, la recherche se poursuit dans le prototype de l'instance. Ce mécanisme de recherche parcourt ce qu'on appelle la **chaîne de prototypes**.
+L'héritage se met en place en étendant la chaine de prototype d'un constructeur. Si l'instance ne possède pas la propriété ou la méthode recherchée, la recherche se poursuit dans le prototype de l'instance. Ce mécanisme de recherche parcourt ce qu'on appelle la chaîne de prototypes.
 
 #### es >= 6
 
@@ -71,7 +71,7 @@ class MonConstructeur {
 }
 ```
 
-**Les classes soufrent toujours d'un problème de compatibilité dans les navigateurs** au niveau de leur import/export et depuis quelques années **l'on n'exécute plus le JavaScript que l'on écrit**. **Un compileur ou plutot transpileur comme Babel est utilisé afin de convertir la syntaxe moderne du langage en syntaxe es5** afin d'avoir une interprétation correcte par le navigateur.
+Les classes soufrent toujours d'un problème de compatibilité dans les navigateurs au niveau de leur import/export et depuis quelques années l'on n'exécute plus le JavaScript que l'on écrit. Un compileur ou plutot transpileur comme Babel est utilisé afin de convertir la syntaxe moderne du langage en syntaxe es5 afin d'avoir une interprétation correcte par le navigateur.
 
 ___
 
@@ -85,9 +85,9 @@ ___
 
 ## 📑 Node Package manager
 
-🔗[npm](https://www.npmjs.com/)
-
 NPM est le `package manager` du langage, il sert notamment à **déclarer un projet**, **ses dépendances** en mode production ou développement, **exécuter des scripts** et bien d'autres choses...
+
+🔗[Npm](https://www.npmjs.com/)
 
 ![image](https://raw.githubusercontent.com/seeren-training/JavaScript/master/wiki/resources/npm.png)
 
@@ -117,7 +117,7 @@ ___
 
 👨🏻‍💻 Manipulation
 
-**Votons pour une thématique de projet** qui nous motive puis initialisez votre projet.
+Votons pour une thématique de projet qui nous motive puis initialisez votre projet.
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 Dans votre navigateur web vous pouvez ouvrir les outils pour développeurs avec la touche `F12`. Un onglet console est disponible et affiche les arguments donné aux méthodes de l'objet console en JavaScript:
 
-```
+```js
 console.log('Hello World');
 ```
 ___
