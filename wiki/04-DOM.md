@@ -310,5 +310,3 @@ ___
 👨🏻‍💻 Manipulation
 
 Utilisez **les fonctions** pour pouvoir dynamiser votre document en fonction de vos besoins.
-
-___
