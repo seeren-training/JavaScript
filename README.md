@@ -1,4 +1,4 @@
-# JavaScript
+# JavaScript - La manipulation du DOM et Ajax
 
 ## Durée
 
