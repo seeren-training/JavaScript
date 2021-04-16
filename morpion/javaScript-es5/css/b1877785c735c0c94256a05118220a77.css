@@ -1,0 +1,174 @@
+/**
+ * Main container
+ * @author seeren <webmaster@seeren.fr>
+ * @project javascript-formation-initiation
+ * @package main
+ * @version 1.1.1
+ */
+@font-face {
+    font-family: "roboto";
+    src: url("../font/roboto-regular.eot");
+    src: local("☺"), url("../font/roboto-regular.woff") format("woff"), url("../font/roboto-regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto bold";
+    src: url("../font/roboto-bold.eot");
+    src: local("☺"), url("../font/roboto-bold.woff") format("woff"), url("../font/roboto-bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto black";
+    src: url("../font/roboto-black.eot");
+    src: local("☺"), url("../font/roboto-black.woff") format("woff"), url("../font/roboto-black.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto light";
+    src: url("../font/roboto-light.eot");
+    src: local("☺"), url("../font/roboto-light.woff") format("woff"), url("../font/roboto-light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto thin";
+    src: url("../font/roboto-thin.eot");
+    src: local("☺"), url("../font/roboto-thin.woff") format("woff"), url("../font/roboto-thin.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto italic";
+    src: url("../font/roboto-italic.eot");
+    src: local("☺"), url("../font/roboto-italic.woff") format("woff"), url("../font/roboto-italic.ttf") format("truetype");
+}
+html {
+    background: #f7f7f7;
+    color: #212121;
+    font-family: "roboto", sans-serif;
+    font-size: 1em;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: 3.5em;
+}
+h2 {
+    font-size: 2.5em;
+}
+h3, h4 {
+    font-size: 1.5em;
+}
+h4 {
+    font-family: "roboto black", sans-serif;
+    text-align: left;
+}
+h1, h2, h3, h4 {
+    font-weight: normal;
+    letter-spacing: .2em;
+    margin: 0;
+    padding: 1em 0;
+}
+h1, h2, h3 {
+    color: #ffffff;
+    font-family: "roboto thin", sans-serif;
+    text-align: center;
+}
+h1 span, h2 span, h3 span {
+    display: block;
+    font-size: .5em;
+    margin: 0 0 2em;
+}
+/**
+ * Cover
+ * @author seeren <webmaster@seeren.fr>
+ * @project javascript-formation-initiation
+ * @package cover
+ * @version 1.1.1
+ */
+#cover-start {
+    background-color: #ff5c77;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+.cover-content {
+    background-image: url(../image/cover.png);
+    background-repeat: no-repeat; 
+    background-size: auto 160%;
+    background-position: center;
+    min-height: 100%;
+    overflow: hidden;
+    padding: 0 20%;
+    position: absolute;
+    width: 60%;
+    z-index: 9;
+}
+.cover-content h1 {
+    background: #FFFFFF;
+    color: #7d1c2e !important;
+    font-size: 1em !important;
+    left: 5%;
+    letter-spacing: .5em;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    position: absolute;
+    top: 0;
+    width: 90% !important;
+}
+.cover-content h2 {
+    bottom: 25%;
+    position: absolute;
+    left: 0%;
+    width: 100%;
+}
+.cover-content h2 a {
+    background: #FFFFFF !important;
+    color: #7d1c2e;
+    display: block;
+    font-size: 1.5em;
+    margin: 0 auto;
+    max-width: 70%;
+    padding: .5em 0;
+    text-decoration: none;
+    transition: background .25s;
+}
+.cover-content h2 a span {
+    font-size: .75em !important;
+    margin: 0 !important;
+}
+.cover-content h2 a:hover {
+    background: #e6e6e6 !important;
+}
+.cover-content h3 {
+    color: #f7a1af;
+    font-size: 3em;
+}
+#cover-start h4 {
+    background: #FFFFFF;
+    color: #7d1c2e !important;
+    font-family: "roboto thin",sans-serif !important;
+    font-size: 1em !important;
+    font-weight: normal !important;
+    left: 5%;
+    letter-spacing: .5em;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 90% !important;
+    z-index: 8;
+}
+#seeren {
+    background-image: url(../image/seeren.png);
+    background-repeat: no-repeat; 
+    background-size: 100% auto;
+    background-position: center;
+    bottom: 6%;
+    height: 4em;
+    position: absolute;
+    right: 5%;
+    width: 8em;
+}

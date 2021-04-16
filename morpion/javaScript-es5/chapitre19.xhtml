@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <title>TD3: Lazy loading - Formation JavaScript Initiation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/33d0c34f96e6afed4baa666fd7bfab67.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/f786f0fa752fdc2603a99d15b85cb5fd.css" media="all and (orientation: portrait)"/>
+  </head>
+  <body>
+    <div class="chapitre-content" id="ch_19">
+      <h2>
+        <span>TD3:</span>
+        <a>Lazy loading</a>
+      </h2>
+      <div class="content-box">
+        <h4>Mise en situation</h4>
+        <p>Un site proposant une galerie d'images a besoin d'optimiser le temps de chargement de ses pages. Il en va de m&#xEA;me pour un blog qui affiche une s&#xE9;rie d'articles poss&#xE9;dant des images, ou m&#xEA;me d'une liste de commentaires qui affiche l'avatar de membres. Les images repr&#xE9;sentent la majeure partie du trafic d'une page qui en affiche ne serait-ce qu'une ou deux. Pour ne pas avoir un chargement de page trop long pour le visiteur et afin de ne pas charger des ressources inutiles il est possible de mettre en place un lazy loading.</p>
+        <p>Le principe de ce dispositif consiste &#xE0; ne pas charger des &#xE9;l&#xE9;ments qui ne sont pas encore visibles, s'ils sont plus bas dans la page et que le visiteur ne l'a pas encore fait d&#xE9;filer pour atteindre ses &#xE9;l&#xE9;ments pas exemple. Nous allons nous int&#xE9;resser &#xE0; un lazy loading pour les images.</p>
+      </div>
+      <div class="content-box">
+        <strong>Analyse des besoins</strong>
+        <p>En vue de charger uniquement les images que le visiteur a atteint il est possible de cr&#xE9;er un lazy loader. La fonctionnalit&#xE9; principale est le chargement, nous allons lister dans quel cas il doit &#xEA;tre d&#xE9;clench&#xE9;.</p>
+      </div>
+      <ul class="content-list">
+        <li>Charger une image visible</li>
+        <li>Charger une image visible apr&#xE8;s un scroll</li>
+        <li>Charger une image visible apr&#xE8;s un redimensionnement</li>
+        <li>Affecter un attribut class &#xE0; une image qui se charge</li>
+        <li>Supprimer l'attribut class &#xE0; une image qui est charg&#xE9;e</li>
+      </ul>
+      <h3 id="c_29_exercice">Exercice</h3>
+      <div class="content-box">
+        <strong>Document</strong>
+        <p>Nous allons utiliser un document HTML poss&#xE9;dant une balise meta pour le charset, un lien vers le script et un lien vers une feuille de style. Le document contient une liste d'images distantes. Tous droits r&#xE9;serv&#xE9;s hd.wallpaperswide.com concernant les images utilis&#xE9;es, pour cet exercice il est conseill&#xE9; d'utiliser des images distantes assez lourdes pour constater le temps de chargement</p>
+      </div>
+      <div class="content-code">
+        <strong>lazy-loader.html</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">&lt;!</span><span style="color: #ffffff">DOCTYPE&#xA0;html</span><span style="color: #ffcc00">&gt;
+<br/>&lt;</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">meta&#xA0;charset</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"UTF-8"</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">title</span><span style="color: #ffcc00">&gt;</span><span style="color: #ffffff">Lazy&#xA0;loader&#xA0;</span><span style="color: #ffcc00">-&#xA0;</span><span style="color: #ffffff">Formation&#xA0;JavaScript&#xA0;Initiation</span><span style="color: #ffcc00">&lt;/</span><span style="color: #ffffff">title</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">link&#xA0;rel</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"stylesheet"&#xA0;</span><span style="color: #ffffff">type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/css"&#xA0;</span><span style="color: #ffffff">href</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"lazy-loader.css"</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">script&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/javascript"&#xA0;</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"lazy-loader.js"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">script</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">div&#xA0;id</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"lazy-loader"</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">h1</span><span style="color: #ffcc00">&gt;</span><span style="color: #ffffff">Lazy&#xA0;loader</span><span style="color: #ffcc00">&lt;/</span><span style="color: #ffffff">h1</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">img&#xA0;</span><span style="color: #ffcc00">class=</span><span style="color: #2aa198">"lazy"
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">data</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"http://hd.wallpaperswide.com/thumbs/good_morning_10-t2.jpg"&#xA0;</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">img&#xA0;</span><span style="color: #ffcc00">class=</span><span style="color: #2aa198">"lazy"
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">data</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"http://hd.wallpaperswide.com/thumbs/sunset_232-t2.jpg"&#xA0;</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">img&#xA0;</span><span style="color: #ffcc00">class=</span><span style="color: #2aa198">"lazy"
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">data</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"http://hd.wallpaperswide.com/thumbs/forest_waterfall_summer-t2.jpg"&#xA0;</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">img&#xA0;</span><span style="color: #ffcc00">class=</span><span style="color: #2aa198">"lazy"
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">data</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"http://hd.wallpaperswide.com/thumbs/snow_capped-t2.jpg"&#xA0;</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">img&#xA0;</span><span style="color: #ffcc00">class=</span><span style="color: #2aa198">"lazy"
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">data</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"http://hd.wallpaperswide.com/thumbs/sunrise_san_francisco-t2.jpg"&#xA0;</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">div</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&lt;/</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>CSS</strong>
+        <p>La feuille de style utilise les s&#xE9;lecteurs lazy et loading pour les images non charg&#xE9;es et en cours de chargement, ils poss&#xE8;dent une image en arri&#xE8;re plan, un gif pour le chargement, tous droits r&#xE9;serv&#xE9;s &#xE0; v2.preloaders.net pour cette image. Ces s&#xE9;lecteurs utilisent une transition pour l'opacit&#xE9; afin de faire appara&#xEE;tre les images en fondu avec les CSS plut&#xF4;t qu'avec JavaScript.</p>
+      </div>
+      <div class="content-code">
+        <strong>lazy-loader.css</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">@</span><span style="color: #ffffff">charset&#xA0;</span><span style="color: #2aa198">"UTF-8"</span><span style="color: #ffcc00">;
+<br/></span><span style="color: #8c8c8c">#lazy-loader&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">background</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">rgb</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">230</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">230</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">230</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">font</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">family</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">sans</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">serif</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">margin</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">0&#xA0;auto</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">max</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">width</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">50</span><span style="color: #ffcc00">%;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">padding</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1em</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">text</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">align</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">center</span><span style="color: #ffcc00">;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#lazy-loader&#xA0;img&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">display</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">block</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">margin</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1em&#xA0;auto</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">max</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">width</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">100</span><span style="color: #ffcc00">%;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">min</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">height</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">3em</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">min</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">width</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">3em</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">opacity</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">transition</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">opacity&#xA0;1s</span><span style="color: #ffcc00">;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#lazy-loader&#xA0;.lazy,
+<br/>#lazy-loader&#xA0;.load&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">background</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">image</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">url</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">http</span><span style="color: #ffcc00">:</span><span style="color: #8c8c8c">//v2.preloaders.net/preloaders/496/Flip%20Flop.gif);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">background</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">repeat</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">no</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">repeat</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">background</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">position</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">center</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">background</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">size</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">50</span><span style="color: #ffcc00">%&#xA0;</span><span style="color: #ffffff">auto</span><span style="color: #ffcc00">;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#lazy-loader&#xA0;.load&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">opacity</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">0&#xA0;</span><span style="color: #ffcc00">!</span><span style="color: #ffffff">important</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">transition</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">opacity&#xA0;0s&#xA0;</span><span style="color: #ffcc00">!</span><span style="color: #ffffff">important</span><span style="color: #ffcc00">;
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <h4>Script</h4>
+        <p>L'objet doit poss&#xE9;der une variable priv&#xE9;e pour stocker la hauteur de la taille de l'&#xE9;cran qui doit &#xEA;tre recalcul&#xE9;e lors d'un redimensionnement de la fen&#xEA;tre et qu'il vaut mieux stocker plut&#xF4;t que de la calculer &#xE0; chaque rendu. Une autre variable pour contenir le nom de l'attribut poss&#xE9;dant le lien vers la source d'une image peut aussi permettre de ne pas r&#xE9;p&#xE9;ter l'&#xE9;criture du nom de cet attribut et facilite la maintenance du script. Une m&#xE9;thode render est indispensable pour rendre la demande de chargement accessible, enfin le constructeur aura la responsabilit&#xE9; d'enregistrer les &#xE9;couteurs. Nous pouvons repr&#xE9;senter le squelette de l'objet.</p>
+      </div>
+      <div class="content-code">
+        <strong>lazy-loader.js</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">(function&#xA0;(</span><span style="color: #ffffff">exports</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">exports</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">lazyLoader&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">selector</span><span style="color: #ffcc00">)
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;(
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;function&#xA0;()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">selector&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">selector&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">selector</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;).</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">({
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">selector</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #2aa198">".lazy"</span><span style="color: #ffcc00">,
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">render</span><span style="color: #ffcc00">:&#xA0;function&#xA0;()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;},&#xA0;</span><span style="color: #ffffff">selector</span><span style="color: #ffcc00">);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>
+<br/>})(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">jQuery&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Charger une image</strong>
+        <p>Les images doivent &#xEA;tres charg&#xE9;es au rendu, une fonction priv&#xE9;e v&#xE9;rifie si sa source existe avant de lui affecter.</p>
+      </div>
+      <div class="content-code">
+        <strong>load</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">source</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;((</span><span style="color: #ffffff">source&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">)))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">removeAttribute</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">attribute</span><span style="color: #ffcc00">);&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"load"</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">onload</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">src&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">source</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Au chargement</strong>
+        <p>Un &#xE9;couteur onload pour l'&#xE9;v&#xE8;nement load de chaque image est utile pour supprimer un attribut et jouer avec les CSS pour cr&#xE9;er une transition.</p>
+      </div>
+      <div class="content-code">
+        <strong>onload</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">onload</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">null</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">removeAttribute</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"class"</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Au redimensionnement</strong>
+        <p>Un &#xE9;couteur onresize pour l'&#xE9;v&#xE8;nement resize de la fen&#xEA;tre est utile pour red&#xE9;finir la hauteur du client et effectuer un rendu.</p>
+      </div>
+      <div class="content-code">
+        <strong>onresize</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">onresize</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">height&#xA0;</span><span style="color: #ffcc00">=&#xA0;(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">documentElement
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">documentElement</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">clientHeight</span><span style="color: #ffcc00">)&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;||&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">clientHeight</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">render</span><span style="color: #ffcc00">();
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Obtenir la source</strong>
+        <p>La source est renvoy&#xE9;e si l'&#xE9;l&#xE9;ment est bien pr&#xE9;sent dans le cadre de l'&#xE9;cran, soit si la distance entre l'&#xE9;l&#xE9;ment et le haut de la fen&#xEA;tre est bien inf&#xE9;rieure &#xE0; la hauteur du client additionn&#xE9;e &#xE0; la hauteur du d&#xE9;filement effectu&#xE9;.</p>
+      </div>
+      <div class="content-code">
+        <strong>src</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;(</span><span style="color: #ffffff">height
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">+&#xA0;((</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">documentElement
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">documentElement</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">scrollTop</span><span style="color: #ffcc00">)&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;||&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">scrollTop</span><span style="color: #ffcc00">))&#xA0;&gt;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">offsetTop
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getAttribute</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">attribute</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_29_correction">Correction</h3>
+      <div class="content-box">
+        <p>Les &#xE9;couteurs sont enregistr&#xE9;s dans la fonction qui construit l'objet retourn&#xE9; par lazyLoad. Lors du d&#xE9;filement de la fen&#xEA;tre ou lors de son redimensionnement, les images sont charg&#xE9;es si elles doivent l'&#xEA;tre uniquement.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;()&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">lazyLoader</span><span style="color: #ffcc00">();
+<br/>
+<br/>};</span>
+</span>
+</code>
+      </div>
+      <div class="content-code">
+        <strong>lazyLoader</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">(function&#xA0;(</span><span style="color: #ffffff">exports</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@var&#xA0;{string}&#xA0;attribute&#xA0;name
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">attribute&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"data-src"</span><span style="color: #ffcc00">;
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@var&#xA0;{number}&#xA0;client&#xA0;height
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">height</span><span style="color: #ffcc00">;
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Load&#xA0;image
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;load
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">source</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;((</span><span style="color: #ffffff">source&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">)))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">removeAttribute</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">attribute</span><span style="color: #ffcc00">);&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"load"</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">onload</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">src&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">source</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Load&#xA0;Listener
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;onload
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">onload</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">null</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">removeAttribute</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"class"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Resize&#xA0;Listener
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;resize
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">onresize</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">height&#xA0;</span><span style="color: #ffcc00">=&#xA0;(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">documentElement
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">documentElement</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">clientHeight</span><span style="color: #ffcc00">)&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;||&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">clientHeight</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">render</span><span style="color: #ffcc00">();
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Get&#xA0;src
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;src
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@returns&#xA0;{string|false}&#xA0;this&#xA0;src
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;(</span><span style="color: #ffffff">height
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">+&#xA0;((</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">documentElement
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">documentElement</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">scrollTop</span><span style="color: #ffcc00">)&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;||&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">scrollTop</span><span style="color: #ffcc00">))&#xA0;&gt;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">offsetTop
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getAttribute</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">attribute</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Cr&#xE9;e&#xA0;une&#xA0;nouvelle&#xA0;interface&#xA0;lazyLoaderInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@exports&#xA0;lazy/loader
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{string}&#xA0;selector&#xA0;CSS&#xA0;Selector
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@returns&#xA0;{Object}&#xA0;lazyLoaderInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">exports</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">lazyLoader&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">selector</span><span style="color: #ffcc00">)
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;(
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@returns&#xA0;{Object}&#xA0;lazyLoaderInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">selector&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">selector&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">selector</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">onresize</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">addEventListener</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"scroll"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">render</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">bind</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">),&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">addEventListener</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"resize"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">onresize</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">bind</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">),&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;).</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@name&#xA0;lazyLoaderInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@namespace
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@memberof&#xA0;lazyLoaderInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@var&#xA0;{string}&#xA0;CSS&#xA0;Selector
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">selector</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #2aa198">".lazy"</span><span style="color: #ffcc00">,
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Affiche&#xA0;les&#xA0;images
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@memberof&#xA0;lazyLoaderInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">render</span><span style="color: #ffcc00">:&#xA0;function&#xA0;()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">image&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">querySelectorAll</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">selector</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">length&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">image</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;for&#xA0;(&#xA0;;&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">&lt;&#xA0;</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">++)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">image</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">]);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;},&#xA0;</span><span style="color: #ffffff">selector
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>
+<br/>})(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">jQuery&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Lors d'un d&#xE9;filement ou d'un redimensionnement de la page les images rendues accessibles apparaissent avec une transition CSS. Ce genre de script peut consid&#xE9;rablement r&#xE9;duire le temps de chargement d'une page, compatible IE8+. Cet exercice fait r&#xE9;viser les bases du langage repr&#xE9;sent&#xE9;es par l'utilisation des op&#xE9;rateurs de comparaison avec des op&#xE9;randes non boolean et la notion de contexte avec l'utilisation de call et bind.</p>
+      </div>
+    </div>
+  </body>
+</html>

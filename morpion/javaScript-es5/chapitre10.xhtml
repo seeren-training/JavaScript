@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <title>Chapitre 10: Modifier les feuilles de style - Formation JavaScript Initiation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/33d0c34f96e6afed4baa666fd7bfab67.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/f786f0fa752fdc2603a99d15b85cb5fd.css" media="all and (orientation: portrait)"/>
+  </head>
+  <body>
+    <div class="chapitre-content" id="ch_10">
+      <h2>
+        <span>Chapitre 10:</span>
+        <a>Modifier les feuilles de style</a>
+      </h2>
+      <div class="content-box">
+        <h4>CSS</h4>
+        <p>Les styles d'un &#xE9;l&#xE9;ment peuvent &#xEA;tre directement d&#xE9;finis dans son attribut style ou peuvent appartenir &#xE0; une feuille de style en utilisant les s&#xE9;lecteurs. Il est possible de modifier les styles de la feuille de style ou de l'attribut.</p>
+      </div>
+      <h3 id="c_10_style">Modifier un style en direct</h3>
+      <div class="content-box">
+        <h4>Propri&#xE9;t&#xE9; style</h4>
+        <p>La propri&#xE9;t&#xE9; style d'un &#xE9;l&#xE9;ment correspond &#xE0; la valeur de son attribut mais ne correspond pas aux propri&#xE9;t&#xE9;s CSS qui lui sont d&#xE9;finies dans une feuille de style. Soit le code suivant.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">&lt;</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">h1&#xA0;</span><span style="color: #ffcc00">{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">color</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">blue</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.</span><span style="color: #ffffff">green&#xA0;</span><span style="color: #ffcc00">{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">color</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">green</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">script&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/javascript"&#xA0;</span><span style="color: #ffffff">defer&#xA0;src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"script.js"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">script</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">h1&#xA0;id</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"titre"</span><span style="color: #ffcc00">&gt;</span><span style="color: #ffffff">Titre</span><span style="color: #ffcc00">&lt;/</span><span style="color: #ffffff">h1</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&lt;/</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Les attributs d'un &#xE9;l&#xE9;ment sont accessibles via la m&#xE9;thode getAttribute ou par l'accesseur de propri&#xE9;t&#xE9; comme &#xE9;tudi&#xE9; au chapitre pr&#xE9;c&#xE9;dent. Bien que le titre ait une propri&#xE9;t&#xE9; color d&#xE9;finie dans la balise style, la propri&#xE9;t&#xE9; style de l'&#xE9;l&#xE9;ment HTML ne contient pas de propri&#xE9;t&#xE9; color car la balise ne comporte pas d'attribut style.</p>
+      </div>
+      <div class="content-code">
+        <strong>Propri&#xE9;t&#xE9; style</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;""
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"titre"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">color</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>En utilisant la propri&#xE9;t&#xE9; style d'un &#xE9;l&#xE9;ment c'est bien &#xE0; son attribut style qu'une valeur est affect&#xE9;e. Bien que la couleur du titre ait &#xE9;t&#xE9; d&#xE9;finie dans la feuille de style, en sp&#xE9;cifiant une couleur dans son attribut style elle devient prioritaire.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">titre&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"titre"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">titre</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">color&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"red"</span><span style="color: #ffcc00">;
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;red
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">titre</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">color</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>En modifiant l'attribut classe de l'&#xE9;l&#xE9;ment pour que lui soit affect&#xE9; la couleur correspondante au s&#xE9;lecteur de cette classe, l'&#xE9;l&#xE9;ment conserve la couleur de son attribut qui est prioritaire sur la feuille de style.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">titre&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"titre"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">titre</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">color&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"red"</span><span style="color: #ffcc00">;
+<br/>
+<br/></span><span style="color: #ffffff">titre</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"green"</span><span style="color: #ffcc00">;</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>camelCase</strong>
+        <p>Le nommage des propri&#xE9;t&#xE9;s de la propri&#xE9;t&#xE9; style d'un &#xE9;l&#xE9;ment HTML doit se faire en camelCase, ainsi background-color doit s&#x2019;&#xE9;crire backgroundColor, z-index devient zIndex etc.</p>
+      </div>
+      <div class="content-code">
+        <strong>Propri&#xE9;t&#xE9; compos&#xE9;</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">titre&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"titre"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">titre</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">backgroundColor&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"yellow"</span><span style="color: #ffcc00">;</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_10_modifier">Modifier une feuille de style</h3>
+      <div class="content-box">
+        <h4>Feuille de style</h4>
+        <p>Utiliser une feuille de style et op&#xE9;rer les modifications dans la feuille est une meilleur pratique que de modifier la valeur de l'attribut style.</p>
+      </div>
+      <div class="content-box">
+        <strong>getComputedStyle</strong>
+        <p>La m&#xE9;thode getComputedStyle de l'objet window sert &#xE0; r&#xE9;cup&#xE9;rer les styles pr&#xE9;sents dans les feuilles de style sous forme d'objet CSSStyleDeclaration. Le premier param&#xE8;tre correspond &#xE0; un n&#x153;ud de type &#xE9;l&#xE9;ment, le second param&#xE8;tre facultatif est une chaine de caract&#xE8;res pour sp&#xE9;cifier son pseudo &#xE9;l&#xE9;ment. La m&#xE9;thode lance une erreur TypeError si le premier param&#xE8;tre n'est pas un &#xE9;l&#xE9;ment HTML.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var CSSStyleDeclaration = window.getComputedStyle(element[, pseudo]);</em>
+      </div>
+      <div class="content-code">
+        <strong>getComputedStyle</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">titre&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"titre"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/></span><span style="color: #8c8c8c">//&#xA0;CSS2Properties
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getComputedStyle</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">titre</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <h4>getComputedStyle</h4>
+        <p>Cette m&#xE9;thode n'est pas prise en charge pour les anciennes versions d'Internet Explorer comme la version 8. Pour utiliser cette m&#xE9;thode sans probl&#xE8;me de compatibilit&#xE9; il faudra v&#xE9;rifier sa pr&#xE9;sence au sein du navigateur comme dans l'exemple &#xE7;i-dessous.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">titre&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"titre"</span><span style="color: #ffcc00">),
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">;
+<br/>
+<br/>if&#xA0;(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getComputedStyle</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">style&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getComputedStyle</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">titre</span><span style="color: #ffcc00">);
+<br/>}&#xA0;else&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">style&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">titre</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">currentStyle</span><span style="color: #ffcc00">;
+<br/>}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/></span><span style="color: #8c8c8c">//&#xA0;CSS2Properties
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>getPropertyValue</strong>
+        <p>La m&#xE9;thode getPropertyValuede l'objet CSSStyleDeclaration renvoie le style correspondant &#xE0; la propri&#xE9;t&#xE9; fournie en param&#xE8;tre sous forme de chaine de caract&#xE8;res.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var propriete = CSSStyleDeclaration.getPropertyValue(nom);</em>
+      </div>
+      <div class="content-code">
+        <strong>getPropertyValue</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">style&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getComputedStyle</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"titre"</span><span style="color: #ffcc00">));
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;rgb(0,&#xA0;0,&#xA0;255)
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getPropertyValue</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"color"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>insertRule</strong>
+        <p>Une balise style contient l'objet CSSStyleSheet, cet objet poss&#xE8;de des m&#xE9;thodes pour ins&#xE9;rer des s&#xE9;lecteurs et leurs r&#xE8;gles. Le premier argument repr&#xE9;sente le s&#xE9;lecteur et sa r&#xE8;gle, le second est un entier pour sa position dans la feuille. Cette m&#xE9;thode renvoie la position o&#xF9; la r&#xE8;gle est ins&#xE9;r&#xE9;e.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>CSSStyleSheet.insertRule(regle, position);</em>
+      </div>
+      <div class="content-code">
+        <strong>insertRule</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">style&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementsByTagName</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"style"</span><span style="color: #ffcc00">)[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">sheet</span><span style="color: #ffcc00">;
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;0
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">insertRule</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"h1&#xA0;{&#xA0;background:&#xA0;yellow;&#xA0;}"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>deleteRule</strong>
+        <p>La m&#xE9;thode deleteRule supprime une r&#xE8;gle de la feuille de style, son param&#xE8;tre correspond &#xE0; la position de la r&#xE8;gle dans la feuille de style. La m&#xE9;thode renvoie undefined</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>CSSStyleSheet.deleteRule(position);</em>
+      </div>
+      <div class="content-box">
+        <p>La propri&#xE9;t&#xE9; cssRules d'un objet CSSStyleSheet contient l'ensemble des r&#xE8;gles CSS, il poss&#xE8;de une taille et une propri&#xE9;t&#xE9; selectorText qui renvoie le s&#xE9;lecteur correspondant &#xE0; la r&#xE8;gle. Il est donc possible de le parcourir pour r&#xE9;cup&#xE9;rer la position d'une r&#xE8;gle.</p>
+      </div>
+      <div class="content-code">
+        <strong>deleteRule</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">style&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementsByTagName</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"style"</span><span style="color: #ffcc00">)[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">sheet</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>for&#xA0;(var&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">length&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">cssRules</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length&#xA0;</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">&lt;&#xA0;</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">++)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #2aa198">"h1"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">cssRules</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">selectorText</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;undefined
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">deleteRule</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">));
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;--</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>removeProperty</strong>
+        <p>La m&#xE9;thode removeProperty de l'objet CSSStyleDeclaration supprime une propri&#xE9;t&#xE9; de la r&#xE8;gle en cours. La m&#xE9;thode renvoie soit la valeur de la propri&#xE9;t&#xE9; supprim&#xE9;e soit une chaine vide.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var propriete = CSSStyleDeclaration.removeProperty(nom);</em>
+      </div>
+      <div class="content-code">
+        <strong>removeProperty</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">style&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementsByTagName</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"style"</span><span style="color: #ffcc00">)[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">sheet</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>for&#xA0;(var&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">length&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">cssRules</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length&#xA0;</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">&lt;&#xA0;</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">++)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #2aa198">"h1"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">cssRules</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">selectorText
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">cssRules</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">[</span><span style="color: #2aa198">"color"</span><span style="color: #ffcc00">])&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;blue
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">cssRules</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">removeProperty</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"color"</span><span style="color: #ffcc00">));
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;break;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>setProperty</strong>
+        <p>La m&#xE9;thode setProperty de l'objet CSSStyleDeclaration ajoute une propri&#xE9;t&#xE9; &#xE0; la r&#xE8;gle en cours. La m&#xE9;thode renvoie undefined. Les m&#xE9;thodes d'&#xE9;criture de l'objet CSSStyleDeclaration l&#xE8;ve une erreur de type NoModificationAllowedError si le style est en lecture seule.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>CSSStyleDeclaration.setProperty(nom, valeur [,important]);</em>
+      </div>
+      <div class="content-code">
+        <strong>setProperty</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">style&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementsByTagName</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"style"</span><span style="color: #ffcc00">)[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">sheet</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>for&#xA0;(var&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">length&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">cssRules</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length&#xA0;</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">&lt;&#xA0;</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">++)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #2aa198">"h1"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">cssRules</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">selectorText</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">cssRules</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">style</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">setProperty</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"color"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #2aa198">"white"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;break;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}</span>
+</span>
+</code>
+      </div>
+    </div>
+  </body>
+</html>

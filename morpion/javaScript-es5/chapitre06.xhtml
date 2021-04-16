@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <title>Chapitre 06: Objets int&#xE9;gr&#xE9;s - Formation JavaScript Initiation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/33d0c34f96e6afed4baa666fd7bfab67.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/f786f0fa752fdc2603a99d15b85cb5fd.css" media="all and (orientation: portrait)"/>
+  </head>
+  <body>
+    <div class="chapitre-content" id="ch_06">
+      <h2>
+        <span>Chapitre 06:</span>
+        <a>Objets int&#xE9;gr&#xE9;s</a>
+      </h2>
+      <div class="content-box">
+        <strong>Objets intrins&#xE8;ques</strong>
+        <p>JavaScript fournit des objets int&#xE9;gr&#xE9;s, certains ont &#xE9;t&#xE9;s utilis&#xE9;s au premier chapitre. ce chapitre est d&#xE9;di&#xE9; &#xE0; l'utilisation de certains d'entre eux parmi les objets Array, Boolean, Date, Error, Function, Global, JSON, Math, Number, Object, RegExp et String.</p>
+      </div>
+      <h3 id="c_06_number">Number et Math</h3>
+      <div class="content-box">
+        <h4>Number</h4>
+        <p>L'objet global Number nous offre des attributs et des m&#xE9;thodes pratiques pour la conversion de type notamment.</p>
+        <strong>parseInt</strong>
+        <p>La m&#xE9;thode parseInt de l'objet Number aussi disponible entant que fonction globale renvoie un nombre entier pour la base arithm&#xE9;tique pr&#xE9;cis&#xE9;e. Son premier param&#xE8;tre est une chaine de caract&#xE8;res, un autre type sera converti en chaine, le second est la base arithm&#xE9;tique et bien que optionnelle il est recommand&#xE9; de la pr&#xE9;ciser pour ne pas avoir de r&#xE9;sultat inattendu.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var entier = parseInt(chaine [, base]);</em>
+      </div>
+      <div class="content-code">
+        <strong>parseInt</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;9
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseInt</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"0x9"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">16</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;9
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseInt</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"9.9"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">10</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;9
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseInt</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"011"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">8</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;9
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseInt</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"1001"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">2</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Sans le second argument pour indiquer la base arithm&#xE9;tique, la m&#xE9;thode ne produit pas les r&#xE9;sultats attendus.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;9
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseInt</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"0x9"</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;9
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseInt</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"9.9"</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;11
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseInt</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"011"</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;1001
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseInt</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"1001"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>parseFloat</strong>
+        <p>La m&#xE9;thode parseFloat de l'objet Number aussi disponible en tant que fonction globale renvoie un nombre flottant. Son premier param&#xE8;tre est une chaine de caract&#xE8;res, un autre type sera converti en chaine.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var flottant = parseFloat(chaine);</em>
+      </div>
+      <div class="content-code">
+        <strong>parseFloat</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;0
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseFloat</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"0x9"</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;0.9
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseFloat</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">".9"</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;9
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Number</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parseFloat</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"9."</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-warning">
+        <strong>ECMAScript 2015</strong>
+        <p>La d&#xE9;finition initiale des m&#xE9;thodes parseInt et parseFloat de l'objet Number a &#xE9;t&#xE9; &#xE9;tablie dans la 6&#xE8;mem &#xE9;dition de ECMAScript. Ses m&#xE9;thodes sont plus robustes que les m&#xE9;thodes globales parseInt et parseFloat qui sont disponibles en dehors de l'objet Number.</p>
+      </div>
+      <div class="content-box">
+        <h4>Math</h4>
+        <p>L'objet global Math nous offre des attributs et des m&#xE9;thodes pratiques pour l'arrondi ou la g&#xE9;n&#xE9;ration de nombres notamment.</p>
+        <strong>random</strong>
+        <p>Pour g&#xE9;n&#xE9;rer al&#xE9;atoirement un nombre, random renvoie un flottant compris entre 0 et 1, le 1 &#xE9;tant exclu.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var flottant = Math.random();</em>
+      </div>
+      <div class="content-code">
+        <strong>random</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;0.5729784879215657
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Math</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">random</span><span style="color: #ffcc00">());</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Pour obtenir un flottant al&#xE9;atoire appartenant &#xE0; un intervalle &#xE0; partir de random il suffit de le multiplier.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">max&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">100</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">min&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">50</span><span style="color: #ffcc00">;
+<br/></span><span style="color: #8c8c8c">//&#xA0;68.25112973894959
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Math</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">random</span><span style="color: #ffcc00">()&#xA0;*&#xA0;(</span><span style="color: #ffffff">max&#xA0;</span><span style="color: #ffcc00">-&#xA0;</span><span style="color: #ffffff">min</span><span style="color: #ffcc00">)&#xA0;+&#xA0;</span><span style="color: #ffffff">min</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>floor</strong>
+        <p>La m&#xE9;thode floor renvoie le plus grand entier  qui est &#xE9;gal ou inf&#xE9;rieur au nombre pass&#xE9; en param&#xE8;tre.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var entier = Math.floor(nombre);</em>
+      </div>
+      <div class="content-code">
+        <strong>floor</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;99
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Math</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">floor</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">99.9</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;-100
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Math</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">floor</span><span style="color: #ffcc00">(-</span><span style="color: #ffffff">99.9</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>round</strong>
+        <p>La m&#xE9;thode round renvoie l'arrondi entier le plus proche pour le nombre pass&#xE9; en param&#xE8;tre.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var entier = Math.round(nombre);</em>
+      </div>
+      <div class="content-code">
+        <strong>round</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;100
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Math</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">round</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">99.9</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;-100
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">Math</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">floor</span><span style="color: #ffcc00">(-</span><span style="color: #ffffff">99.9</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_06_array">JSON</h3>
+      <div class="content-box">
+        <h4>JavaScript Object Notation</h4>
+        <p>La notation JSON est un format interchangeable de donn&#xE9;es entre diff&#xE9;rents langages. Cette notation est tr&#xE8;s proche de la notation objet &#xE0; quelques diff&#xE9;rences pr&#xE8;s.</p>
+      </div>
+      <ul class="content-list">
+        <li>Les propri&#xE9;t&#xE9;s doivent &#xEA;tre entre des guillemets doubles</li>
+        <li>Peut contenir une chaine de caract&#xE8;res</li>
+        <li>Peut contenir un nombre</li>
+        <li>Peut contenir un boolean</li>
+        <li>Peut contenir un null</li>
+        <li>Peut contenir un tableau</li>
+        <li>Peut contenir un objet JSON</li>
+      </ul>
+      <div class="content-box">
+        <p>Un objet JSON peut &#xEA;tre s&#xE9;rialis&#xE9; et d&#xE9;s&#xE9;rialis&#xE9; avec les m&#xE9;thodes de l'objet int&#xE9;gr&#xE9; JSON. S&#xE9;rialiser un objet est utile pour le partager via le protocole HTTP par exemple afin qu'il puisse &#xEA;tre d&#xE9;s&#xE9;rialis&#xE9; par le programme qui attrape la r&#xE9;ponse quel que soit le langage et puisse utiliser les informations qu'il contient.</p>
+      </div>
+      <div class="content-code">
+        <strong>Objet JSON</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">objet&#xA0;</span><span style="color: #ffcc00">=&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"0"</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #2aa198">"Hello"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"1"</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"2"</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"3"</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">null</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"4"</span><span style="color: #ffcc00">:&#xA0;[],
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"5"</span><span style="color: #ffcc00">:&#xA0;{}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>};</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>stringify</strong>
+        <p>La m&#xE9;thode stringify de l'objet JSON s&#xE9;rialise un objet en chaine de caract&#xE8;res. Les propri&#xE9;t&#xE9;s qui ne sont pas entre guillemets seront mises entre guillemets , celles qui contiennent des fonctions ne seront pas s&#xE9;rialis&#xE9;es.</p>
+      </div>
+      <div class="content-code">
+        <strong>JSON.stringify</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">objet&#xA0;</span><span style="color: #ffcc00">=&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"0"</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #2aa198">"Hello"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"1"</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"2"</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"3"</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">null</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"4"</span><span style="color: #ffcc00">:&#xA0;[],
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"5"</span><span style="color: #ffcc00">:&#xA0;{}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>};
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;{"0":"Hello","1":1,"2":true,"3":null,"4":[],"5":{}}
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">JSON</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">stringify</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">))</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>parse</strong>
+        <p>La m&#xE9;thode parse de l'objet JSON convertit une chaine de caract&#xE8;res repr&#xE9;sentant un objet JSON en objet qui peut de nouveau &#xEA;tre manipul&#xE9;.</p>
+      </div>
+      <div class="content-code">
+        <strong>JSON.parse</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">unserialize&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">JSON</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parse</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">'{"0":"Hello","1":1,"2":true,"3":null,"4":[],"5":{}}'
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">);
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;Hello
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">unserialize</span><span style="color: #ffcc00">[</span><span style="color: #2aa198">"0"</span><span style="color: #ffcc00">]);
+<br/></span><span style="color: #8c8c8c">//&#xA0;1
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">unserialize</span><span style="color: #ffcc00">[</span><span style="color: #2aa198">"1"</span><span style="color: #ffcc00">]);
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">unserialize</span><span style="color: #ffcc00">[</span><span style="color: #2aa198">"2"</span><span style="color: #ffcc00">]);
+<br/></span><span style="color: #8c8c8c">//&#xA0;null
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">unserialize</span><span style="color: #ffcc00">[</span><span style="color: #2aa198">"3"</span><span style="color: #ffcc00">]);
+<br/></span><span style="color: #8c8c8c">//&#xA0;[]
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">unserialize</span><span style="color: #ffcc00">[</span><span style="color: #2aa198">"4"</span><span style="color: #ffcc00">]);
+<br/></span><span style="color: #8c8c8c">//&#xA0;Object&#xA0;{}
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">unserialize</span><span style="color: #ffcc00">[</span><span style="color: #2aa198">"5"</span><span style="color: #ffcc00">]);</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <h4>JSON.stringify</h4>
+        <p>Cette m&#xE9;thode ignore les fonctions et par mesure de s&#xE9;curit&#xE9; c'est une bonne chose. N&#xE9;anmoins il est possible d'avoir besoin de transmettre une fonction via un objet JSON s&#xE9;rialis&#xE9;. Une solution consiste &#xE0; transformer la fonction en chaine de caract&#xE8;res pour que stringify la s&#xE9;rialise.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">objet&#xA0;</span><span style="color: #ffcc00">=&#xA0;{&#xA0;</span><span style="color: #2aa198">"func"</span><span style="color: #ffcc00">:&#xA0;function&#xA0;()&#xA0;{&#xA0;return&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;&#xA0;}&#xA0;};
+<br/>
+<br/></span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">[</span><span style="color: #2aa198">"func"</span><span style="color: #ffcc00">]&#xA0;=&#xA0;</span><span style="color: #2aa198">"("&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">[</span><span style="color: #2aa198">"func"</span><span style="color: #ffcc00">]&#xA0;+&#xA0;</span><span style="color: #2aa198">")"</span><span style="color: #ffcc00">;
+<br/>
+<br/>var&#xA0;</span><span style="color: #ffffff">serialize&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">JSON</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">stringify</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">);
+<br/>var&#xA0;</span><span style="color: #ffffff">unserialize&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">JSON</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parse</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">serialize</span><span style="color: #ffcc00">);
+<br/>var&#xA0;</span><span style="color: #ffffff">maFunction&#xA0;</span><span style="color: #ffcc00">=&#xA0;eval(</span><span style="color: #ffffff">unserialize</span><span style="color: #ffcc00">[</span><span style="color: #2aa198">"func"</span><span style="color: #ffcc00">]);
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">maFunction</span><span style="color: #ffcc00">());</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <p>La fonction eval() &#xE9;value du code repr&#xE9;sent&#xE9; sous forme de cha&#xEE;ne de caract&#xE8;res. En utilisant eval sur la fonction convertie nous pouvons l'assigner et l'ex&#xE9;cuter.</p>
+      </div>
+      <h3 id="c_06_objects">RegExp</h3>
+      <div class="content-box">
+        <h4>Expression rationnelle</h4>
+        <p>Une expression rationnelle ou r&#xE9;guli&#xE8;re repr&#xE9;sente un motif qui sera utilis&#xE9; pour v&#xE9;rifier s'il correspond &#xE0; des donn&#xE9;es que l'on souhaite comparer ou extraire.</p>
+        <p>Ces expressions sont tr&#xE8;s utiles pour valider le format de donn&#xE9;es ou pour extraire ou remplacer des donn&#xE9;es dans un flux, comme remplacer des balises, extraire leur contenu etc.</p>
+        <h4>RegExp</h4>
+        <p>L'objet RegExp sert &#xE0; cr&#xE9;er une expression rationnelle &#xE0; partir d'un motif et optionnellement d'un drapeau.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var regex = new RegExp(motif[, flags]);</em>
+      </div>
+      <div class="content-box">
+        <p>Le premier argument peut &#xEA;tre une chaine de caract&#xE8;res entour&#xE9;e par des guillemets simples qui sera compil&#xE9;e entant que motif lors de l&#x2019;&#xE9;valuation des param&#xE8;tres, il peut aussi &#xEA;tre un motif litt&#xE9;ral qui ne sera pas recompil&#xE9;.</p>
+      </div>
+      <div class="content-code">
+        <strong>RegExp</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">regexChaine&#xA0;</span><span style="color: #ffcc00">=&#xA0;new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">'Motif'</span><span style="color: #ffcc00">),
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">regexLitteral&#xA0;</span><span style="color: #ffcc00">=&#xA0;/</span><span style="color: #ffffff">Motif</span><span style="color: #ffcc00">/;</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>test</strong>
+        <p>La m&#xE9;thode test permet de tester la correspondance du motif avec une chaine de caract&#xE8;res, renvoie true ou false.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var test = RegExp.test(chaine);</em>
+      </div>
+      <div class="content-code">
+        <strong>RegExp.test</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">regex&#xA0;</span><span style="color: #ffcc00">=&#xA0;new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Motif"</span><span style="color: #ffcc00">);
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">regex</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Correspondance&#xA0;avec&#xA0;le&#xA0;Motif&#xA0;?"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <h4>Drapeaux</h4>
+        <p>Le second param&#xE8;tre de RegExp correspond au drapeau utilis&#xE9; pour le motif. Un drapeau est utile pour pr&#xE9;ciser comment la correspondance doit se faire entre le motif et les donn&#xE9;es.</p>
+      </div>
+      <div class="content-tab">
+        <table>
+          <tr>
+            <th>Correspondance</th>
+            <th>Flag</th>
+            <th>Syntaxe</th>
+          </tr>
+          <tr>
+            <td>Recherche sur plusieurs lignes</td>
+            <td>g</td>
+            <td>/motif/g</td>
+          </tr>
+          <tr>
+            <td>Insensible &#xE0; la casse</td>
+            <td>i</td>
+            <td>/motif/i</td>
+          </tr>
+          <tr>
+            <td>Recherche ligne par ligne</td>
+            <td>m</td>
+            <td>/motif/m</td>
+          </tr>
+          <tr>
+            <td>Recherche &#xE0; partir de la position de la propri&#xE9;t&#xE9; lastIndex</td>
+            <td>y</td>
+            <td>/motif/y</td>
+          </tr>
+        </table>
+      </div>
+      <div class="content-code">
+        <strong>Drapeaux</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">motif&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"Motif"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">chaine&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"Correspondance"&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #2aa198">"\n"
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #2aa198">"avec&#xA0;le&#xA0;motif&#xA0;?"
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">motif</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">motif</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #2aa198">'g'</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">motif</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #2aa198">'i'</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">motif</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #2aa198">'m'</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">motif</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #2aa198">'y'</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <h4>Limites</h4>
+        <p>Un motif peut comporter des limites, pour marquer le d&#xE9;but ou la fin d'une entr&#xE9;e par exemple.</p>
+      </div>
+      <div class="content-tab">
+        <table>
+          <tr>
+            <th>Correspondance</th>
+            <th>Limite</th>
+            <th>Syntaxe</th>
+          </tr>
+          <tr>
+            <td>D&#xE9;but de la chaine ou de la ligne selon le drapeau</td>
+            <td>^</td>
+            <td>/^motif/</td>
+          </tr>
+          <tr>
+            <td>Fin de la chaine ou de la ligne selon le drapeau</td>
+            <td>$</td>
+            <td>/motif$/</td>
+          </tr>
+          <tr>
+            <td>Largeur entre mots</td>
+            <td>\b</td>
+            <td>/\bmotif/</td>
+          </tr>
+          <tr>
+            <td>Largeur entre caract&#xE8;res</td>
+            <td>\B</td>
+            <td>/\Bmotif/</td>
+          </tr>
+        </table>
+      </div>
+      <div class="content-code">
+        <strong>Limites</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"^Motif"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Motif&#xA0;au&#xA0;d&#xE9;but"</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Motif$"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"&#xC0;&#xA0;la&#xA0;fin:&#xA0;Motif"</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"\\bMotif"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Le&#xA0;Motif"</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(new&#xA0;</span><span style="color: #ffffff">RegExp</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"\\BMotif"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Le_Motif"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <h4>Ensemble de caract&#xE8;res</h4>
+        <p>Les crochets regroupent un ensemble de caract&#xE8;res, des caract&#xE8;res ou des intervalles de caract&#xE8;res peuvent y figurer.</p>
+      </div>
+      <div class="content-tab">
+        <table>
+          <tr>
+            <th>Correspondance</th>
+            <th>Ensemble</th>
+            <th>Syntaxe</th>
+          </tr>
+          <tr>
+            <td>Un ensemble de caract&#xE8;res</td>
+            <td>[aeiou]</td>
+            <td>/[aeiou]/</td>
+          </tr>
+          <tr>
+            <td>Un ensemble de caract&#xE8;res</td>
+            <td>[a-z]</td>
+            <td>/[a-z]/</td>
+          </tr>
+          <tr>
+            <td>Un ensemble de caract&#xE8;res exclus</td>
+            <td>[^a-z]</td>
+            <td>/[^a-z]/</td>
+          </tr>
+        </table>
+      </div>
+      <div class="content-code">
+        <strong>Ensemble de caract&#xE8;res</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">chaine&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"chaine"</span><span style="color: #ffcc00">;
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/[</span><span style="color: #ffffff">aeiou</span><span style="color: #ffcc00">]/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/[</span><span style="color: #ffffff">a</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">z</span><span style="color: #ffcc00">]/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/[</span><span style="color: #ffffff">A</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">Z</span><span style="color: #ffcc00">]/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/[^</span><span style="color: #ffffff">a</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">z</span><span style="color: #ffcc00">]/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <h4>Classe de caract&#xE8;res</h4>
+        <p>Afin de d&#xE9;crire des ensembles de caract&#xE8;res plus simplement, les classes de caract&#xE8;res repr&#xE9;sentent des ensembles de caract&#xE8;res.</p>
+      </div>
+      <div class="content-tab">
+        <table>
+          <tr>
+            <th>Correspondance</th>
+            <th>Classe</th>
+            <th>Syntaxe</th>
+          </tr>
+          <tr>
+            <td>Tous les caract&#xE8;res except&#xE9;s saut de ligne et retour chariot</td>
+            <td>.</td>
+            <td>/./</td>
+          </tr>
+          <tr>
+            <td>Caract&#xE8;res num&#xE9;riques</td>
+            <td>\d</td>
+            <td>/\d/</td>
+          </tr>
+          <tr>
+            <td>Caract&#xE8;res non num&#xE9;riques</td>
+            <td>\D</td>
+            <td>/\D/</td>
+          </tr>
+          <tr>
+            <td>Caract&#xE8;res alphab&#xE9;tiques et num&#xE9;riques</td>
+            <td>\w</td>
+            <td>/\w/</td>
+          </tr>
+          <tr>
+            <td>Caract&#xE8;res non alphab&#xE9;tiques et non num&#xE9;riques</td>
+            <td>\W</td>
+            <td>/\W/</td>
+          </tr>
+          <tr>
+            <td>Caract&#xE8;res blancs</td>
+            <td>\s</td>
+            <td>/\s/</td>
+          </tr>
+          <tr>
+            <td>Caract&#xE8;res non blancs</td>
+            <td>\S</td>
+            <td>/\S/</td>
+          </tr>
+        </table>
+      </div>
+      <div class="content-code">
+        <strong>Classe de caract&#xE8;res</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">chaine&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"chaine"</span><span style="color: #ffcc00">;
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/./.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/\</span><span style="color: #ffffff">d</span><span style="color: #ffcc00">/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/\</span><span style="color: #ffffff">D</span><span style="color: #ffcc00">/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/\</span><span style="color: #ffffff">w</span><span style="color: #ffcc00">/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/\</span><span style="color: #ffffff">W</span><span style="color: #ffcc00">/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/\</span><span style="color: #ffffff">s</span><span style="color: #ffcc00">/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/\</span><span style="color: #ffffff">S</span><span style="color: #ffcc00">/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <h4>Quantificateurs</h4>
+        <p>Les quantificateurs permettent de quantifier des caract&#xE8;res dans un motif.</p>
+      </div>
+      <div class="content-tab">
+        <table>
+          <tr>
+            <th>Correspondance</th>
+            <th>Quantificateur</th>
+            <th>Syntaxe</th>
+          </tr>
+          <tr>
+            <td>Aucun ou plusieurs fois</td>
+            <td>*</td>
+            <td>/x*/</td>
+          </tr>
+          <tr>
+            <td>Une ou plusieurs fois</td>
+            <td>+</td>
+            <td>/x+/</td>
+          </tr>
+          <tr>
+            <td>Aucune ou une fois</td>
+            <td>?</td>
+            <td>/x?/</td>
+          </tr>
+          <tr>
+            <td>S'il est pr&#xE9;c&#xE9;d&#xE9; par y</td>
+            <td>(?=)</td>
+            <td>/x(?=y)/</td>
+          </tr>
+          <tr>
+            <td>S'il n'est pas pr&#xE9;c&#xE9;d&#xE9; par y</td>
+            <td>(?!)</td>
+            <td>/x(?!y)/</td>
+          </tr>
+          <tr>
+            <td>L'un ou l'autre</td>
+            <td>|</td>
+            <td>/x|y/</td>
+          </tr>
+          <tr>
+            <td>Correspond &#xE0; n occurrences</td>
+            <td>{n}</td>
+            <td>/x{n}/</td>
+          </tr>
+          <tr>
+            <td>Correspond &#xE0; n occurrences ou plus</td>
+            <td>{n,}</td>
+            <td>/x{n,}/</td>
+          </tr>
+          <tr>
+            <td>Correspond &#xE0; un intervalle entre n et m occurences</td>
+            <td>{n,m}</td>
+            <td>/x{n,m}/</td>
+          </tr>
+        </table>
+      </div>
+      <div class="content-code">
+        <strong>Quantificateurs</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">chaine&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"chaine"</span><span style="color: #ffcc00">;
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/</span><span style="color: #ffffff">s</span><span style="color: #ffcc00">*/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/</span><span style="color: #ffffff">s</span><span style="color: #ffcc00">+/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/</span><span style="color: #ffffff">s</span><span style="color: #ffcc00">?/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/</span><span style="color: #ffffff">n</span><span style="color: #ffcc00">(?=</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/</span><span style="color: #ffffff">n</span><span style="color: #ffcc00">(?!</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">|</span><span style="color: #ffffff">string</span><span style="color: #ffcc00">/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/</span><span style="color: #ffffff">a</span><span style="color: #ffcc00">{</span><span style="color: #ffffff">2</span><span style="color: #ffcc00">}/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/</span><span style="color: #ffffff">a</span><span style="color: #ffcc00">{</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">,}/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/</span><span style="color: #ffffff">a</span><span style="color: #ffcc00">{</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">}/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <h4>Les expressions rationnelles</h4>
+        <p>Elles nous permettent d'extraire et v&#xE9;rifier des motifs pour un ensemble de donn&#xE9;es. Avec la m&#xE9;thode test qui a &#xE9;t&#xE9; d&#xE9;crite il est possible de v&#xE9;rifier un num&#xE9;ro de t&#xE9;l&#xE9;phone ou un code postal par exemple.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/^[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">9</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">5</span><span style="color: #ffcc00">}$/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"75600"</span><span style="color: #ffcc00">));
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/^</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">+[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">9</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">9</span><span style="color: #ffcc00">}$/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"0123456789"</span><span style="color: #ffcc00">));
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(/^</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">+[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">9</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">}([\</span><span style="color: #ffffff">s</span><span style="color: #ffcc00">]?[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">9</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">2</span><span style="color: #ffcc00">}){</span><span style="color: #ffffff">4</span><span style="color: #ffcc00">}$/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"01&#xA0;23&#xA0;45&#xA0;67&#xA0;89"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>RegExp.exec()</strong>
+        <p>La m&#xE9;thode exec permet d'extraire les portions de chaine correspondant au motif. La valeur de retour vaut null si aucune correspondance n'est trouv&#xE9;e ou vaut un tableau poss&#xE9;dant les clefs 0, index et input comme dans l'exemple suivant sa d&#xE9;finition syntaxique.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var tableau = RegExp.exec(chaine);</em>
+      </div>
+      <div class="content-code">
+        <strong>RegExp.exec</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">regex&#xA0;</span><span style="color: #ffcc00">=&#xA0;/[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">9</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">5</span><span style="color: #ffcc00">}/</span><span style="color: #ffffff">g</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">chaine&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"Paris:&#xA0;75600,&#xA0;Lille:&#xA0;59000"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">match</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/></span><span style="color: #8c8c8c">//&#xA0;[&#xA0;0&#xA0;=&gt;&#xA0;"75600",&#xA0;index&#xA0;=&gt;&#xA0;7,&#xA0;input&#xA0;=&gt;&#xA0;"Paris:&#xA0;75600,&#xA0;Lille:&#xA0;59000"&#xA0;]
+<br/>//&#xA0;[&#xA0;0&#xA0;=&gt;&#xA0;"59000",&#xA0;index&#xA0;=&gt;&#xA0;21,&#xA0;input&#xA0;=&gt;&#xA0;"Paris:&#xA0;75600,&#xA0;Lille:&#xA0;59000"&#xA0;]
+<br/></span><span style="color: #ffcc00">while&#xA0;(</span><span style="color: #ffffff">match&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">regex</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">exec</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">chaine</span><span style="color: #ffcc00">))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">match</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+    </div>
+  </body>
+</html>

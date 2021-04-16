@@ -1,0 +1,109 @@
+/**
+ * Main container
+ * @author seeren <webmaster@seeren.fr>
+ * @project javascript-formation-initiation
+ * @package main
+ * @version 1.1.1
+ */
+@font-face {
+    font-family: "roboto";
+    src: url("../font/roboto-regular.eot");
+    src: local("☺"), url("../font/roboto-regular.woff") format("woff"), url("../font/roboto-regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto bold";
+    src: url("../font/roboto-bold.eot");
+    src: local("☺"), url("../font/roboto-bold.woff") format("woff"), url("../font/roboto-bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto black";
+    src: url("../font/roboto-black.eot");
+    src: local("☺"), url("../font/roboto-black.woff") format("woff"), url("../font/roboto-black.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto light";
+    src: url("../font/roboto-light.eot");
+    src: local("☺"), url("../font/roboto-light.woff") format("woff"), url("../font/roboto-light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto thin";
+    src: url("../font/roboto-thin.eot");
+    src: local("☺"), url("../font/roboto-thin.woff") format("woff"), url("../font/roboto-thin.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto italic";
+    src: url("../font/roboto-italic.eot");
+    src: local("☺"), url("../font/roboto-italic.woff") format("woff"), url("../font/roboto-italic.ttf") format("truetype");
+}
+html {
+    background: #f7f7f7;
+    color: #212121;
+    font-family: "roboto", sans-serif;
+    font-size: 1em;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: 3.5em;
+}
+h2 {
+    font-size: 2.5em;
+}
+h3, h4 {
+    font-size: 1.5em;
+}
+h4 {
+    font-family: "roboto black", sans-serif;
+    text-align: left;
+}
+h1, h2, h3, h4 {
+    font-weight: normal;
+    letter-spacing: .2em;
+    margin: 0;
+    padding: 1em 0;
+}
+h1, h2, h3 {
+    color: #ffffff;
+    font-family: "roboto thin", sans-serif;
+    text-align: center;
+}
+h1 span, h2 span, h3 span {
+    display: block;
+    font-size: .5em;
+    margin: 0 0 2em;
+}
+/**
+ * Partie
+ * @author seeren <webmaster@seeren.fr>
+ * @project javascript-formation-initiation
+ * @package partie
+ * @version 1.1.1
+ */
+.partie-content {
+    background-color: #ff5c77;
+    min-height: 100%;
+    overflow: auto;
+    padding: 0 20%;
+    position: absolute;
+    width: 60%;
+}
+.partie-content * {
+    color: #FFFFFF;
+}
+.partie-content a {
+    display: block;
+    padding: .5em 0;
+    text-decoration: none;
+    transition: background .25s;
+}
+.partie-content a:hover {
+    background: #e6e6e6 !important;
+    color: #f36a81 !important;
+}

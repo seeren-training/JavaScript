@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <title>TD2: Validation de formulaire - Formation JavaScript Initiation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/33d0c34f96e6afed4baa666fd7bfab67.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/f786f0fa752fdc2603a99d15b85cb5fd.css" media="all and (orientation: portrait)"/>
+  </head>
+  <body>
+    <div class="chapitre-content" id="ch_18">
+      <h2>
+        <span>TD2:</span>
+        <a>Validation de formulaire</a>
+      </h2>
+      <div class="content-box">
+        <h4>Mise en situation</h4>
+        <p>Un formulaire poss&#xE8;de l'&#xE9;v&#xE8;nement submit qui envoie les donn&#xE9;es contenues dans le formulaire via le protocole HTTP. Si une donn&#xE9;e n'est pas valide, le serveur apr&#xE8;s avoir trait&#xE9; le formulaire doit envoyer une r&#xE9;ponse pour l'afficher de nouveau en donnant les indications permettant de corriger la saisie.</p>
+        <p>Afin de limiter les allez-retour et le traitement c&#xF4;t&#xE9; serveur, JavaScript peut faciliter la saisie du formulaire en fournissant des renseignements sur les donn&#xE9;es attendues et emp&#xEA;cher son envoi s'il n'est pas rempli correctement. L&#x2019;avantage est aussi d'offrir une meilleure exp&#xE9;rience pour l'utilisateur en utilisant d'autres &#xE9;v&#xE8;nements que submit comme keyup, ou blur. En utilisant JavaScript pour valider un formulaire il ne faut pas perdre de vue que la validation se fait c&#xF4;t&#xE9; serveur, il est possible de soumettre un formulaire sans passer par une saisie et sans que JavaScript puisse emp&#xEA;cher son envoi.</p>
+      </div>
+      <div class="content-box">
+        <strong>Analyse des besoins</strong>
+        <p>En vue de valider un ou plusieurs formulaires il est possible de cr&#xE9;er un objet pour automatiser leur validation. Nous pouvons &#xE9;tablir une liste de fonctionnalit&#xE9;s que doit proposer cet objet.</p>
+      </div>
+      <ul class="content-list">
+        <li>Enregistre un motif pour un &#xE9;l&#xE9;ment nomm&#xE9;</li>
+        <li>Enregistre un message pour un &#xE9;l&#xE9;ment nomm&#xE9;</li>
+        <li>Annule l'envoi du formulaire s'il est mal renseign&#xE9;</li>
+        <li>Peut ajouter/supprimer des messages avant l'envoi du formulaire</li>
+        <li>Peut ajouter/supprimer un message pendant la saisie d'un champ</li>
+        <li>Peut ajouter/supprimer des messages quand un champ perd son focus</li>
+        <li>Stylise un ou des champs mal renseign&#xE9;s</li>
+        <li>Stylise un ou des champs bien renseign&#xE9;s</li>
+      </ul>
+      <h3 id="c_28_exercice">Exercice</h3>
+      <div class="content-box">
+        <strong>Document</strong>
+        <p>Nous allons utiliser un document HTML poss&#xE9;dant une balise meta pour le charset, un lien vers le script et un lien vers une feuille de style. Le formulaire repr&#xE9;sente une prise de contact.</p>
+      </div>
+      <div class="content-code">
+        <strong>form-validation.html</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">&lt;!</span><span style="color: #ffffff">DOCTYPE&#xA0;html</span><span style="color: #ffcc00">&gt;
+<br/>&lt;</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">meta&#xA0;charset</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"UTF-8"</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">title</span><span style="color: #ffcc00">&gt;</span><span style="color: #ffffff">Form&#xA0;validation&#xA0;</span><span style="color: #ffcc00">-&#xA0;</span><span style="color: #ffffff">Formation&#xA0;JavaScript&#xA0;Initiation</span><span style="color: #ffcc00">&lt;/</span><span style="color: #ffffff">title</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">link&#xA0;rel</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"stylesheet"&#xA0;</span><span style="color: #ffffff">type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/css"&#xA0;</span><span style="color: #ffffff">href</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"form-validation.css"</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">script&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/javascript"&#xA0;</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"form-validation.js"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">script</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">form&#xA0;id</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"form"</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">strong</span><span style="color: #ffcc00">&gt;</span><span style="color: #ffffff">Form&#xA0;validation</span><span style="color: #ffcc00">&lt;/</span><span style="color: #ffffff">strong</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">br</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">input&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text"&#xA0;</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"firstname"&#xA0;</span><span style="color: #ffffff">placeholder</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"Pr&#xE9;nom*"&#xA0;</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">input&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text"&#xA0;</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"lastname"&#xA0;</span><span style="color: #ffffff">placeholder</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"Nom*"&#xA0;</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">input&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text"&#xA0;</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"company"&#xA0;</span><span style="color: #ffffff">placeholder</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"Soci&#xE9;t&#xE9;"&#xA0;</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">input&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text"&#xA0;</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"email"&#xA0;</span><span style="color: #ffffff">placeholder</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"Email*"&#xA0;</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">input&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text"&#xA0;</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"phone"&#xA0;</span><span style="color: #ffffff">placeholder</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"T&#xE9;l&#xE9;phone"&#xA0;</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">textarea&#xA0;name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"message"&#xA0;</span><span style="color: #ffffff">placeholder</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"Message*"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">textarea</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">input&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"submit"&#xA0;</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"contact"</span><span style="color: #ffcc00">/&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&lt;/</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>CSS</strong>
+        <p>La feuille de style utilise focus pour mettre en &#xE9;vidence les &#xE9;l&#xE9;ments en cours de saisie, les s&#xE9;lecteurs alert, true et false repr&#xE9;sentent le message d'aide &#xE0; la saisie et un champ valide et invalide.</p>
+      </div>
+      <div class="content-code">
+        <strong>form-validation.css</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">@</span><span style="color: #ffffff">charset&#xA0;</span><span style="color: #2aa198">"UTF-8"</span><span style="color: #ffcc00">;
+<br/>*&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">font</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">family</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">sans</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">serif</span><span style="color: #ffcc00">;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#form&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">font</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">size</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1em</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">margin</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">0&#xA0;auto</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">padding</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">.5em</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">width</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">20em</span><span style="color: #ffcc00">;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#form&#xA0;strong&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">font</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">size</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1.5em</span><span style="color: #ffcc00">;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#form&#xA0;input,
+<br/>#form&#xA0;textarea&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">background</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">rgb</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">250</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">250</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">250</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">border</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">solid&#xA0;1px&#xA0;rgb</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">198</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">208</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">218</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">font</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">size</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1em</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">margin</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">.5em&#xA0;auto</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">padding</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">.5em&#xA0;5</span><span style="color: #ffcc00">%;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">transition</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">background&#xA0;0.25s</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">width</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">90</span><span style="color: #ffcc00">%;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#form&#xA0;input:focus,
+<br/>#form&#xA0;textarea:focus&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">background</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">rgb</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">255</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">255</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">255</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">border</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1px&#xA0;solid&#xA0;rgb</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">122</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">230</span><span style="color: #ffcc00">);
+<br/>}
+<br/></span><span style="color: #8c8c8c">#form&#xA0;textarea&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">height</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">10em</span><span style="color: #ffcc00">;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#form&#xA0;input[type=submit]&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">background</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">rgb</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">122</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">230</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">color</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">rgb</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">242</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">242</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">242</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">cursor</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">pointer</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">width</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">100</span><span style="color: #ffcc00">%;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#form&#xA0;input[type=submit]:hover&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">background</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">rgb</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">50</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">160</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">255</span><span style="color: #ffcc00">);
+<br/>}
+<br/></span><span style="color: #8c8c8c">#form&#xA0;.alert&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">font</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">size</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">.8em&#xA0;</span><span style="color: #ffcc00">!</span><span style="color: #ffffff">important</span><span style="color: #ffcc00">;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#form&#xA0;.false&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">border</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1px&#xA0;solid&#xA0;rgb</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">255</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">102</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">)&#xA0;!</span><span style="color: #ffffff">important</span><span style="color: #ffcc00">;
+<br/>}
+<br/></span><span style="color: #8c8c8c">#form&#xA0;.true&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">border</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">1px&#xA0;solid&#xA0;rgb</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">51</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">204</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">51</span><span style="color: #ffcc00">)&#xA0;!</span><span style="color: #ffffff">important</span><span style="color: #ffcc00">;
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <h4>Script</h4>
+        <p>L'objet doit poss&#xE9;der une m&#xE9;thode pour enregistrer la d&#xE9;finition des motifs et messages relatifs aux &#xE9;l&#xE9;ments nomm&#xE9;s du formulaire et qui transiteront jusqu'au serveur lors de son envoi, cette m&#xE9;thode attend un nom, un motif et un message. Les conditions d&#xE9;finies seront affect&#xE9;es entant que propri&#xE9;t&#xE9; &#xE0; un objet &#xE0; la visibilit&#xE9; limit&#xE9; nomm&#xE9; condition. Le module doit aussi poss&#xE9;der une fonction qui attend en param&#xE8;tre un formulaire pour initialiser ses &#xE9;couteurs. Pour le reste la logique de traitement peut avoir une visibilit&#xE9; priv&#xE9;e car l'on ne souhaite pas pour l'instant acc&#xE9;der &#xE0; d'autres fonctionnalit&#xE9;s. Nous d&#xE9;sirons comme au chapitre pr&#xE9;c&#xE9;dent pouvoir enregistrer le module entant que propri&#xE9;t&#xE9; de jQuery et chaque appel renvoie un nouvel objet afin de pouvoir plusieurs formulaires sans utiliser une m&#xE9;thode de reproduction d'objet comme la m&#xE9;thode create de Object.</p>
+      </div>
+      <div class="content-code">
+        <strong>form-validation.js</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">(function&#xA0;(</span><span style="color: #ffffff">exports</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">exports</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">formValidation&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">condition&#xA0;</span><span style="color: #ffcc00">=&#xA0;{};
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;(
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;function&#xA0;()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;).</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">({
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">setCondition</span><span style="color: #ffcc00">:&#xA0;function&#xA0;(</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #ffffff">pattern&#xA0;</span><span style="color: #ffcc00">instanceof&#xA0;</span><span style="color: #ffffff">RegExp
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #2aa198">"string"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">typeof&#xA0;name
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #2aa198">"string"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">typeof&#xA0;message</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">]&#xA0;=&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">message
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">};
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;},&#xA0;</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>
+<br/>})(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">jQuery&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Annuler l'envoi</strong>
+        <p>Pour annuler l'envoi du formulaire une fonction assurant la compatibilit&#xE9; de l'utilisation de preventDefault peut &#xEA;tre impl&#xE9;ment&#xE9;e.</p>
+      </div>
+      <div class="content-code">
+        <strong>prevent</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">prevent</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">preventDefault&#xA0;</span><span style="color: #ffcc00">?&#xA0;</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">preventDefault</span><span style="color: #ffcc00">()&#xA0;:&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">returnValue&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Afficher un message</strong>
+        <p>Pour afficher le message d'aide &#xE0; la saisie pour un &#xE9;l&#xE9;ment nomm&#xE9; du formulaire une fonction peut cr&#xE9;er et ins&#xE9;rer le message avant l'&#xE9;l&#xE9;ment mal renseign&#xE9;.</p>
+      </div>
+      <div class="content-code">
+        <strong>insert</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">insert</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">previous&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">previousSibling</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #2aa198">"alert"&#xA0;</span><span style="color: #ffcc00">!==&#xA0;</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">previous&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">createElement</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"em"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"alert"</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parentNode</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">insertBefore</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">innerHTML&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">;
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Supprimer un message</strong>
+        <p>Si un &#xE9;l&#xE9;ment qui a &#xE9;t&#xE9; mal renseign&#xE9; est corrig&#xE9; il faut pouvoir supprimer le message d'aide &#xE0; la saisie.</p>
+      </div>
+      <div class="content-code">
+        <strong>remove</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">remove</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">previous&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">previousSibling</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #2aa198">"alert"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parentNode</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">removeChild</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Valider un &#xE9;l&#xE9;ment</strong>
+        <p>Si un &#xE9;l&#xE9;ment est consid&#xE9;r&#xE9; comme valide, une m&#xE9;thode doit invoquer la fonction de suppression du message et affecter sa propri&#xE9;t&#xE9; className pour le styliser.</p>
+      </div>
+      <div class="content-code">
+        <strong>valid</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">valid</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">remove</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"true"</span><span style="color: #ffcc00">;
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Invalider un &#xE9;l&#xE9;ment</strong>
+        <p>Si un &#xE9;l&#xE9;ment est consid&#xE9;r&#xE9; comme invalide, une m&#xE9;thode doit invoquer la fonction d'insertion du message et affecter sa propri&#xE9;t&#xE9; className pour le styliser.</p>
+      </div>
+      <div class="content-code">
+        <strong>invalid</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">invalid</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">insert</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"false"</span><span style="color: #ffcc00">;
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Tester la valeur d'un &#xE9;l&#xE9;ment</strong>
+        <p>Une fonction peut &#xEA;tre impl&#xE9;ment&#xE9;e pour tester la correspondance entre un motif et la valeur d'un &#xE9;l&#xE9;ment.</p>
+      </div>
+      <div class="content-code">
+        <strong>test</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">value</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Valider la valeur d'un &#xE9;l&#xE9;ment</strong>
+        <p>Une fonction ayant la responsabilit&#xE9; d'invoquer les fonctions d&#xE9;crites pr&#xE9;alablement et contenant la logique de validation doit &#xEA;tre impl&#xE9;ment&#xE9;e. Son contexte est celui d'un &#xE9;l&#xE9;ment du formulaire, elle invoque valide, ou invalide et preventDefault si le test sur la valeur vaut false.</p>
+      </div>
+      <div class="content-code">
+        <strong>value</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">value</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(!</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">])&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}&#xA0;else&#xA0;if&#xA0;(!</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">invalid</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">prevent</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}&#xA0;else&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">valid</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Contexte d'un champ</strong>
+        <p>Nous allons impl&#xE9;menter une fonction field. Sa responsabilit&#xE9; est d'invoquer une fonction fournie en param&#xE8;tre en lui rattachant le contexte d'un &#xE9;l&#xE9;ment afin de ne pas r&#xE9;p&#xE9;ter des instructions proches, cette fonction fournie une couche d'abstraction &#xE0; l'invocation des fonctions. Elle peut &#xEA;tre utilis&#xE9;e pour affecter diff&#xE9;rents &#xE9;couteurs sur les &#xE9;l&#xE9;ments ou pour valider les &#xE9;l&#xE9;ments lorsque que l'&#xE9;v&#xE8;nement submit est &#xE9;mis.</p>
+      </div>
+      <div class="content-code">
+        <strong>field</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">field</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">func</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">args</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;for&#xA0;(var&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">tag&#xA0;</span><span style="color: #ffcc00">=&#xA0;[</span><span style="color: #2aa198">"input"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #2aa198">"textarea"</span><span style="color: #ffcc00">],
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">tagLength&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">tag</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">&lt;&#xA0;</span><span style="color: #ffffff">tagLength</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">++)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;for&#xA0;(var&#xA0;</span><span style="color: #ffffff">j&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">field&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementsByTagName</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">tag</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">]),
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">fieldLength&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">field</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">j&#xA0;</span><span style="color: #ffcc00">&lt;&#xA0;</span><span style="color: #ffffff">fieldLength</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">j</span><span style="color: #ffcc00">++)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">func</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">apply</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">field</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">j</span><span style="color: #ffcc00">],&#xA0;</span><span style="color: #ffffff">args</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>&#xC9;couteurs</strong>
+        <p>Pour ajouter les &#xE9;couteurs aux champs du formulaire et au formulaire, nous pouvons cr&#xE9;er deux fonctions mais leur pr&#xE9;sence peut &#xEA;tre &#xE9;vit&#xE9;e en les ajoutant directement dans le constructeur de l'objet au sein du squelette pr&#xE9;sent&#xE9;. Pour des soucis de lisibilit&#xE9; des fonctionnalit&#xE9;s du module elles sont impl&#xE9;ment&#xE9;es.</p>
+      </div>
+      <div class="content-code">
+        <strong>fieldListeners et formListeners</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">fieldListeners</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onblur&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">value</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">apply</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;[</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">]);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onkeyup&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(!</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">])&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}&#xA0;else&#xA0;if&#xA0;(</span><span style="color: #2aa198">"true"&#xA0;</span><span style="color: #ffcc00">!==&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">valid</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}&#xA0;else&#xA0;if&#xA0;(</span><span style="color: #2aa198">"true"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;!</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">invalid</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>}
+<br/>
+<br/>function&#xA0;</span><span style="color: #ffffff">formListeners</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onsubmit&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">field</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">value</span><span style="color: #ffcc00">,&#xA0;[</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">]);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_28_correction">Correction</h3>
+      <div class="content-box">
+        <p>En invoquant formValidation un nouvel objet est cr&#xE9;&#xE9;, la m&#xE9;thode setCondition d&#xE9;fini les conditions de validation de ses champs. Nous utilisons des expressions r&#xE9;guli&#xE8;res et observons que les classes de caract&#xE8;res pour d&#xE9;finir un ensemble de caract&#xE8;res accentu&#xE9;s utilisent la notation hexad&#xE9;cimale. Concernant le motif d&#xE9;crivant l'adresse mail, il faut savoir qu'un email peut ne pas correspondre avec ce motif et il est d&#xE9;conseill&#xE9; d'utiliser un motif pour v&#xE9;rifier une adresse email, sa syntaxe d&#xE9;finie par la RFC 822 ne peut pas &#xEA;tre v&#xE9;rifi&#xE9;e &#xE0; 100% par une expression r&#xE9;guli&#xE8;re.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;()&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">form&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">formValidation</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"form"</span><span style="color: #ffcc00">));
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">setCondition</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"firstname"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;/^[</span><span style="color: #ffffff">A</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">Z</span><span style="color: #ffcc00">\</span><span style="color: #ffffff">xc1</span><span style="color: #ffcc00">-\</span><span style="color: #ffffff">xdd</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">}[</span><span style="color: #ffffff">A</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">Za</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">z</span><span style="color: #ffcc00">\</span><span style="color: #ffffff">xc1</span><span style="color: #ffcc00">-\</span><span style="color: #ffffff">xff</span><span style="color: #ffcc00">-\</span><span style="color: #ffffff">s</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">2</span><span style="color: #ffcc00">,</span><span style="color: #ffffff">31</span><span style="color: #ffcc00">}$/,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"Le&#xA0;pr&#xE9;nom&#xA0;commence&#xA0;par&#xA0;une&#xA0;majuscule&#xA0;et&#xA0;poss&#xE8;de&#xA0;de&#xA0;3&#xA0;&#xE0;&#xA0;32&#xA0;caract&#xE8;res&#xA0;alphab&#xE9;tiques"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">setCondition</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"lastname"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;/^[</span><span style="color: #ffffff">A</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">Z</span><span style="color: #ffcc00">\</span><span style="color: #ffffff">xc1</span><span style="color: #ffcc00">-\</span><span style="color: #ffffff">xdd</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">}[</span><span style="color: #ffffff">A</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">Za</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">z</span><span style="color: #ffcc00">\</span><span style="color: #ffffff">xc1</span><span style="color: #ffcc00">-\</span><span style="color: #ffffff">xff</span><span style="color: #ffcc00">-\</span><span style="color: #ffffff">s</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">2</span><span style="color: #ffcc00">,</span><span style="color: #ffffff">63</span><span style="color: #ffcc00">}$/,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"Le&#xA0;nom&#xA0;commence&#xA0;par&#xA0;une&#xA0;majuscule&#xA0;et&#xA0;poss&#xE8;de&#xA0;de&#xA0;3&#xA0;&#xE0;&#xA0;64&#xA0;caract&#xE8;res&#xA0;alphab&#xE9;tiques"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">setCondition</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"company"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;/(^$|^[</span><span style="color: #ffffff">A</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">Za</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">z0</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">9</span><span style="color: #ffcc00">\</span><span style="color: #ffffff">xc1</span><span style="color: #ffcc00">-\</span><span style="color: #ffffff">xff</span><span style="color: #ffcc00">-\</span><span style="color: #ffffff">s</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">3</span><span style="color: #ffcc00">,</span><span style="color: #ffffff">32</span><span style="color: #ffcc00">}$)/,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"Le&#xA0;soci&#xE9;t&#xE9;&#xA0;poss&#xE8;de&#xA0;de&#xA0;3&#xA0;&#xE0;&#xA0;32&#xA0;caract&#xE8;res&#xA0;alphanum&#xE9;riques"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">setCondition</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"email"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;/^([</span><span style="color: #ffffff">a</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">z0</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">9._</span><span style="color: #ffcc00">-]{</span><span style="color: #ffffff">3</span><span style="color: #ffcc00">,</span><span style="color: #ffffff">64</span><span style="color: #ffcc00">})+@([</span><span style="color: #ffffff">a</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">z0</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">9.</span><span style="color: #ffcc00">-]{</span><span style="color: #ffffff">3</span><span style="color: #ffcc00">,</span><span style="color: #ffffff">64</span><span style="color: #ffcc00">})+\.[</span><span style="color: #ffffff">a</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">z</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">2</span><span style="color: #ffcc00">,</span><span style="color: #ffffff">8</span><span style="color: #ffcc00">}$/,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"L'adresse&#xA0;email&#xA0;n'est&#xA0;pas&#xA0;valide"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">setCondition</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"phone"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;/(^$|^(\+</span><span style="color: #ffffff">33</span><span style="color: #ffcc00">\</span><span style="color: #ffffff">s</span><span style="color: #ffcc00">)?</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">+[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">9</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">}([\.-\</span><span style="color: #ffffff">s</span><span style="color: #ffcc00">]?[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">-</span><span style="color: #ffffff">9</span><span style="color: #ffcc00">]{</span><span style="color: #ffffff">2</span><span style="color: #ffcc00">}){</span><span style="color: #ffffff">4</span><span style="color: #ffcc00">}$)/,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"Le&#xA0;num&#xE9;ro&#xA0;de&#xA0;t&#xE9;l&#xE9;phone&#xA0;n'est&#xA0;pas&#xA0;valide"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">setCondition</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"message"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;/(.|\</span><span style="color: #ffffff">n</span><span style="color: #ffcc00">){</span><span style="color: #ffffff">10</span><span style="color: #ffcc00">,</span><span style="color: #ffffff">300</span><span style="color: #ffcc00">}/,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"Le&#xA0;message&#xA0;poss&#xE8;de&#xA0;de&#xA0;10&#xA0;&#xE0;&#xA0;300&#xA0;caract&#xE8;res"</span><span style="color: #ffcc00">);&#xA0;
+<br/>};</span>
+</span>
+</code>
+      </div>
+      <div class="content-code">
+        <strong>formValidation</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">(function&#xA0;(</span><span style="color: #ffffff">exports</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Prevent&#xA0;event&#xA0;default
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;prevent
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{Event}&#xA0;event&#xA0;Ev&#xE8;nement&#xA0;emis
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">prevent</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">preventDefault&#xA0;</span><span style="color: #ffcc00">?&#xA0;</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">preventDefault</span><span style="color: #ffcc00">()&#xA0;:&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">returnValue&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Insert&#xA0;message
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;insert
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{string}&#xA0;message&#xA0;Message&#xA0;d'aide
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">insert</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">previous&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">previousSibling</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #2aa198">"alert"&#xA0;</span><span style="color: #ffcc00">!==&#xA0;</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">previous&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">createElement</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"em"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"alert"</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parentNode</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">insertBefore</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">innerHTML&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Remove&#xA0;message
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;remove
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">remove</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">previous&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">previousSibling</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #2aa198">"alert"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parentNode</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">removeChild</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">previous</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Invalid&#xA0;element
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;invalid
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{string}&#xA0;message&#xA0;Message&#xA0;d'aide
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">invalid</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">insert</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"false"</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Valid&#xA0;element
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;invalid
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">valid</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">remove</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #2aa198">"true"</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Test&#xA0;element&#xA0;value
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;test
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{RegExp}&#xA0;pattern&#xA0;Motif
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">value</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Valid&#xA0;element&#xA0;value
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;value
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{Event}&#xA0;event&#xA0;Ev&#xE8;nement&#xA0;&#xE9;mis
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{Object}&#xA0;condition&#xA0;Condition&#xA0;de&#xA0;validation
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">value</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(!</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">])&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}&#xA0;else&#xA0;if&#xA0;(!</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">invalid</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">prevent</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}&#xA0;else&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">valid</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Apply&#xA0;field&#xA0;to&#xA0;func
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;field
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{func}&#xA0;func&#xA0;Fonction&#xA0;&#xE0;&#xA0;appliquer
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{array}&#xA0;args&#xA0;Arguments&#xA0;&#xE0;&#xA0;appliquer
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">field</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">func</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">args</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;for&#xA0;(var&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">tag&#xA0;</span><span style="color: #ffcc00">=&#xA0;[</span><span style="color: #2aa198">"input"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #2aa198">"textarea"</span><span style="color: #ffcc00">],
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">tagLength&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">tag</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">&lt;&#xA0;</span><span style="color: #ffffff">tagLength</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">++)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;for&#xA0;(var&#xA0;</span><span style="color: #ffffff">j&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">field&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementsByTagName</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">tag</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">]),
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">fieldLength&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">field</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">j&#xA0;</span><span style="color: #ffcc00">&lt;&#xA0;</span><span style="color: #ffffff">fieldLength</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">j</span><span style="color: #ffcc00">++)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">func</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">apply</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">field</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">j</span><span style="color: #ffcc00">],&#xA0;</span><span style="color: #ffffff">args</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Add&#xA0;event&#xA0;listeners
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;formEvents
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{Object}&#xA0;condition&#xA0;Condition&#xA0;de&#xA0;validation
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">fieldListeners</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onblur&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">value</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">apply</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;[</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">]);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onkeyup&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(!</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">])&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}&#xA0;else&#xA0;if&#xA0;(</span><span style="color: #2aa198">"true"&#xA0;</span><span style="color: #ffcc00">!==&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">valid</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}&#xA0;else&#xA0;if&#xA0;(</span><span style="color: #2aa198">"true"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">className
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;!</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">invalid</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Add&#xA0;event&#xA0;listeners
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@function&#xA0;formEvents
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{Object}&#xA0;condition&#xA0;Condition&#xA0;de&#xA0;validation
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">formListeners</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onsubmit&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">field</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">value</span><span style="color: #ffcc00">,&#xA0;[</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">]);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Cr&#xE9;e&#xA0;une&#xA0;nouvelle&#xA0;interface&#xA0;formValidationInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@exports&#xA0;form/validation
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{Object}&#xA0;form&#xA0;HTML&#xA0;Element
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@returns&#xA0;{Object}&#xA0;formValidationInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">exports</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">formValidation&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">)
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@var&#xA0;{string}&#xA0;condition&#xA0;validation&#xA0;condition
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@access&#xA0;private
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">condition&#xA0;</span><span style="color: #ffcc00">=&#xA0;{};
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;(
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@returns&#xA0;{Object}&#xA0;formValidationInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">function&#xA0;()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">formListeners</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">field</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">form</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">fieldListeners</span><span style="color: #ffcc00">,&#xA0;[</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">]);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;).</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@name&#xA0;formValidationInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@namespace
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">/**
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;Set&#xA0;condition
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@memberof&#xA0;formValidationInterface
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{string}&#xA0;name&#xA0;Attribut&#xA0;name
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{RegExp}&#xA0;pattern&#xA0;Motif
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*&#xA0;@param&#xA0;{string}&#xA0;message&#xA0;Message&#xA0;d'aide
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;*/&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">setCondition</span><span style="color: #ffcc00">:&#xA0;function&#xA0;(</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #ffffff">pattern&#xA0;</span><span style="color: #ffcc00">instanceof&#xA0;</span><span style="color: #ffffff">RegExp
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #2aa198">"string"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">typeof&#xA0;name
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">&amp;&amp;&#xA0;</span><span style="color: #2aa198">"string"&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">typeof&#xA0;message</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">condition</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">name</span><span style="color: #ffcc00">]&#xA0;=&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">pattern</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">message
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">};
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;},&#xA0;</span><span style="color: #ffffff">form
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>
+<br/>})(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">jQuery&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Le formulaire est enrichi et l'utilisateur peut le compl&#xE9;ter plus facilement gr&#xE2;ce aux messages d'aide &#xE0; la saisie affich&#xE9;s lors de son interaction avec lui. Quand le formulaire est soumis, les champs dont l'attribut name est pr&#xE9;sent dans les conditions sont v&#xE9;rifi&#xE9;s, s'ils sont valides ils sont stylis&#xE9;s en vert, s'ils sont invalides, un message d'aide &#xE0; la saisie s'affiche et ils sont stylis&#xE9;s en orange. Quand un &#xE9;l&#xE9;ment est renseign&#xE9;, au moment du keyup, si sa valeur est valide le champ est stylis&#xE9;, s'il est valide puis suite &#xE0; une modification devient invalide, le message s'affiche et il est stylis&#xE9; invalide. Au moment o&#xF9; un champ perd son focus sa valeur est v&#xE9;rifi&#xE9;e et il devient soit valide soit invalide. Cet exercice a propos&#xE9; de r&#xE9;viser la manipulation des contextes d'ex&#xE9;cution, les &#xE9;v&#xE8;nements et la compatibilit&#xE9; de Event sur les navigateurs et la modification du DOM.</p>
+      </div>
+    </div>
+  </body>
+</html>

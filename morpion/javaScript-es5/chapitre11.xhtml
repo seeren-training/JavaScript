@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <title>Chapitre 11: Les &#xE9;v&#xE8;nements - Formation JavaScript Initiation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/33d0c34f96e6afed4baa666fd7bfab67.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/f786f0fa752fdc2603a99d15b85cb5fd.css" media="all and (orientation: portrait)"/>
+  </head>
+  <body>
+    <div class="chapitre-content" id="ch_11">
+      <h2>
+        <span>Chapitre 11:</span>
+        <a>Les &#xE9;v&#xE8;nements</a>
+      </h2>
+      <div class="content-box">
+        <strong>Dynamiser le DOM</strong>
+        <p>Les &#xE9;v&#xE8;nements sont l&#x2019;&#xE9;tape manquante pour pouvoir modifier dynamiquement un document. La partie pr&#xE9;c&#xE9;dente a d&#xE9;taill&#xE9; le DOM et la modification de ses n&#x153;uds, les &#xE9;v&#xE8;nements vont nous permettre d'effectuer ces modifications suite &#xE0; un &#xE9;v&#xE8;nement, une action de l'utilisateur ou du navigateur.</p>
+      </div>
+      <h3 id="c_11_intro">Introduction aux &#xE9;v&#xE8;nements</h3>
+      <div class="content-box">
+        <h4>Events</h4>
+        <p>Un &#xE9;v&#xE8;nement est toujours d&#xE9;clench&#xE9;, il survient suite &#xE0; une action souris ou clavier de l'utilisateur, soit suite &#xE0; un changement d'&#xE9;tat du document ou d'objets.</p>
+        <p>Les objets disposants d'&#xE9;v&#xE8;nements sont le document, les n&#x153;uds du document, window et ses &#xE9;l&#xE9;ments et l'objet XMLHttpRequest ou ActiveXObject. Les &#xE9;v&#xE8;nements sur le document ou ses n&#x153;uds d&#xE9;crivent principalement des actions de l'utilisateur, ou le chargement du document et des n&#x153;uds. Les &#xE9;v&#xE8;nements de window et ses &#xE9;l&#xE9;ments d&#xE9;crivent principalement un changement d'&#xE9;tat comme le redimensionnement de la fen&#xEA;tre ou sa fermeture. Les &#xE9;v&#xE8;nements de XMLHttpRequest d&#xE9;crivent principalement l'&#xE9;tat de la progression d'un message HTTP.</p>
+      </div>
+      <div class="content-box">
+        <strong>Handlers</strong>
+        <p>Les &#xE9;v&#xE8;nements transitent par des propri&#xE9;t&#xE9;s d'objets sujets aux &#xE9;v&#xE8;nements comme cit&#xE9; pr&#xE9;c&#xE9;demment dont la valeur peut &#xEA;tre un handler. Ces propri&#xE9;t&#xE9;s se distinguent par le pr&#xE9;fixe "on" comme par exemple onclick pour faire transiter l'&#xE9;v&#xE8;nement d'un click souris de l'utilisateur. Ces propri&#xE9;t&#xE9;s valent null par d&#xE9;faut et attendent comme valeur une fonction.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">;
+<br/>
+<br/>for&#xA0;(</span><span style="color: #ffffff">prop&#xA0;in&#xA0;document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(/^</span><span style="color: #ffffff">on</span><span style="color: #ffcc00">/.</span><span style="color: #ffffff">test</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">++;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}
+<br/>
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Le script ci-dessus affichera dans la console 85 sur Chrome, 75 sur Firefox ou encore 102 sur Edge. Tout comme certains objets ou propri&#xE9;t&#xE9;s qui ne sont pas impl&#xE9;ment&#xE9;s par diff&#xE9;rentes versions d'un m&#xEA;me navigateur ou par diff&#xE9;rents navigateurs, il en est de m&#xEA;me pour les propri&#xE9;t&#xE9;s soutenant un &#xE9;v&#xE8;nement.</p>
+      </div>
+      <div class="content-box">
+        <strong>Listeners</strong>
+        <p>Les &#xE9;v&#xE8;nements peuvent &#xEA;tre &#xE9;cout&#xE9;s. Au moment d'un clic, si la propi&#xE9;t&#xE9; onclick poss&#xE8;de un handler qui invoque des &#xE9;couteurs (listeners), ceux ci seront appel&#xE9;s au moment de l'&#xE9;v&#xE8;nement. Un &#xE9;couteur est une fonction de rappel (callback) qui peut &#xEA;tre utilis&#xE9;e par un ou plusieurs handlers.</p>
+        <p>Un handler affect&#xE9; &#xE0; une propri&#xE9;t&#xE9; pour un &#xE9;v&#xE8;nement, invoquant des listeners d&#xE9;crit une premi&#xE8;re approche de la programmation &#xE9;v&#xE8;nementielle. Lorsqu'un &#xE9;v&#xE8;nement se produit, si un handler est associ&#xE9; &#xE0; l'&#xE9;v&#xE8;nement et poss&#xE8;de un ou des listeners, les listeners seront invoqu&#xE9;s et le programme pourra r&#xE9;agir &#xE0; l'&#xE9;v&#xE8;nement. Si l'&#xE9;couteur contient dans son bloc des instructions modifiant le document, ce document est dynamique car il &#xE9;volue en fonction d'&#xE9;v&#xE8;nements.</p>
+      </div>
+      <h3 id="c_11_mouse">Les &#xE9;v&#xE9;nements souris</h3>
+      <div class="content-box">
+        <h4>MouseEvent</h4>
+        <p>Les &#xE9;v&#xE8;nements souris sont d&#xE9;clench&#xE9;s lors d'un d&#xE9;placement de la souris, une pression sur un des clics ou toute autre manipulation du p&#xE9;riph&#xE9;rique.</p>
+      </div>
+      <div class="content-tab">
+        <table>
+          <tr>
+            <th>Handler</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>click</td>
+            <td>Le bouton de la souris a &#xE9;t&#xE9; press&#xE9; puis rel&#xE2;ch&#xE9;</td>
+          </tr>
+          <tr>
+            <td>dblclick&#xD;
+</td>
+            <td>Le bouton de la souris a &#xE9;t&#xE9; press&#xE9; puis rel&#xE2;ch&#xE9; deux fois</td>
+          </tr>
+          <tr>
+            <td>mousedown</td>
+            <td>Le bouton de la souris est press&#xE9;</td>
+          </tr>
+          <tr>
+            <td>mouseenter</td>
+            <td>Le curseur de la souris est au dessus de l'&#xE9;l&#xE9;ment</td>
+          </tr>
+          <tr>
+            <td>mouseleave</td>
+            <td>Le curseur de la souris n'est plus au dessus de l'&#xE9;l&#xE9;ment</td>
+          </tr>
+          <tr>
+            <td>mousemove</td>
+            <td>Le curseur de la souris bouge au dessus de l'&#xE9;l&#xE9;ment</td>
+          </tr>
+          <tr>
+            <td>mouseout</td>
+            <td>Le curseur de la souris n'est plus au dessus de l'&#xE9;l&#xE9;ment ou d'un de ses enfants</td>
+          </tr>
+          <tr>
+            <td>mouseover</td>
+            <td>Le curseur de la souris est au dessus de l'&#xE9;l&#xE9;ment ou d'un de ses enfants</td>
+          </tr>
+          <tr>
+            <td>mouseup</td>
+            <td>Le curseur de la souris est rel&#xE2;ch&#xE9; au dessus de l'&#xE9;l&#xE9;ment</td>
+          </tr>
+        </table>
+      </div>
+      <h3 id="c_11_keyboard">Les &#xE9;v&#xE9;nements clavier</h3>
+      <div class="content-box">
+        <h4>KeyboardEvent</h4>
+        <p>Les &#xE9;v&#xE8;nements clavier sont d&#xE9;clench&#xE9;s lors d'un action sur une touche.</p>
+      </div>
+      <div class="content-tab">
+        <table>
+          <tr>
+            <th>Handler</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>keydown</td>
+            <td>Une touche du clavier est press&#xE9;e</td>
+          </tr>
+          <tr>
+            <td>keypress</td>
+            <td>Une touche de caract&#xE8;re du clavier est press&#xE9;e</td>
+          </tr>
+          <tr>
+            <td>keyup</td>
+            <td>Une touche du clavier est relach&#xE9;e</td>
+          </tr>
+        </table>
+      </div>
+      <h3 id="c_11_progress">Les &#xE9;v&#xE9;nements de progression</h3>
+      <div class="content-box">
+        <h4>ProgressEvent</h4>
+        <p>Les &#xE9;v&#xE8;nements de progression sont d&#xE9;clench&#xE9;s lors d'une changement d'&#xE9;tat d'une requ&#xEA;te ou r&#xE9;ponse HTTP.</p>
+      </div>
+      <div class="content-tab">
+        <table>
+          <tr>
+            <th>Handler</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>abort</td>
+            <td>La progression est termin&#xE9;e avec ou sans erreur</td>
+          </tr>
+          <tr>
+            <td>error&#xD;
+</td>
+            <td>La progression a &#xE9;chou&#xE9;</td>
+          </tr>
+          <tr>
+            <td>load</td>
+            <td>La progression est termin&#xE9;e sans erreur</td>
+          </tr>
+          <tr>
+            <td>loadend</td>
+            <td>La progression est termin&#xE9;e</td>
+          </tr>
+          <tr>
+            <td>loadstart</td>
+            <td>La progression a commenc&#xE9;</td>
+          </tr>
+          <tr>
+            <td>progress</td>
+            <td>La progression progresse</td>
+          </tr>
+          <tr>
+            <td>timeout</td>
+            <td>La progression d&#xE9;passe le d&#xE9;lai d'attente</td>
+          </tr>
+        </table>
+      </div>
+      <h3 id="c_11_add">Ajouter un &#xE9;couter</h3>
+      <div class="content-box">
+        <h4>addEventListener</h4>
+        <p>Plusieurs interfaces d&#xE9;crivent les propri&#xE9;t&#xE9;s disponibles pour faire transiter un &#xE9;v&#xE8;nement, elles h&#xE9;ritent toutes de l'interface Event.</p>
+      </div>
+      <ul class="content-list">
+        <li>AnimationEvent</li>
+        <li>AudioProcessingEvent</li>
+        <li>BeforeUnloadEvent</li>
+        <li>ClipboardEvent</li>
+        <li>CompositionEvent</li>
+        <li>DeviceLightEvent</li>
+        <li>DeviceMotionEvent</li>
+        <li>DeviceOrientationEvent</li>
+        <li>DeviceProximityEvent</li>
+        <li>DragEvent</li>
+        <li>FocusEvent</li>
+        <li>GamepadEvent</li>
+        <li>HashChangeEvent</li>
+        <li>KeyboardEvent</li>
+        <li>MessageEvent</li>
+        <li>MouseEvent</li>
+        <li>MutationEvent</li>
+        <li>MutationNameEvent</li>
+        <li>NotificationEvent</li>
+        <li>OfflineAudioCompletionEvent</li>
+        <li>PageTransitionEvent</li>
+        <li>Performance</li>
+        <li>PointerEvent</li>
+        <li>PopStateEvent</li>
+        <li>ProgressEvent</li>
+        <li>PushEvent</li>
+        <li>ServiceWorkerMessageEvent</li>
+        <li>SpeechRecognitionEvent</li>
+        <li>SpeechSynthesisErrorEvent</li>
+        <li>SpeechSynthesisEvent</li>
+        <li>StorageEvent</li>
+        <li>SVGEvent</li>
+        <li>SVGZoomEvent</li>
+        <li>TimeEvent</li>
+        <li>TouchEvent</li>
+        <li>TransitionEvent</li>
+        <li>UIEvent</li>
+        <li>UserProximityEvent</li>
+        <li>WheelEvent</li>
+      </ul>
+      <div class="content-box">
+        <p>Pour rattacher un listener &#xE0; un &#xE9;v&#xE8;nement, plusieurs m&#xE9;thodes nous sont propos&#xE9;es en fonction des navigateur mais il est aussi possible d'affecter directement un handler.</p>
+      </div>
+      <div class="content-box">
+        <p>La m&#xE9;thode addEventListener permet d'assigner un &#xE9;couteur pour un &#xE9;l&#xE9;ment poss&#xE9;dant la propri&#xE9;t&#xE9; fournie en premier param&#xE8;tre sans son suffixe, le second param&#xE8;tre est l'&#xE9;couteur soit l'identifiant d'une fonction soit une d&#xE9;claration de fonction soit une fonction anonyme, le troisi&#xE8;me param&#xE8;tre est un boolean pour initier la capture ou non.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>element.addEventListener(handler, listener, capture);</em>
+      </div>
+      <div class="content-code">
+        <strong></strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">&lt;</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">script&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/javascript"&#xA0;</span><span style="color: #ffffff">defer&#xA0;src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"script.js"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">script</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&lt;/</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;</span>
+</span>
+</code>
+      </div>
+      <div class="content-code">
+        <strong>addEventListener</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"1"</span><span style="color: #ffcc00">);
+<br/>}
+<br/>
+<br/>var&#xA0;</span><span style="color: #ffffff">var_click&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"2"</span><span style="color: #ffcc00">);
+<br/>};
+<br/>
+<br/></span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">addEventListener</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">);
+<br/></span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">addEventListener</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">var_click</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">);
+<br/></span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">addEventListener</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"3"</span><span style="color: #ffcc00">);&#xA0;},
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Quand l'utilisateur click quelque part sur la fen&#xEA;tre, les fonctions pass&#xE9;es en param&#xE8;tre de la m&#xE9;thode addEventListener sont invoqu&#xE9;es.</p>
+      </div>
+      <div class="content-tips">
+        <h4>addEventListener</h4>
+        <p>La m&#xE9;thode addEventListener n'est prise en charge sur Internet Explorer qu'&#xE0; partir de sa version 9 et ses versions ant&#xE9;rieures utilisent la m&#xE9;thode non standard attachEvent. Pour &#xEA;tre r&#xE9;tro compatible il faut v&#xE9;rifier la disponibilit&#xE9; de addEventListener.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">click&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">);
+<br/>};
+<br/>
+<br/>if&#xA0;(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">addEventListener</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">addEventListener</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">)
+<br/>}&#xA0;else&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">attachEvent</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"onclick"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_11_remove">Retirer un &#xE9;couter</h3>
+      <div class="content-box">
+        <h4>removeEventListener</h4>
+        <p>La m&#xE9;thode removeEventListener permet de d&#xE9;tacher un &#xE9;couteur.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>element.removeEventListener(handler, listener, capture);</em>
+      </div>
+      <div class="content-code">
+        <strong>removeEventListener</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">);
+<br/>}
+<br/>
+<br/></span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">addEventListener</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">);
+<br/>
+<br/></span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">removeEventListener</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Apr&#xE8;s avoir utilis&#xE9; removeEventListener l'&#xE9;couteur n'est plus enregistr&#xE9; pour l'&#xE9;v&#xE8;nement, apr&#xE8;s un clic sur window plus rien ne s'affiche dans la console.</p>
+      </div>
+      <div class="content-tips">
+        <h4>removeEventListener</h4>
+        <p>La m&#xE9;thode removeEventListener n'est prise en charge sur Internet Explorer qu'&#xE0; partir de sa version 9, ses versions ant&#xE9;rieures utilisent uniquement la m&#xE9;thode non standard detachEvent.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">if&#xA0;(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">removeEventListener</span><span style="color: #ffcc00">))&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">removeEventListener</span><span style="color: #ffcc00">)(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">)
+<br/>}&#xA0;else&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">detachEvent</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"onclick"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Sur les exemples pr&#xE9;c&#xE9;dents nous avons attach&#xE9; puis d&#xE9;tach&#xE9; un &#xE9;couteur pour l'&#xE9;v&#xE8;nement onclick sur l'objet window. Nous allons au prochain chapitre affecter un handler directement &#xE0; une propri&#xE9;t&#xE9; pour un &#xE9;l&#xE9;ment du document avant d'&#xE9;tudier l'objet Event.</p>
+      </div>
+    </div>
+  </body>
+</html>

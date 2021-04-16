@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <title>Chapitre 14: Contexte d&#x2019;ex&#xE9;cution - Formation JavaScript Initiation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/33d0c34f96e6afed4baa666fd7bfab67.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/f786f0fa752fdc2603a99d15b85cb5fd.css" media="all and (orientation: portrait)"/>
+  </head>
+  <body>
+    <div class="chapitre-content" id="ch_14">
+      <h2>
+        <span>Chapitre 14:</span>
+        <a>Contexte d&#x2019;ex&#xE9;cution</a>
+      </h2>
+      <div class="content-box">
+        <strong>Contexte d'ex&#xE9;cution</strong>
+        <p>Nous allons &#xE9;tudier la notion de contexte et l'op&#xE9;rateur this. Le chapitre pr&#xE9;c&#xE9;dent a utilis&#xE9; cet op&#xE9;rateur pour assurer la compatibilit&#xE9; lors de l'utilisation de currentTarget.</p>
+      </div>
+      <h3 id="c_14_context">La notion de contexte</h3>
+      <div class="content-box">
+        <strong>Contexte vs Scope</strong>
+        <p>Le contexte d'ex&#xE9;cution ne doit pas &#xEA;tre confondu avec la port&#xE9;e des variables disponibles lors de l'ex&#xE9;cution d'instructions. Un scope est une port&#xE9;e, une variable d&#xE9;clar&#xE9;e dans le bloc d'une fonction n'est pas accessible entant que propri&#xE9;t&#xE9; de window par exemple. C'est l'ensemble des variables, objets, et fonctions auxquels l'instruction a acc&#xE8;s. Des contextes diff&#xE9;rents peuvent avoir le m&#xEA;me scope.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">globale&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>
+<br/>function&#xA0;</span><span style="color: #ffffff">fonction</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">locale&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Context:&#xA0;"&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Globale:&#xA0;"&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">globale</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Locale:&#xA0;"&#xA0;&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">locale</span><span style="color: #ffcc00">);
+<br/>}
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;Context:&#xA0;[object&#xA0;Window]
+<br/>//&#xA0;Globale:&#xA0;true
+<br/>//&#xA0;Locale:&#xA0;true
+<br/></span><span style="color: #ffffff">fonction</span><span style="color: #ffcc00">();
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;Context:&#xA0;[object&#xA0;Object]
+<br/>//&#xA0;Globale:&#xA0;true
+<br/>//&#xA0;Locale:&#xA0;true
+<br/></span><span style="color: #ffcc00">new&#xA0;</span><span style="color: #ffffff">fonction</span><span style="color: #ffcc00">();</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>L'op&#xE9;rateur new construit une instance de fonction. Quand le constructeur est invoqu&#xE9; le contexte est celui de window, quand il est instanci&#xE9; le contexte est celui de l'objet cr&#xE9;&#xE9; par instanciation. Il y a deux contextes diff&#xE9;rents qui peuvent avoir acc&#xE8;s aux m&#xEA;mes variables, ils partagent le m&#xEA;me scope.</p>
+        <p>En construisant un objet le contexte d'un constructeur n'est plus celui de son contexte global, mais en utilisant les &#xE9;v&#xE8;nements le contexte d'un handler ou d'un listner change &#xE9;galement pour faire r&#xE9;f&#xE9;rence &#xE0; l'objet en cours de manipulation.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">globale&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>
+<br/>function&#xA0;</span><span style="color: #ffffff">fonction</span><span style="color: #ffcc00">()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">locale&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Context:&#xA0;"&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Globale:&#xA0;"&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">globale</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Locale:&#xA0;"&#xA0;&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">locale</span><span style="color: #ffcc00">);
+<br/>}
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;Context:&#xA0;[object&#xA0;Window]
+<br/>//&#xA0;Globale:&#xA0;true
+<br/>//&#xA0;Locale:&#xA0;true
+<br/></span><span style="color: #ffffff">fonction</span><span style="color: #ffcc00">();
+<br/>
+<br/></span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onclick&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">fonction</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Context:&#xA0;[object&#xA0;HTMLBodyElement]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;//&#xA0;Globale:&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;//&#xA0;Locale:&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">();
+<br/>};</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>En utilisant fonction come handler, lorsque l'&#xE9;v&#xE8;nement est &#xE9;mis et la fonction invoqu&#xE9;e, son contexte fait r&#xE9;f&#xE9;rence &#xE0; l'objet &#xE9;metteur soit &#xE0; document.body, le contexte tout comme avec l'op&#xE9;rateur d'instanciation a chang&#xE9;.</p>
+      </div>
+      <div class="content-box">
+        <p>JavaScript est un langage orient&#xE9; prototype et n'utilise pas le mot this comme un langage de programmation objet classique. Ce mot peut faire r&#xE9;f&#xE9;rence &#xE0; des objets qui n&#x2019;h&#xE9;ritent pas du constructeur utilisant cet op&#xE9;rateur. La suite du chapitre d&#xE9;taille l'utilisation et la signification de this.</p>
+      </div>
+      <h3 id="c_14_this">L'op&#xE9;rateur this</h3>
+      <div class="content-box">
+        <h4>this</h4>
+        <p>L'operateur this fait r&#xE9;f&#xE9;rence &#xE0; l'objet repr&#xE9;sentant l'espace courant du contexte d'ex&#xE9;cution.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var contexte = this;</em>
+      </div>
+      <div class="content-box">
+        <strong>contexte</strong>
+        <p>L'op&#xE9;rateur this dans le contexte global du script fera r&#xE9;f&#xE9;rence &#xE0; l'objet window.</p>
+      </div>
+      <div class="content-code">
+        <strong>this dans un contexte global</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">document&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>this s'utilise alors comme un alias de l'identifiant de l'objet repr&#xE9;sentant le contexte d'ex&#xE9;cution courant et les m&#xEA;mes r&#xE9;gles d'acc&#xE8;s aux propri&#xE9;t&#xE9;s et m&#xE9;thodes lui sont appliqu&#xE9;es.</p>
+      </div>
+      <div class="content-box">
+        <strong>Object literal</strong>
+        <p>Dans le contexte d&#x2019;ex&#xE9;cution d'un objet, this fera r&#xE9;f&#xE9;rence &#xE0; l'objet.</p>
+      </div>
+      <div class="content-code">
+        <strong>this dans le contexte d'un objet litt&#xE9;ral</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">objet&#xA0;</span><span style="color: #ffcc00">=&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">:&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">getProp</span><span style="color: #ffcc00">:&#xA0;function&#xA0;()&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>
+<br/>};
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getProp</span><span style="color: #ffcc00">());</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Function</strong>
+        <p>Dans le contexte d&#x2019;ex&#xE9;cution d'une fonction invoqu&#xE9;e, this fera r&#xE9;f&#xE9;rence au contexte d'ex&#xE9;cution qui lui est attach&#xE9;. this fera r&#xE9;f&#xE9;rence &#xE0; l'objet window dans l'exemple ci-dessous et affectera la propri&#xE9;t&#xE9; prop &#xE0; l'objet window.</p>
+      </div>
+      <div class="content-code">
+        <strong>this dans le contexte d'une fonction invoqu&#xE9;e</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">fonction&#xA0;</span><span style="color: #ffcc00">()&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">;
+<br/>
+<br/>}
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">fonction</span><span style="color: #ffcc00">());
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Strict mode</strong>
+        <p>Le mode strict emp&#xEA;che ce comportement et l&#xE8;ve une exception de type TypeError s'il est fait r&#xE9;f&#xE9;rence &#xE0; un contexte ind&#xE9;fini.</p>
+      </div>
+      <div class="content-code">
+        <strong>this dans le contexte d'une fonction invoqu&#xE9;e en mode strict</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">fonction&#xA0;</span><span style="color: #ffcc00">()&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"use&#xA0;strict"</span><span style="color: #ffcc00">;
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">;
+<br/>
+<br/>}
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;TypeError:&#xA0;this&#xA0;is&#xA0;undefined
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">fonction</span><span style="color: #ffcc00">());</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Constructeur</strong>
+        <p>Dans le cas d'un constructeur invoqu&#xE9; avec l'op&#xE9;rateur d'instanciation, this fait r&#xE9;f&#xE9;rence &#xE0; l'objet construit.</p>
+      </div>
+      <div class="content-code">
+        <strong>this dans le contexte d'un constructeur invoqu&#xE9;</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">fonction&#xA0;</span><span style="color: #ffcc00">()&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">;
+<br/>
+<br/>}
+<br/>
+<br/>var&#xA0;</span><span style="color: #ffffff">objet&#xA0;</span><span style="color: #ffcc00">=&#xA0;new&#xA0;</span><span style="color: #ffffff">fonction</span><span style="color: #ffcc00">();
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);
+<br/></span><span style="color: #8c8c8c">//&#xA0;false
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Handler</strong>
+        <p>Dans le cas d'un handler affect&#xE9; &#xE0; une propri&#xE9;t&#xE9; d&#xE9;crivant un &#xE9;v&#xE8;nement, this repr&#xE9;sente la cible courante soit l'&#xE9;l&#xE9;ment travers&#xE9; par l'&#xE9;v&#xE8;nement.</p>
+      </div>
+      <div class="content-code">
+        <strong>this dans le contexte d'un handler</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onclick&#xA0;</span><span style="color: #ffcc00">=&#xA0;function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">();
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);
+<br/>};</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Listener</strong>
+        <p>Dans le cas d'un listener ajout&#xE9; par la m&#xE9;thode addEventListener, this repr&#xE9;sente aussi la cible courante.</p>
+      </div>
+      <div class="content-code">
+        <strong>this dans le contexte d'un listener</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">addEventListener</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;},
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">false</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">();
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);
+<br/>};</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Rappelons que lors de l'invocation d'une fonction, this fera r&#xE9;f&#xE9;rence au contexte d'ex&#xE9;cution qui lui est attach&#xE9;. Lorsqu'un handler affect&#xE9; manuellement invoque des fonctions, leur contexte d'ex&#xE9;cution n'est pas celui de l'&#xE9;l&#xE9;ment travers&#xE9; par l'&#xE9;v&#xE8;nement.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">listener</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>}
+<br/>
+<br/></span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onclick&#xA0;</span><span style="color: #ffcc00">=&#xA0;function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">listener</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">();
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;undefined
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);
+<br/>};</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Pour pouvoir invoquer une fonction avec un contexte particulier des m&#xE9;thodes r&#xE9;solvent cette probl&#xE9;matique. Nous les d&#xE9;taillons sans plus attendre.</p>
+      </div>
+      <h3 id="c_14_call">Les m&#xE9;thodes call et apply</h3>
+      <div class="content-box">
+        <h4>call</h4>
+        <p>La m&#xE9;thode call d'une objet de type function invoque la fonction ou la m&#xE9;thode en rempla&#xE7;ant son contexte par l'objet pass&#xE9; en premier argument. Les arguments suppl&#xE9;mentaires sont facultatifs et correspondent aux arguments pr&#xE9;sents dans la signature de l'objet function &#xE0; invoquer.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>callable.call(contexte[, arg1[, arg2[..., argN]]]);</em>
+      </div>
+      <div class="content-code">
+        <strong>call</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">listener</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>}
+<br/>
+<br/></span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onclick&#xA0;</span><span style="color: #ffcc00">=&#xA0;function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">listener</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">call</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">();
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);
+<br/>};</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <h4>apply</h4>
+        <p>La m&#xE9;thode apply d'un objet est similaire &#xE0; call &#xE0; la diff&#xE9;rence pr&#xE8;s qu'elle n'accepte que deux param&#xE8;tres. Le premier param&#xE8;tre correspond au contexte, le second param&#xE8;tre est un tableau contenant la collection d'arguments &#xE0; faire passer &#xE0; l'objet function, il est optionnel. Si le second param&#xE8;tre n'est pas un tableau aucune exception n'est lev&#xE9;e mais les arguments ne sont pas transmis.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>callable.apply(contexte[, tableau]);</em>
+      </div>
+      <div class="content-code">
+        <strong>apply</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">listener</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>}
+<br/>
+<br/></span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onclick&#xA0;</span><span style="color: #ffcc00">=&#xA0;function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">listener</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">apply</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">,&#xA0;[</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">]);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;};
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">();
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);
+<br/>};</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_14_bind">La m&#xE9;thode bind</h3>
+      <div class="content-box">
+        <h4>bind</h4>
+        <p>La m&#xE9;thode bind d'un objet de type function  renvoie une fonction identique &#xE0; l'objet utilisant la m&#xE9;thode mais dont le contexte d'ex&#xE9;cution correspond &#xE0; l'objet fourni en premier param&#xE8;tre. Les autres param&#xE8;tres optionnels correspondent aux arguments &#xE0; faire passer &#xE0; la nouvelle fonction dans l'ordre des arguments pr&#xE9;sents dans la signature de l'objet initial.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var func = callable.bind(contexte[, arg1[, arg2[..., argN]]]);</em>
+      </div>
+      <div class="content-code">
+        <strong>bind</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onclick&#xA0;</span><span style="color: #ffcc00">=&#xA0;(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">true</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}).</span><span style="color: #ffffff">bind</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">();
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;undefined
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">prop</span><span style="color: #ffcc00">);
+<br/>};</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Les m&#xE9;thodes d&#xE9;crites dans ce chapitre compl&#xE8;te l'initiation aux &#xE9;v&#xE8;nements mais leur utilisation ne se limite pas &#xE0; ses cas. Avec le soin port&#xE9; au d&#xE9;tail de la notion de contexte les &#xE9;v&#xE8;nements peuvent &#xEA;tre utilis&#xE9;s correctement.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <title>Chapitre 08: Acc&#xE9;der aux n&#x153;uds du DOM - Formation JavaScript Initiation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/33d0c34f96e6afed4baa666fd7bfab67.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/f786f0fa752fdc2603a99d15b85cb5fd.css" media="all and (orientation: portrait)"/>
+  </head>
+  <body>
+    <div class="chapitre-content" id="ch_08">
+      <h2>
+        <span>Chapitre 08:</span>
+        <a>Acc&#xE9;der aux n&#x153;uds du DOM</a>
+      </h2>
+      <div class="content-box">
+        <strong>Atteindre les n&#x153;uds</strong>
+        <p>L'objet document et ses &#xE9;l&#xE9;ments nous offrent des m&#xE9;thodes pour acc&#xE9;der &#xE0; leurs noeuds. Ce chapitre expose les m&#xE9;thodes pour cibler un &#xE9;l&#xE9;ment particulier, puis une collection d'&#xE9;l&#xE9;ments avant de voir les m&#xE9;thodes pour naviguer entre les n&#x153;uds.</p>
+      </div>
+      <h3 id="c_08_acceder">Acc&#xE9;der &#xE0; un &#xE9;l&#xE9;ment</h3>
+      <div class="content-box">
+        <h4>Document</h4>
+        <p>Le corps du document peut s'atteindre en utilisant la propri&#xE9;t&#xE9; body du document. Que la balise body soit pr&#xE9;sente ou non cette propri&#xE9;t&#xE9; renvoie la repr&#xE9;sentation du corps du document.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var body = document.body; </em>
+      </div>
+      <div class="content-code">
+        <strong>defer</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">&lt;</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">script&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/javascript"&#xA0;</span><span style="color: #ffffff">defer&#xA0;src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"script.js"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">script</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">ul&#xA0;id</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"identifiant"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">ul</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&lt;/</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Nous utilisons un script distant qui poss&#xE8;de l'attribut defer. Defer indique au navigateur que l&#x2019;ex&#xE9;cution du script doit se faire une fois l'ensemble document charg&#xE9;, en son absence nous ne pouvons pas interagir avec ses &#xE9;l&#xE9;ments car il ne sont pas charg&#xE9;s et donc pas pr&#xE9;sents lors de l&#x2019;ex&#xE9;cution du script. Une fois que les &#xE9;v&#xE8;nement auront &#xE9;t&#xE9; introduits il ne sera plus utile d'utiliser defer qui pose des probl&#xE8;mes de compatibilit&#xE9; avec les vielles versions d'internet explorer.</p>
+      </div>
+      <div class="content-code">
+        <strong>document.body</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;&lt;body&gt;
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>getElementById</strong>
+        <p>La m&#xE9;thode getElementById renvoie soit l'&#xE9;l&#xE9;ment unique identifi&#xE9; par son attribut id transmis en param&#xE8;tre soit null.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var noeud = document.getElementById(id); </em>
+      </div>
+      <div class="content-code">
+        <strong>document.getElementById</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;&lt;ul&#xA0;id="identifiant"&gt;
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"identifiant"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>querySelector</strong>
+        <p>La m&#xE9;thode querySelector renvoie soit l'&#xE9;l&#xE9;ment identifi&#xE9; par un selector soit null.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var noeud = document.querySelector(selector); </em>
+      </div>
+      <div class="content-code">
+        <strong>document.querySelector</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;&lt;ul&#xA0;id="identifiant"&gt;
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">querySelector</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-warning">
+        <strong>querySelector</strong>
+        <p>La m&#xE9;thode repose sur la Selectors API et le navigateur doit prendre en charge la version du selector sp&#xE9;cifi&#xE9; pour son bon fonctionnement. Ind&#xE9;pendamment des selectors, cette m&#xE9;thode n'est disponible qu'&#xE0; partir d'Internet Explorer 8 ou Opera 10 par exemple.</p>
+      </div>
+      <div class="content-box">
+        <strong>elementFromPoint</strong>
+        <p>La m&#xE9;thode elementFromPoint renvoie soit l'&#xE9;l&#xE9;ment point&#xE9; graphiquement par un couple de coordonn&#xE9;es x et y soit null.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var noeud = document.elementFromPoint(x,y); </em>
+      </div>
+      <div class="content-code">
+        <strong>document.elementFromPoint</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;&lt;html&gt;
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">elementFromPoint</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_08_collection">Acc&#xE9;der &#xE0; une collection</h3>
+      <div class="content-box">
+        <h4>HTMLCollection et NodeList</h4>
+        <p>Des m&#xE9;thodes de l'objet document renvoient une collection d'&#xE9;l&#xE9;ments, nous compl&#xE9;tons le fichier HTML d&#xE9;j&#xE0; utilis&#xE9; afin d'interagir avec.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">&lt;</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">script&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/javascript"&#xA0;</span><span style="color: #ffffff">defer&#xA0;src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"script.js"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">script</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">ul&#xA0;id</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"identifiant"&#xA0;</span><span style="color: #ffcc00">class=</span><span style="color: #2aa198">"classe"</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">li&#xA0;name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"nom"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">li</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">ul</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">ul&#xA0;</span><span style="color: #ffcc00">class=</span><span style="color: #2aa198">"classe"</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">li&#xA0;name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"nom"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">li</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">ul</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&lt;/</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>getElementsByTagName</strong>
+        <p>La m&#xE9;thode getElementsByTagName renvoie soit une collection d'&#xE9;l&#xE9;ments correspondants au tag sp&#xE9;cifi&#xE9; en param&#xE8;tre pour l'&#xE9;l&#xE9;ment parent utilis&#xE9; soit un tableau vide.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var collection = element.getElementsByTagName(tag); </em>
+      </div>
+      <div class="content-code">
+        <strong>getElementsByTagName</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;HTMLCollection[li,&#xA0;li]
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementsByTagName</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">));
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;HTMLCollection[li]
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">getElementsByTagName</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Le nom du tag est repr&#xE9;sent&#xE9; en capitale pour un document HTML et en minuscule pour un document XHTML ou XML.</p>
+      </div>
+      <div class="content-box">
+        <strong>getElementsByClassName</strong>
+        <p>La m&#xE9;thode getElementsByClassName renvoie soit une collection d'&#xE9;l&#xE9;ments correspondants &#xE0; la classe sp&#xE9;cifi&#xE9;e en param&#xE8;tre pour l'&#xE9;l&#xE9;ment parent utilis&#xE9; soit un tableau vide.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var collection = element.getElementsByClassName(className); </em>
+      </div>
+      <div class="content-code">
+        <strong>getElementsByClass</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;HTMLCollection[ul#identifiant.classe,&#xA0;ul.classe]
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementsByClassName</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"classe"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-warning">
+        <strong>getElementsByClassName</strong>
+        <p>La m&#xE9;thode getElementsByClassName n'est prise en charge pour le navigateur de Microsoft qu'&#xE0; partir de la version 9 de Internet Explorer.</p>
+      </div>
+      <div class="content-box">
+        <strong>querySelectorAll</strong>
+        <p>La m&#xE9;thode querySelectorAll renvoie soit une collection d'&#xE9;l&#xE9;ments correspondants aux s&#xE9;lecteurs sp&#xE9;cifi&#xE9;s en param&#xE8;tre pour l'&#xE9;l&#xE9;ment parent utilis&#xE9; soit un tableau vide.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var collection = element.querySelectorAll(selector); </em>
+      </div>
+      <div class="content-code">
+        <strong>querySelectorAll</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;&#xA0;NodeList[ul#identifiant.classe,&#xA0;li,&#xA0;ul.classe,&#xA0;li]
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">querySelectorAll</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"ul,&#xA0;li"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>getElementsByName</strong>
+        <p>La m&#xE9;thode getElementsByName renvoie soit une collection d'&#xE9;l&#xE9;ments correspondants au nom sp&#xE9;cifi&#xE9; en param&#xE8;tre pour l'&#xE9;l&#xE9;ment parent utilis&#xE9; soit un tableau vide.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var collection = element.getElementsByName(nom); </em>
+      </div>
+      <div class="content-code">
+        <strong>getElementsByName</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;&#xA0;NodeList[li,&#xA0;li]
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementsByName</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"nom"</span><span style="color: #ffcc00">));</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_08_naviguer">Naviguer entre les noeuds</h3>
+      <div class="content-box">
+        <h4>Navigation</h4>
+        <p>A partir d'un n&#x153;ud il est possible de se d&#xE9;placer dans le DOM et d'atteindre des n&#x153;uds qui ne sont pas de type &#xE9;l&#xE9;ment.</p>
+      </div>
+      <div class="content-box">
+        <strong>firstChild</strong>
+        <p>La propri&#xE9;t&#xE9; firstChild d'un n&#x153;ud renvoie le premier enfant de ce n&#x153;ud ou undefined, un enfant est un n&#x153;ud. Les propri&#xE9;t&#xE9;s nodeName et nodeType renvoient le nom et le type de n&#x153;ud.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var noeud = noeud.firstChild; </em>
+      </div>
+      <div class="content-code">
+        <strong>firstChild</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">var&#xA0;</span><span style="color: #ffffff">noeud&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">firstChild</span><span style="color: #ffcc00">;
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;&lt;TextNode&#xA0;textContent="\n&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;"&gt;
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">noeud</span><span style="color: #ffcc00">);
+<br/></span><span style="color: #8c8c8c">//&#xA0;#text
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">noeud</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">nodeName</span><span style="color: #ffcc00">);
+<br/></span><span style="color: #8c8c8c">//&#xA0;3
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">noeud</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">nodeType</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>lastChild</strong>
+        <p>La propri&#xE9;t&#xE9; lastChild d'un n&#x153;ud renvoie le dernier enfant de ce n&#x153;ud ou undefined.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var noeud = noeud.lastChild; </em>
+      </div>
+      <div class="content-code">
+        <strong>lastChild</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;&lt;body&gt;
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">firstChild</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">lastChild</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>nextSibling</strong>
+        <p>La propri&#xE9;t&#xE9; nextSibling d'un n&#x153;ud renvoie le n&#x153;ud suivant ou undefined.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var noeud = noeud.nextSibling; </em>
+      </div>
+      <div class="content-code">
+        <strong>nextSibling</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;&lt;TextNode&#xA0;textContent="\n&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;"&gt;
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">nextSibling</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>previousSibling</strong>
+        <p>La propri&#xE9;t&#xE9; previousSibling d'un n&#x153;ud renvoie le n&#x153;ud pr&#xE9;c&#xE9;dent ou undefined.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var noeud = noeud.previousSibling; </em>
+      </div>
+      <div class="content-code">
+        <strong>previousSibling</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;&lt;ul&#xA0;id="identifiant"&#xA0;class="classe"&gt;
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">nextSibling</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">previousSibling</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>parentNode</strong>
+        <p>La propri&#xE9;t&#xE9; parentNode le n&#x153;ud parent ou null si la propri&#xE9;t&#xE9; est appel&#xE9;e depuis le document..</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var noeud = noeud.parentnode; </em>
+      </div>
+      <div class="content-code">
+        <strong>parentNode</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;&lt;body&gt;
+<br/>&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">parentNode</span><span style="color: #ffcc00">);
+<br/>
+<br/></span><span style="color: #8c8c8c">//&#xA0;&lt;html&gt;
+<br/>&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">parentNode</span><span style="color: #ffcc00">);
+<br/></span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>childNodes</strong>
+        <p>La propri&#xE9;t&#xE9; childNodes renvoie la collection des n&#x153;uds enfants ou undefined.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var collection = noeud.childNodes; </em>
+      </div>
+      <div class="content-code">
+        <strong>childNodes</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;NodeList[&lt;TextNode&#xA0;textContent="\n&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;"&gt;,&#xA0;li,&#xA0;&lt;TextNode&#xA0;textContent="\n&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;"&gt;]
+<br/>&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">childNodes</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+    </div>
+  </body>
+</html>

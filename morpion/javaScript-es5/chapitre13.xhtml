@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <title>Chapitre 13: Propagation des &#xE9;v&#xE8;nements - Formation JavaScript Initiation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/33d0c34f96e6afed4baa666fd7bfab67.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/f786f0fa752fdc2603a99d15b85cb5fd.css" media="all and (orientation: portrait)"/>
+  </head>
+  <body>
+    <div class="chapitre-content" id="ch_13">
+      <h2>
+        <span>Chapitre 13:</span>
+        <a>Propagation des &#xE9;v&#xE8;nements</a>
+      </h2>
+      <div class="content-box">
+        <strong>Bouillonnement vs capture</strong>
+        <p>Le chapitre pr&#xE9;c&#xE9;dent a introduit la notion de bouillonnement via la propri&#xE9;t&#xE9; bubbles et la m&#xE9;thode stopPropagation de Event. Ce chapitre est consacr&#xE9; &#xE0; d&#xE9;tailler ces concepts.</p>
+      </div>
+      <h3 id="c_13_bubbling">Le bouillonnement</h3>
+      <div class="content-box">
+        <h4>Bubbling</h4>
+        <p>Comme nous l'avons d&#xE9;j&#xE0; observ&#xE9;, un &#xE9;v&#xE8;nement se propage. Quand il n'utilise pas la capture un &#xE9;v&#xE8;nement bouillonne. Il passe par la phase 2 soit l'&#xE9;v&#xE8;nement est transmis au n&#x153;ud cible puis peut passer par la phase 3 soit l'&#xE9;v&#xE8;nement est transmis &#xE0; ses anc&#xEA;tres (de bas en haut comme une bulle d'air) s'il porte &#xE9;galement un handler pour l'&#xE9;v&#xE8;nement. Nous avons observ&#xE9; ce fonctionnement lors de la diff&#xE9;renciation de target et currentTarget.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">&lt;</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">script&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/javascript"&#xA0;</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"script.js"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">script</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">p</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">span</span><span style="color: #ffcc00">&gt;</span><span style="color: #ffffff">Text&#xA0;node</span><span style="color: #ffcc00">&lt;/</span><span style="color: #ffffff">span</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">p</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&lt;/</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>A partir du document ci-dessus, nous allons affecter un &#xE9;v&#xE8;nement &#xE0; tous les n&#x153;uds de type &#xE9;l&#xE9;ment et observer qu'avec le bouillonnement un &#xE9;v&#xE8;nement se propage bien de bas en haut en passant par les phases d&#xE9;crites. Pour ne pas nous encombrer avec une r&#xE9;p&#xE9;tition d'instructions nous &#xE9;crivons une fonction qui affecte &#xE0; chaque &#xE9;lement d'un noeud pass&#xE9; en premier argument pour un &#xE9;v&#xE8;nement dont le type est pass&#xE9; en deuxi&#xE8;me argument un handler pass&#xE9; en troisi&#xE8;me argument. La fonction est r&#xE9;cursive. L'op&#xE9;rateur this pr&#xE9;sent dans la fonction nous sert &#xE0; &#xEA;tre retro-compatible pour la propri&#xE9;t&#xE9; currentTarget et sera pr&#xE9;sent&#xE9; dans le prochain chapitre.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">setEventHandlerAll</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">currentTarget&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">currentTarget&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">eventPhase&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">currentTarget</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;);
+<br/>}
+<br/>
+<br/>function&#xA0;</span><span style="color: #ffffff">setEventHandlerAll</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">element</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">type</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">handler</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;for&#xA0;(var&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">nodes&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">element</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">childNodes</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">length&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">nodes</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">&lt;&#xA0;</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">++)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #ffffff">1&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">nodes</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">nodeType</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">nodes</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">][</span><span style="color: #2aa198">"on"&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">type</span><span style="color: #ffcc00">]&#xA0;=&#xA0;</span><span style="color: #ffffff">handler</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">setEventHandlerAll</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">nodes</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">],&#xA0;</span><span style="color: #ffffff">type</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">handler</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Apr&#xE8;s un clic sur un des &#xE9;l&#xE9;ments du document, la console affiche la phase et le n&#x153;ud. Apr&#xE8;s un clic sur le n&#x153;ud textuel chaque parent de son &#xE9;l&#xE9;ment invoque le handler associ&#xE9; &#xE0; l'&#xE9;v&#xE8;nement en partant de la cible courante vers le haut du document. La console affiche le r&#xE9;sultat ci-dessous.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;2[object&#xA0;HTMLSpanElement]
+<br/>//&#xA0;3[object&#xA0;HTMLParagraphElement]
+<br/>//&#xA0;3[object&#xA0;HTMLBodyElement]
+<br/>//&#xA0;3[object&#xA0;HTMLHtmlElement]</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>La phase 2 correspond bien &#xE0; l'&#xE9;l&#xE9;ment cliqu&#xE9; puis l'&#xE9;v&#xE8;nement passe &#xE0; la phase 3 car les parents de currentTarget enregistrent un handler pour le m&#xEA;me &#xE9;v&#xE8;nement. Pour arr&#xEA;ter la propagation le chapitre pr&#xE9;c&#xE9;dent a pr&#xE9;sent&#xE9; la m&#xE9;thode stopPropagation et l'attribut cancelBubble pour palier &#xE0; sa compatibilit&#xE9;.</p>
+      </div>
+      <h3 id="c_13_capturing">La capture</h3>
+      <div class="content-box">
+        <h4>Capturing</h4>
+        <p>En utilisant la capture, l'&#xE9;v&#xE8;nement se propage du haut vers la bas. Si le cible courante poss&#xE8;de des anc&#xEA;tres, l'&#xE9;v&#xE8;nement passe par la phase 1 lorsqu'il les traverse avant de passer par la phase 2 quand l'&#xE9;v&#xE8;nement lui est transmis, il n'y a pas de phase 3 lors de la capture. Nous modifions notre dernier exemple en impl&#xE9;mentant une fonction r&#xE9;cursive qui attache un &#xE9;couteur aux enfants d'un &#xE9;l&#xE9;ment pour un type d'&#xE9;v&#xE8;nement. Le quatri&#xE8;me param&#xE8;tre correspond au boolean capture, pour l'utilisation ou non de la capture, nous invoquons la fonction avec cet argument &#xE0; true.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">onload&#xA0;</span><span style="color: #ffcc00">=&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">addEventListenerAll</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">event&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">currentTarget&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">currentTarget&#xA0;</span><span style="color: #ffcc00">||&#xA0;</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">eventPhase&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">currentTarget</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;},
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">);
+<br/>}
+<br/>
+<br/>function&#xA0;</span><span style="color: #ffffff">addEventListenerAll</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">element</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">type</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">listener</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">capture</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;for&#xA0;(var&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">nodes&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">element</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">childNodes</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">length&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">nodes</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i&#xA0;</span><span style="color: #ffcc00">&lt;&#xA0;</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;&#xA0;</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">++)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #ffffff">1&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">nodes</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">nodeType</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">nodes</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">].</span><span style="color: #ffffff">addEventListener</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">type</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">listener</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">capture</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">addEventListenerAll</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">nodes</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">i</span><span style="color: #ffcc00">],&#xA0;</span><span style="color: #ffffff">type</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">listener</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">capture</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Apr&#xE8;s un clic sur un des &#xE9;l&#xE9;ments du document, la console affiche la phase et le n&#x153;ud. Apr&#xE8;s un clic sur le n&#x153;ud textuel chaque parent de son &#xE9;l&#xE9;ment invoque le listener associ&#xE9; &#xE0; l'&#xE9;v&#xE8;nement mais en partant du haut du document vers la bas. La console affiche le r&#xE9;sultat ci-dessous.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;1[object&#xA0;HTMLHtmlElement]
+<br/>//&#xA0;1[object&#xA0;HTMLBodyElement]
+<br/>//&#xA0;1[object&#xA0;HTMLParagraphElement]
+<br/>//&#xA0;2[object&#xA0;HTMLSpanElement]</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>La phase 1 correspond bien &#xE0; l'&#xE9;l&#xE9;ment parent travers&#xE9; par l'&#xE9;v&#xE8;nement qui passe ensuite &#xE0; la phase 2 lorsqu&#x2019;il traverse la cible qui l'a &#xE9;mis.</p>
+      </div>
+    </div>
+  </body>
+</html>

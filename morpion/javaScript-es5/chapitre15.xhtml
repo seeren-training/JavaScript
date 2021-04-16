@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <title>Chapitre 15: Utiliser jQuery - Formation JavaScript Initiation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/33d0c34f96e6afed4baa666fd7bfab67.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/f786f0fa752fdc2603a99d15b85cb5fd.css" media="all and (orientation: portrait)"/>
+  </head>
+  <body>
+    <div class="chapitre-content" id="ch_15">
+      <h2>
+        <span>Chapitre 15:</span>
+        <a>Utiliser jQuery</a>
+      </h2>
+      <div class="content-box">
+        <strong>Librairies et Frameworks</strong>
+        <p>Utiliser une couche d'abstraction pour l'utilisation de JavaScript est une bonne pratique, seulement comment s'y retrouver avec toutes les solutions qui sont offertes. Parmi cette jungle il y a des incontournables dont jQuery fait partie. Ce chapitre r&#xE9;sume une initiation &#xE0; ce Framework.</p>
+      </div>
+      <h3 id="c_15_jquery">Utiliser jQuery</h3>
+      <div class="content-box">
+        <h4>jQuery</h4>
+        <p>jQuery fournit une couche d&#x2019;abstraction permettant d'utiliser JavaScript en acc&#xE9;l&#xE9;rant le temps de d&#xE9;veloppement tout en assurant une compatibilit&#xE9; entre navigateurs suffisante. Ces avantages sont certains mais il y a quelques inconv&#xE9;nients &#xE0; l'utilisation de cette librairie, jQuery doit &#xEA;tre t&#xE9;l&#xE9;charg&#xE9; pour la page voulant l'utiliser et le nombre des fonctionnalit&#xE9;s disponibles peuvent paraitre limit&#xE9;es, enfin la maintenabilit&#xE9; du code en fonction de sa qualit&#xE9; peut s'av&#xE9;rer plus difficile mais cela reste subjectif.</p>
+      </div>
+      <div class="content-box">
+        <p>La premi&#xE8;re &#xE9;tape pour utiliser jQuery est de l'inclure entant que source dans un script. Il y a la possibilit&#xE9; d'indiquer une adresse vers un serveur fournissant jQuery ou de le t&#xE9;l&#xE9;charger, nous choisissons d'inclure la version 2.2.2 non compress&#xE9;e disponible &#xE0; l'adresse http://code.jquery.com/jquery-2.2.2.js</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">&lt;</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">script&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/javascript"&#xA0;</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"http://code.jquery.com/jquery-2.2.2.js"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">script</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">script&#xA0;type</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"text/javascript"&#xA0;</span><span style="color: #ffffff">src</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"script.js"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">script</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">head</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">ul&#xA0;id</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"identifiant"&#xA0;</span><span style="color: #ffcc00">class=</span><span style="color: #2aa198">"classe"</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">li&#xA0;name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"nom"&#xA0;</span><span style="color: #ffcc00">class=</span><span style="color: #2aa198">"classe"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">li</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">ul</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">ul&#xA0;</span><span style="color: #ffcc00">class=</span><span style="color: #2aa198">"classe"</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;</span><span style="color: #ffffff">li&#xA0;name</span><span style="color: #ffcc00">=</span><span style="color: #2aa198">"nom"</span><span style="color: #ffcc00">&gt;&lt;/</span><span style="color: #ffffff">li</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">ul</span><span style="color: #ffcc00">&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/</span><span style="color: #ffffff">body</span><span style="color: #ffcc00">&gt;
+<br/>&lt;/</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">&gt;</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>$</strong>
+        <p>jQuery est un objet de type function qui poss&#xE8;de deux arguments dans sa signature, c'est avant tout une librairie de manipulation des &#xE9;l&#xE9;ments. L'objet est disponible dans l'espace de nom jQuery mais une r&#xE9;f&#xE9;rence est aussi disponible via l'identifiant $. En utilisant le $ cela raccourcit l'appel de l'identifiant et cela rappelle le signe d'acc&#xE8;s &#xE0; l'identifiant aux variables du langage PHP.</p>
+      </div>
+      <div class="content-code">
+        <strong>jQuery === $</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #8c8c8c">//&#xA0;function(selector,&#xA0;context)
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">jQuery</span><span style="color: #ffcc00">);
+<br/></span><span style="color: #8c8c8c">//&#xA0;true
+<br/></span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">jQuery&#xA0;</span><span style="color: #ffcc00">===&#xA0;$);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>La premier param&#xE8;tre de l'objet jQuery est un s&#xE9;lecteur, nous les avons utilis&#xE9;s lors de l'utilisation de la m&#xE9;thode querySelector et querySelectorAll ainsi que pendant le chapitre sur la modification des feuilles de style. Un s&#xE9;lecteur est un motif permettant de cibler un ou des &#xE9;l&#xE9;ments du DOM. Le param&#xE8;tre selector peut aussi contenir un &#xE9;l&#xE9;ment.</p>
+      </div>
+      <h3 id="c_15_access">Acc&#xE9;der aux &#xE9;l&#xE9;ments du DOM</h3>
+      <div class="content-box">
+        <strong>Document</strong>
+        <p>Pour d&#xE9;tecter la fin du chargement du document, jQuery propose l'affectation de listeners sur un objet renvoy&#xE9; par jQuery en utilisant une m&#xE9;thode identifi&#xE9;e par le type de l'&#xE9;v&#xE8;nement, qui attend comme argument le listener. Avant de d&#xE9;tailler la gestion des &#xE9;v&#xE8;nements, nous allons d&#xE9;tailler l'acc&#xE8;s aux &#xE9;l&#xE9;ments du DOM.</p>
+      </div>
+      <div class="content-code">
+        <strong>Chargement du document</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Window
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>}),
+<br/>$(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">ready</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Document
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>selector</strong>
+        <p>L'objet renvoy&#xE9; par jQuery est un objet qui n'est plus un n&#x153;ud de type &#xE9;l&#xE9;ment. Le premier selector de jQuery peut &#xEA;tre un &#xE9;l&#xE9;ment comme utilis&#xE9; ci dessous et dans ce cas l&#xE0; la propri&#xE9;t&#xE9; selector de l'objet est une chaine vide.</p>
+      </div>
+      <div class="content-code">
+        <strong>S&#xE9;lecteur element</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">objet&#xA0;</span><span style="color: #ffcc00">=&#xA0;$(</span><span style="color: #ffffff">document</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">getElementById</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"identifiant"</span><span style="color: #ffcc00">));
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Object[ul#identifiant.classe]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;""
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">selector</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>En utilisant un s&#xE9;lecteur, la propri&#xE9;t&#xE9; selector de l'objet poss&#xE8;de bien le s&#xE9;lecteur utilis&#xE9;. Un objet renvoy&#xE9; par jQuery poss&#xE8;de en propri&#xE9;t&#xE9; num&#xE9;rique les objets s&#xE9;lectionn&#xE9;s par le motif selector  et leur contexte dans sa propri&#xE9;t&#xE9; context.</p>
+      </div>
+      <div class="content-code">
+        <strong>S&#xE9;lecteur selector</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">objet&#xA0;</span><span style="color: #ffcc00">=&#xA0;$(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;"#identifiant"
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">selector</span><span style="color: #ffcc00">);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;&lt;ul&#xA0;id="identifiant"&#xA0;class="classe"&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">]);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;&#xA0;Document
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">context</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>En utilisant un s&#xE9;lecteur qui identifie plusieurs &#xE9;l&#xE9;ments, chaque &#xE9;l&#xE9;ment appartient &#xE0; l'objet renvoy&#xE9; pour ses clefs num&#xE9;riques dans l'ordre des &#xE9;l&#xE9;ments trouv&#xE9;s.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">objet&#xA0;</span><span style="color: #ffcc00">=&#xA0;$(</span><span style="color: #2aa198">".classe"</span><span style="color: #ffcc00">);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;&#xA0;&lt;ul&#xA0;id="identifiant"&#xA0;class="classe"&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">]);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;&lt;ul&#xA0;class="classe"&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">]);
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Il est possible de sp&#xE9;cifier plusieurs s&#xE9;lecteurs en les s&#xE9;parant par une virgule comme pour les CSS.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">objet&#xA0;</span><span style="color: #ffcc00">=&#xA0;$(</span><span style="color: #2aa198">"ul,&#xA0;li"</span><span style="color: #ffcc00">);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;&lt;ul&#xA0;id="identifiant"&#xA0;class="classe"&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">]);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;&lt;li&#xA0;name="nom"&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">]);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;&lt;ul&#xA0;class="classe"&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">2</span><span style="color: #ffcc00">]);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;&lt;li&#xA0;name="nom"&gt;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">[</span><span style="color: #ffffff">3</span><span style="color: #ffcc00">]);
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>parent</strong>
+        <p>La m&#xE9;thode parent d'un objet jQuery renvoie un objet repr&#xE9;sentant aucun, un ou plusieurs parents pour le ou les &#xE9;l&#xE9;ments repr&#xE9;sent&#xE9;s par l'objet.</p>
+      </div>
+      <div class="content-code">
+        <strong>parent</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Object[body]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">parent</span><span style="color: #ffcc00">());
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Object[ul#identifiant.classe,&#xA0;ul.classe]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">parent</span><span style="color: #ffcc00">());
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>children</strong>
+        <p>La m&#xE9;thode children d'un objet jQuery renvoie un objet repr&#xE9;sentant aucun, un ou plusieurs enfants pour le ou les &#xE9;l&#xE9;ments repr&#xE9;sent&#xE9;s par l'objet.</p>
+      </div>
+      <div class="content-code">
+        <strong>children</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Object[li]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">children</span><span style="color: #ffcc00">());
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Object[]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">children</span><span style="color: #ffcc00">());
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_15_modify">Modifier les &#xE9;l&#xE9;ments du DOM</h3>
+      <div class="content-box">
+        <strong>text</strong>
+        <p>La m&#xE9;thode text d'un objet jQuery renvoie une chaine de caract&#xE8;res correspondant &#xE0; la valeur du n&#x153;ud textuel de l'&#xE9;l&#xE9;ment lorsqu'elle est invoqu&#xE9;e sans argument. En sp&#xE9;cifiant un argument la m&#xE9;thode affecte la valeur textuelle &#xE0; son n&#x153;ud de type texte, et renvoie un objet repr&#xE9;sentant le ou les &#xE9;l&#xE9;ments dont le n&#x153;ud textuel a &#xE9;t&#xE9; modifi&#xE9;. Si l'objet contient un ou des n&#x153;uds de type &#xE9;l&#xE9;ment ils sont remplac&#xE9;s par le n&#x153;ud textuel.</p>
+      </div>
+      <div class="content-code">
+        <strong>text</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;""
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">text</span><span style="color: #ffcc00">());
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Object[li,&#xA0;li]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">text</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Text&#xA0;Node"</span><span style="color: #ffcc00">));
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>html</strong>
+        <p>La m&#xE9;thode html d'un objet jQuery renvoie une chaine de caract&#xE8;res correspondant au contenu html de l'&#xE9;l&#xE9;ment lorsqu'elle est invoqu&#xE9;e sans argument. En sp&#xE9;cifiant un argument la m&#xE9;thode affecte le contenu html &#xE0; l&#x2019;&#xE9;l&#xE9;ment, et renvoie un objet repr&#xE9;sentant le ou les &#xE9;l&#xE9;ments dont le contenu a &#xE9;t&#xE9; modifi&#xE9;.</p>
+      </div>
+      <div class="content-code">
+        <strong>html</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;""
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">());
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Object[li,&#xA0;li]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">html</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"&lt;a&#xA0;href=\"#\"&gt;Link&lt;/a&gt;"</span><span style="color: #ffcc00">));
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>append</strong>
+        <p>La m&#xE9;thode append renvoie un objet repr&#xE9;sentant le ou les &#xE9;l&#xE9;ments dont le ou les &#xE9;l&#xE9;ments d&#xE9;crits par l'objet pass&#xE9; en param&#xE8;tre de la m&#xE9;thode ont &#xE9;t&#xE9;s ins&#xE9;r&#xE9;s en derni&#xE8;re position.</p>
+      </div>
+      <div class="content-code">
+        <strong>append</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">objet&#xA0;</span><span style="color: #ffcc00">=&#xA0;$(</span><span style="color: #2aa198">"&lt;a&#xA0;href=\"#\"&gt;Link&lt;/a&gt;"</span><span style="color: #ffcc00">);
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Object[li,&#xA0;li]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">append</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">objet</span><span style="color: #ffcc00">));
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>remove</strong>
+        <p>La m&#xE9;thode remove renvoie un objet repr&#xE9;sentant le ou les &#xE9;l&#xE9;ments supprim&#xE9;s du DOM. Sans argument, la m&#xE9;thode supprime le ou les &#xE9;l&#xE9;ments correspondant au s&#xE9;lecteur. Avec argument la m&#xE9;thode peut filtrer la suppression et enl&#xE8;ve le ou les &#xE9;l&#xE9;ments qui poss&#xE8;dent un ou des &#xE9;l&#xE9;ments correspondant au s&#xE9;lecteur en param&#xE8;tre.</p>
+      </div>
+      <div class="content-code">
+        <strong>remove</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Object[ul#identifiant.classe]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">remove</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">".classe"</span><span style="color: #ffcc00">));
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Object[li]
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">($(</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">remove</span><span style="color: #ffcc00">());
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_15_manage">Gestion des &#xE9;couteurs</h3>
+      <div class="content-box">
+        <strong>Listeners</strong>
+        <p>L'ajout d'&#xE9;couteurs a &#xE9;t&#xE9; introduit avec le chargement du document, nous allons observer comment affecter des listeners et comment d&#xE9;clencher des &#xE9;v&#xE8;nements et modifier leur contexte. La librairie qualifie elle m&#xEA;me les &#xE9;couteurs ajout&#xE9;s de handlers mais ils sont l&#x2019;&#xE9;quivalent des &#xE9;couteurs pr&#xE9;sents en param&#xE8;tre de la m&#xE9;thode native addEventListener.</p>
+      </div>
+      <div class="content-box">
+        <strong>on</strong>
+        <p>La m&#xE9;thode on d'un objet attend quatre param&#xE8;tres, sa signature est particuli&#xE8;re car les deux param&#xE8;tres optionnels ne sont pas situ&#xE9;s &#xE0; la fin de la signature. Le premier param&#xE8;tre correspond au type de l'&#xE9;v&#xE8;nement, et le dernier, le listener pour l'&#xE9;v&#xE8;nement.</p>
+      </div>
+      <div class="content-code">
+        <strong>on</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;$(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">on</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">);&#xA0;&#xA0;&#xA0;&#xA0;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;});
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Le second param&#xE8;tre correspond &#xE0; un s&#xE9;lecteur, enfant des &#xE9;l&#xE9;ments d&#xE9;crits par l'objet pour qui sera affect&#xE9; le listener de l&#x2019;&#xE9;v&#xE8;nement. Le troisi&#xE8;me param&#xE8;tre correspond &#xE0; une donn&#xE9;e qui sera affect&#xE9;e &#xE0; la propri&#xE9;t&#xE9; data de l'objet event.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;$(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">on</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #2aa198">"li"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #2aa198">"data"</span><span style="color: #ffcc00">,&#xA0;function&#xA0;(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">data</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;});
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>unbind</strong>
+        <p>La m&#xE9;thode unbind d&#xE9;tache un &#xE9;couteur pour un type d'&#xE9;v&#xE8;nement, le premier param&#xE8;tre est le type d'&#xE9;v&#xE8;nement, le second optionnel correspond &#xE0; l'&#xE9;couteur. Cette m&#xE9;thode correspond &#xE0; la m&#xE9;thode native removeEventListener.</p>
+      </div>
+      <div class="content-code">
+        <strong>unbind</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">function&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">);
+<br/>}
+<br/>$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function()&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;$(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">on</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;$(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">unbind</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">);
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>proxy</strong>
+        <p>La m&#xE9;thode proxy permet d'enregistrer un contexte pour une fonction. Le premier param&#xE8;tre correspond &#xE0; la fonction, le second correspond &#xE0; l'objet repr&#xE9;sentant le contexte d&#x2019;ex&#xE9;cution pour la fonction. Sa valeur de retour est une nouvelle fonction, cette m&#xE9;thode est proche de la m&#xE9;thode bind en JavaScript natif.</p>
+      </div>
+      <div class="content-code">
+        <strong>proxy</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;$(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">on</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;$.</span><span style="color: #ffffff">proxy</span><span style="color: #ffcc00">(
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;function&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">this</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;},
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;$(</span><span style="color: #2aa198">"#identifiant&#xA0;li"</span><span style="color: #ffcc00">)
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;)
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;);
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>trigger</strong>
+        <p>La m&#xE9;thode trigger d'un objet jQuery poss&#xE8;de un param&#xE8;tre pour le type de l'&#xE9;v&#xE8;nement. Cette m&#xE9;thode d&#xE9;clenche l'&#xE9;v&#xE8;nement correspondant &#xE0; l'objet qui invoque la m&#xE9;thode pour le type d'&#xE9;v&#xE8;nement sp&#xE9;cifi&#xE9;.</p>
+      </div>
+      <div class="content-code">
+        <strong>trigger</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">$(</span><span style="color: #ffffff">window</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">load</span><span style="color: #ffcc00">(function(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;$(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">on</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">,&#xA0;function&#xA0;</span><span style="color: #ffffff">click</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">event</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;});
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;click
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffcc00">$(</span><span style="color: #2aa198">"#identifiant"</span><span style="color: #ffcc00">).</span><span style="color: #ffffff">trigger</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"click"</span><span style="color: #ffcc00">);
+<br/>
+<br/>});</span>
+</span>
+</code>
+      </div>
+    </div>
+  </body>
+</html>

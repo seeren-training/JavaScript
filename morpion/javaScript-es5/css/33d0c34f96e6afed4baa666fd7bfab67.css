@@ -1,0 +1,207 @@
+/**
+ * Main container
+ * @author seeren <webmaster@seeren.fr>
+ * @project javascript-formation-initiation
+ * @package main
+ * @version 1.1.1
+ */
+@font-face {
+    font-family: "roboto";
+    src: url("../font/roboto-regular.eot");
+    src: local("☺"), url("../font/roboto-regular.woff") format("woff"), url("../font/roboto-regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto bold";
+    src: url("../font/roboto-bold.eot");
+    src: local("☺"), url("../font/roboto-bold.woff") format("woff"), url("../font/roboto-bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto black";
+    src: url("../font/roboto-black.eot");
+    src: local("☺"), url("../font/roboto-black.woff") format("woff"), url("../font/roboto-black.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto light";
+    src: url("../font/roboto-light.eot");
+    src: local("☺"), url("../font/roboto-light.woff") format("woff"), url("../font/roboto-light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto thin";
+    src: url("../font/roboto-thin.eot");
+    src: local("☺"), url("../font/roboto-thin.woff") format("woff"), url("../font/roboto-thin.ttf") format("truetype");
+}
+@font-face {
+    font-family: "roboto italic";
+    src: url("../font/roboto-italic.eot");
+    src: local("☺"), url("../font/roboto-italic.woff") format("woff"), url("../font/roboto-italic.ttf") format("truetype");
+}
+html {
+    background: #f7f7f7;
+    color: #212121;
+    font-family: "roboto", sans-serif;
+    font-size: 1em;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: 3.5em;
+}
+h2 {
+    font-size: 2.5em;
+}
+h3, h4 {
+    font-size: 1.5em;
+}
+h4 {
+    font-family: "roboto black", sans-serif;
+    text-align: left;
+}
+h1, h2, h3, h4 {
+    font-weight: normal;
+    letter-spacing: .2em;
+    margin: 0;
+    padding: 1em 0;
+}
+h1, h2, h3 {
+    color: #ffffff;
+    font-family: "roboto thin", sans-serif;
+    text-align: center;
+}
+h1 span, h2 span, h3 span {
+    display: block;
+    font-size: .5em;
+    margin: 0 0 2em;
+}
+/**
+ * Chapitre
+ * @author seeren <webmaster@seeren.fr>
+ * @project javascript-formation-initiation
+ * @package chapitre
+ * @version 1.1.1
+ */
+h2 a {
+    color: #ffffff;
+}
+.chapitre-content {
+    padding: 0 0 2em 0;
+}
+.chapitre-content h2 {
+    background: #ff5c77;
+}
+.chapitre-content h3 {
+    background: #66004d;
+}
+.chapitre-content code {
+    background: #212121;
+}
+.content-syntaxe em {
+    background: #ceeefd;
+}
+.content-tab table th {
+    background: #e9e2e2;
+}
+.content-tab table tr:nth-child(odd) {
+    background: #FFFFFF;
+}
+.content-warning {
+    background-color: #ffffe6;
+    background-image: url(../image/warning.png);
+}
+.content-tips {
+    background-color: #f36a81;
+    color: #FFFFFF !important;
+}
+.content-tips h4 {
+    background-image: url(../image/tips.png);
+}
+.content-warning,
+.content-tips h4 {
+    background-repeat: no-repeat; 
+    background-position: 7.5% 55%;
+}
+.chapitre-content h2,
+.chapitre-content h3,
+.chapitre-content h4,
+.chapitre-content strong,
+.chapitre-content p,
+.chapitre-content code,
+.content-syntaxe,
+.content-tab {
+    padding-left: 20%;
+    padding-right: 20%;
+    width: 60%;
+}
+.chapitre-content,
+.chapitre-content h2,
+.chapitre-content h3,
+.chapitre-content h4,
+.chapitre-content strong,
+.chapitre-content p,
+.chapitre-content code,
+.chapitre-content ul {
+    margin: 0;
+}
+.chapitre-content strong,
+.chapitre-content code,
+.content-syntaxe em {
+    display: block;
+    font-size: 1.2em;
+}
+.chapitre-content h2 {
+    padding-top: 1.5em;
+    padding-bottom: 3em;
+}
+.chapitre-content h3 {
+    padding-top: 4em;
+    padding-bottom: 4em;
+}
+.content-box,
+.content-warning,
+.content-tips,
+.chapitre-content strong,
+.chapitre-content code,
+.content-syntaxe em {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
+.chapitre-content code,
+.content-syntaxe em {
+    word-break: break-all;
+}
+.chapitre-content p {
+    padding-top: .5em;
+    padding-bottom: .5em;
+    text-align: justify;
+}
+.content-code strong {
+    display: block;
+    font-family: "roboto italic";
+    font-size: .8em !important;
+    font-weight: normal;
+}
+.content-syntaxe em {
+    margin: 1em 0;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.content-list {
+    padding: .5em 25% 1.5em;
+    width: 50%;
+}
+.content-tab table {
+    margin: 0 0 1.5em;
+    text-align: left;
+    width: 100%;
+}
+.content-tab table th,
+.content-tab table td {
+    border: solid 1px white;
+    padding: .5em 1em;
+}

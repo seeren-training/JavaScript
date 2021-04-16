@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <title>Chapitre 03: Structures de contr&#xF4;le - Formation JavaScript Initiation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/33d0c34f96e6afed4baa666fd7bfab67.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/f786f0fa752fdc2603a99d15b85cb5fd.css" media="all and (orientation: portrait)"/>
+  </head>
+  <body>
+    <div class="chapitre-content" id="ch_03">
+      <h2>
+        <span>Chapitre 03:</span>
+        <a>Structures de contr&#xF4;le</a>
+      </h2>
+      <div class="content-box">
+        <strong>Ex&#xE9;cution par bloc</strong>
+        <p>Le flux d'instructions peut &#xEA;tre encapsul&#xE9; dans des blocs qui s&#x2019;ex&#xE9;cutent si certaines conditions sont remplies. Les structures conditionnelles contr&#xF4;lent les flux d'instructions et mettent en place la logique, l&#x2019;algorithmique du programme.</p>
+        <p>L'op&#xE9;rateur conditionnel vu dans le chapitre pr&#xE9;c&#xE9;dent a introduit l'utilisation d'une condition, bien que ne regroupant pas d'instructions dans des blocs son fonctionnement est similaire. Nous aborderons dans ce chapitre la structure if/else, switch, try/catch puis la lev&#xE9;e d'exception et la gestion des erreurs.</p>
+      </div>
+      <h3 id="c_03_if">Structure if else</h3>
+      <div class="content-box">
+        <h4>if</h4>
+        <p>La structure if v&#xE9;rifie une condition dans ses parenth&#xE8;ses puis ex&#xE9;cute les instructions dans le bloc d&#xE9;limit&#xE9; par ses accolades si la condition vaut true.</p>
+        <p>Si la condition vaut false le code ne sera pas ex&#xE9;cut&#xE9;. Dans le cas d&#x2019;absence d'op&#xE9;rateurs, les valeurs chaine de caract&#xE8;res vide, 0, false, null, undefined ou NaN sont &#xE9;quivalentes &#xE0; false.</p>
+      </div>
+      <div class="content-code">
+        <strong>Structure if</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">if&#xA0;(</span><span style="color: #ffffff">true&#xA0;</span><span style="color: #ffcc00">==&#xA0;</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"true"</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <h4>Coding style</h4>
+        <p>Les accolades ne sont pas obligatoirement pr&#xE9;sentes, s'il n'y a qu'une seule instruction &#xE0; ex&#xE9;cuter elles peuvent &#xEA;tre omises et le bloc de la condition est d&#xE9;limit&#xE9; par la premi&#xE8;re ex&#xE9;cution.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">if&#xA0;(</span><span style="color: #ffffff">true&#xA0;</span><span style="color: #ffcc00">==&#xA0;</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">)
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"true"</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <p>La bonne pratique consiste &#xE0; toujours utiliser les accolades pour d&#xE9;limiter un bloc. Pour la structure if, la premi&#xE8;re accolade doit figurer sur la m&#xEA;me ligne que la condition pr&#xE9;c&#xE9;d&#xE9;e par un espace. Il est fr&#xE9;quent de voir des erreurs lorsque les accolades sont omises.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">if&#xA0;(</span><span style="color: #ffffff">true&#xA0;</span><span style="color: #ffcc00">==&#xA0;</span><span style="color: #ffffff">0</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"true"</span><span style="color: #ffcc00">);</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <h4>else</h4>
+        <p>La structure if poss&#xE8;de une clause else qui est optionnelle. Le bloc d&#xE9;limit&#xE9; par else sera ex&#xE9;cut&#xE9; dans le cas o&#xF9; la condition pr&#xE9;c&#xE9;dente ne vaut pas true.</p>
+      </div>
+      <div class="content-code">
+        <strong>Clause else</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">if&#xA0;(</span><span style="color: #ffffff">true&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>}&#xA0;else&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;false
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"false"</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <p>Les accolades du else sont facultatives, si on rajoute &#xE0; cette option une indentation fantaisiste, la maintenabilit&#xE9; d'un code peut s'av&#xE9;rer difficile. Le else doit figurer sur la m&#xEA;me ligne que l'accolade fermant le bloc et doit &#xEA;tre pr&#xE9;c&#xE9;d&#xE9; par un espace. Ce style de codage pour la structure if else est appel&#xE9;e "coddled".</p>
+      </div>
+      <div class="content-box">
+        <h4>else if</h4>
+        <p>La clause else peut aussi poss&#xE9;der une condition pour que son bloc soit ex&#xE9;cut&#xE9; et ainsi continuer de tester diff&#xE9;rentes conditions pour contr&#xF4;ler le flux d'instructions plus pr&#xE9;cis&#xE9;ment.</p>
+      </div>
+      <div class="content-code">
+        <strong>Clause else if</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">if&#xA0;(</span><span style="color: #ffffff">true&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>}&#xA0;else&#xA0;if&#xA0;(</span><span style="color: #ffffff">true&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #2aa198">"1"</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>}&#xA0;else&#xA0;if&#xA0;(</span><span style="color: #ffffff">true&#xA0;</span><span style="color: #ffcc00">==&#xA0;</span><span style="color: #2aa198">"1"</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"true"</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <p>Un bloc peut lui aussi contenir d'autres blocs, La clause else if simplifie l'encapsulation de plusieurs blocs. L'&#xE9;criture suivante est &#xE0; &#xE9;viter absolument.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">if&#xA0;(</span><span style="color: #ffffff">true&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #ffffff">1</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>}&#xA0;else&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #ffffff">true&#xA0;</span><span style="color: #ffcc00">===&#xA0;</span><span style="color: #2aa198">"1"</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}&#xA0;else&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;if&#xA0;(</span><span style="color: #ffffff">true&#xA0;</span><span style="color: #ffcc00">==&#xA0;</span><span style="color: #2aa198">"1"</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"true"</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;}
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <p>Il est important d'&#xE9;viter d'imbriquer de trop nombreux blocs, une profondeur de trois blocs est un maximum. Pour &#xEA;tre alert&#xE9; de ce genre de d&#xE9;rapage il est important de travailler avec un &#xE9;diteur de code poss&#xE9;dant un analyseur syntaxique qui saura vous sensibiliser aux probl&#xE8;mes de maintenabilit&#xE9; du code.</p>
+      </div>
+      <h3 id="c_03_switch">Structure switch</h3>
+      <div class="content-box">
+        <h4>switch</h4>
+        <p>La structure switch n'&#xE9;value pas une condition mais la valeur de retour d'une expression afin d'ex&#xE9;cuter les instructions suivant l'&#xE9;tiquette correspondant &#xE0; son &#xE9;galit&#xE9; stricte.</p>
+      </div>
+      <div class="content-code">
+        <strong>Instruction switch</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">switch&#xA0;(</span><span style="color: #ffffff">2&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">3</span><span style="color: #ffcc00">)&#xA0;{
+<br/>
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>case</strong>
+        <p>L'instruction switch poss&#xE8;de la clause case qui permet de pr&#xE9;ciser une &#xE9;tiquette. Si l'&#xE9;tiquette est strictement &#xE9;gale &#xE0; l'expression &#xE9;valu&#xE9;e alors les instructions d&#xE9;finies &#xE0; la suite de la clause seront ex&#xE9;cut&#xE9;es.</p>
+      </div>
+      <div class="content-code">
+        <strong>Clause case</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">switch&#xA0;(</span><span style="color: #ffffff">2&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">3</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;case&#xA0;</span><span style="color: #ffffff">5</span><span style="color: #ffcc00">:
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;5
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">5</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>break</strong>
+        <p>L'instruction break n'est pas propre au switch et s'utilise pour arr&#xEA;ter une it&#xE9;ration. Dans le switch, l'utilisation d'un break permet de sortir de l'instruction switch principalement pour ne pas ex&#xE9;cuter d'instructions ne correspondant pas &#xE0; une &#xE9;tiquette.</p>
+      </div>
+      <div class="content-code">
+        <strong>Instruction break</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">switch&#xA0;(</span><span style="color: #ffffff">2&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">3</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;case&#xA0;</span><span style="color: #ffffff">5</span><span style="color: #ffcc00">:
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;5
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">5</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;break;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;case&#xA0;</span><span style="color: #ffffff">10</span><span style="color: #ffcc00">:
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">10</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <p>En l&#x2019;absence d'un break, les instructions suivant celles correspondantes &#xE0; l'&#xE9;tiquette seront quand m&#xEA;me ex&#xE9;cut&#xE9;es.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">switch&#xA0;(</span><span style="color: #ffffff">2&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">3</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;case&#xA0;</span><span style="color: #ffffff">5</span><span style="color: #ffcc00">:
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;5
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">5</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;case&#xA0;</span><span style="color: #ffffff">10</span><span style="color: #ffcc00">:
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;10
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">10</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>default</strong>
+        <p>La clause default indique une &#xE9;tiquette par d&#xE9;faut au cas o&#xF9; aucune ne correspond pour l'expression &#xE9;valu&#xE9;e dans l'instruction switch.</p>
+      </div>
+      <div class="content-code">
+        <strong>Clause default</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">switch&#xA0;(</span><span style="color: #ffffff">2&#xA0;</span><span style="color: #ffcc00">+&#xA0;</span><span style="color: #ffffff">3</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;case&#xA0;</span><span style="color: #ffffff">10</span><span style="color: #ffcc00">:
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">10</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;break;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;default:
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;default
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"default"</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <p>La clause default ne se situe pas forc&#xE9;ment &#xE0; la fin du switch et peut se situer avant une autre &#xE9;tiquette, seulement en pla&#xE7;ant default &#xE0; la fin il n'est plus utile d'utiliser l'instruction break apres les instructions qui la suivent.</p>
+      </div>
+      <h3 id="c_03_try">Structure try catch</h3>
+      <div class="content-box">
+        <h4>try catch</h4>
+        <p>L'instruction try catch est compos&#xE9;e de deux blocs. Le premier bloc essaie d'ex&#xE9;cuter une s&#xE9;rie d'instructions, si une exception est lev&#xE9;e alors les instructions suivantes de ce bloc ne seront pas ex&#xE9;cut&#xE9;es. Le bloc catch attrape l'exception dans son unique argument avant de le transmettre &#xE0; son bloc contenant lui aussi des instructions destin&#xE9;es &#xE0; traiter l'exception.</p>
+      </div>
+      <div class="content-code">
+        <strong>Instruction try catch</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">try&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;try
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"try"</span><span style="color: #ffcc00">);
+<br/>}&#xA0;catch&#xA0;(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"catch"</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Dans l'exemple ci-dessus le bloc try ne l&#xE8;ve pas d'exception, alors les instructions dans le bloc catch ne seront jamais ex&#xE9;cut&#xE9;es. Si le bloc try l&#xE8;ve une exception alors le flux d'instructions s'arr&#xEA;te et le bloc catch prend le relais comme dans l'exemple ci-dessous, o&#xF9; une exception est lev&#xE9;e lorsqu'on fait appel &#xE0; la propri&#xE9;t&#xE9; length d'une variable tableau qui n'existe pas.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">try&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">taille&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">tableau</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"try"</span><span style="color: #ffcc00">);
+<br/>}&#xA0;catch&#xA0;(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;catch
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"catch"</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>L'exception lev&#xE9;e quand l'on fait appel &#xE0; une r&#xE9;f&#xE9;rence qui n'existe pas est l'objet ReferenceError.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">try&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">taille&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">tableau</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"try"</span><span style="color: #ffcc00">);
+<br/>}&#xA0;catch&#xA0;(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">e&#xA0;</span><span style="color: #ffcc00">instanceof&#xA0;</span><span style="color: #ffffff">ReferenceError</span><span style="color: #ffcc00">);
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;ReferenceError:&#xA0;tableau&#xA0;is&#xA0;not&#xA0;defined
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <h4>Exceptions</h4>
+        <p>SyntaxError est lev&#xE9;e quand une erreur syntaxique est rencontr&#xE9;e. Au runtime il est impossible d'attraper une erreur syntaxique sans passer par une &#xE9;valuation du code.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">try&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;eval(</span><span style="color: #2aa198">"erreur&#xA0;syntaxique"</span><span style="color: #ffcc00">)
+<br/>}&#xA0;catch&#xA0;(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">e&#xA0;</span><span style="color: #ffcc00">instanceof&#xA0;</span><span style="color: #ffffff">SyntaxError</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <p>TypeError est lev&#xE9;e quand une erreur de type est rencontr&#xE9;e.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">try&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #2aa198">"Hello&#xA0;World"</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">pop</span><span style="color: #ffcc00">();
+<br/>}&#xA0;catch&#xA0;(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">e&#xA0;</span><span style="color: #ffcc00">instanceof&#xA0;</span><span style="color: #ffffff">TypeError</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-tips">
+        <p>RangeError est lev&#xE9;e quand une erreur d'intervalle est rencontr&#xE9;e.</p>
+      </div>
+      <div class="content-code">
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">try&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;new&#xA0;Array(-</span><span style="color: #ffffff">5</span><span style="color: #ffcc00">);
+<br/>}&#xA0;catch&#xA0;(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;true
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">e&#xA0;</span><span style="color: #ffcc00">instanceof&#xA0;</span><span style="color: #ffffff">RangeError</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <h4>finally</h4>
+        <p>Le bloc finally s'utilise pour ex&#xE9;cuter des instructions apr&#xE8;s avoir essay&#xE9; d'ex&#xE9;cuter des instructions ou apr&#xE8;s avoir attrap&#xE9; une erreur. Il est utile pour effectuer un traitement qu'il y ait eu des erreurs ou non.</p>
+      </div>
+      <div class="content-code">
+        <strong>Bloc finally</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">try&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;var&#xA0;</span><span style="color: #ffffff">taille&#xA0;</span><span style="color: #ffcc00">=&#xA0;</span><span style="color: #ffffff">tableau</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">length</span><span style="color: #ffcc00">;
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"try"</span><span style="color: #ffcc00">);
+<br/>}&#xA0;catch&#xA0;(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;catch
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"catch"</span><span style="color: #ffcc00">);
+<br/>}&#xA0;finally&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;finally
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"finally"</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <h3 id="c_03_throw">La lev&#xE9;e d'exceptions</h3>
+      <div class="content-box">
+        <h4>throw</h4>
+        <p>L'instruction throw l&#xE8;ve une exception.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>throw expression;</em>
+      </div>
+      <div class="content-box">
+        <p>Contrairement &#xE0; d'autres langages, JavaScript ne l&#xE8;ve pas d'exceptions de type Exception. Il est possible d'utiliser une valeur de n'importe quel type comme exception.</p>
+      </div>
+      <div class="content-code">
+        <strong>Instruction throw</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">try&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;throw&#xA0;</span><span style="color: #2aa198">"Hello&#xA0;World"</span><span style="color: #ffcc00">;
+<br/>}&#xA0;catch&#xA0;(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;string
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">typeof&#xA0;</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">));
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <strong>Objet Error</strong>
+        <p>Bien que l'on puisse lever n'importe quel type d'exception, l'instruction try catch est l&#xE0; pour attraper des erreurs. Nous avons observ&#xE9; diff&#xE9;rents objets repr&#xE9;sentant des erreurs, ils h&#xE9;ritent tous de l'objet Error.</p>
+      </div>
+      <div class="content-syntaxe">
+        <em>var Error = new Error([message[, fileName[, lineNumber]]]);</em>
+      </div>
+      <div class="content-box">
+        <p>Pour cr&#xE9;er un objet Error, nous allons cr&#xE9;er une instance de Error. Une instance s'obtient en utilisant l'op&#xE9;rateur new suivi du nom d'un constructeur, dans le cas pr&#xE9;sent Error. Nous verrons plus tard ce qu'est un constructeur mais cette explication suffit pour cr&#xE9;er des erreurs &#xE0; partir des objets d&#xE9;j&#xE0; pr&#xE9;sent&#xE9;s.</p>
+        <p>Le constructeur poss&#xE8;de trois arguments optionnels, pour pr&#xE9;ciser le message, le nom du fichier et le num&#xE9;ro de la ligne. Les deux derniers param&#xE8;tres ne sont pas standardis&#xE9;s et il est conseill&#xE9; de ne pas les utiliser.</p>
+      </div>
+      <div class="content-code">
+        <strong>new Error</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">try&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;throw&#xA0;new&#xA0;</span><span style="color: #ffffff">Error</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Erreur"</span><span style="color: #ffcc00">);
+<br/>}&#xA0;catch&#xA0;(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Erreur
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">message</span><span style="color: #ffcc00">);
+<br/>}</span>
+</span>
+</code>
+      </div>
+      <div class="content-box">
+        <p>Tous les objets poss&#xE8;dent une m&#xE9;thode pour retourner leur repr&#xE9;sentation sous forme de chaine de caract&#xE8;res: la m&#xE9;thode toString().</p>
+      </div>
+      <div class="content-code">
+        <strong>toString</strong>
+        <code><span style="color: #ffffff">
+<span style="color: #ffffff">
+</span><span style="color: #ffcc00">try&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;throw&#xA0;new&#xA0;</span><span style="color: #ffffff">Error</span><span style="color: #ffcc00">(</span><span style="color: #2aa198">"Erreur"</span><span style="color: #ffcc00">);
+<br/>}&#xA0;catch&#xA0;(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">)&#xA0;{
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #8c8c8c">//&#xA0;Error:&#xA0;Erreur
+<br/>&#xA0;&#xA0;&#xA0;&#xA0;</span><span style="color: #ffffff">console</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">log</span><span style="color: #ffcc00">(</span><span style="color: #ffffff">e</span><span style="color: #ffcc00">.</span><span style="color: #ffffff">toString</span><span style="color: #ffcc00">());
+<br/>}</span>
+</span>
+</code>
+      </div>
+    </div>
+  </body>
+</html>
