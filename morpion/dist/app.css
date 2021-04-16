@@ -1,0 +1,34 @@
+body {
+  height: 100vh; }
+  body .navbar {
+    height: 10vh; }
+  body main {
+    flex: 1 0 auto; }
+    body main aside {
+      height: 20%; }
+      @media screen and (min-width: 768px) {
+        body main aside {
+          height: 100%; } }
+    body main .clearfix.d-inline-block {
+      margin-bottom: -0.4em; }
+    body main .border {
+      box-sizing: border-box; }
+
+.case {
+  height: 24vh;
+  width: 22vh;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+  cursor: pointer; }
+  @media screen and (orientation: portrait) {
+    .case {
+      height: 30vw;
+      width: 30vw; } }
+  .case.circle {
+    cursor: default;
+    background-image: url(67bb30171ba612643ebbe9e5665d6b20.png); }
+  .case.cross {
+    cursor: default;
+    background-image: url(f00224be59809adc5987482f92ad5108.png); }
+
