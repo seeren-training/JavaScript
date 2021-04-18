@@ -22,6 +22,7 @@ Les intégrateur ont bien travaillé sur l'affichage d'un jeu de morpion mais le
 
 Les identifiants suivants sont disponibles:
 
+* timerTime
 * timerStart
 * timerPause
 * timerResume
