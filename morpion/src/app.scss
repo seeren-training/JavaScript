@@ -28,7 +28,6 @@ body {
     background-repeat: no-repeat;
     background-size: 50%;
     background-position: center;
-    cursor: pointer;
     @media screen and (orientation: portrait) {
         & {
             height: 30vw;
@@ -36,7 +35,6 @@ body {
         }
     }
     &.circle {
-        cursor: default;
         background-image: url(./../assets/circle.png);
     }
     &.cross {

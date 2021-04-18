@@ -19,14 +19,12 @@ body {
   width: 22vh;
   background-repeat: no-repeat;
   background-size: 50%;
-  background-position: center;
-  cursor: pointer; }
+  background-position: center; }
   @media screen and (orientation: portrait) {
     .case {
       height: 30vw;
       width: 30vw; } }
   .case.circle {
-    cursor: default;
     background-image: url(67bb30171ba612643ebbe9e5665d6b20.png); }
   .case.cross {
     cursor: default;
