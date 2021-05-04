@@ -46,6 +46,7 @@ module.exports = {
             port: 3000,
             files: [
                 './index.html',
+                './src/*'
             ],
             server: {
                 baseDir: './',
