@@ -1,3 +1,9 @@
+let counterPlayer = 0;
+let counterCPU = 0;
+let timeoutId = 0;
+const scorePlayer = $("#scorePlayer");
+const scoreCPU = $("#scoreCPU");
+const markList = [];
 const results = [
     [0, 1, 2],
     [3, 4, 5],
@@ -9,14 +15,59 @@ const results = [
     [2, 4, 6],
 ];
 
-const mark = (e) => {
-    const target = $(e.target);
-    if (false === target.hasClass('circle')) {   
-        target.addClass('circle');
-        if (hasWin('circle')) {
-            console.log("Partie gagnée");
-            disable();
+const markCPU = () => {
+    let resultIndex = getResultsTarget();
+    for (const key in results[resultIndex]) {
+        const resultCase = $("#case" + results[resultIndex][key]);
+        if (false === resultCase.hasClass('circle')) {
+            return mark(resultCase, 'cross');
         }
+    }
+};
+
+const getResultsTarget = () => {
+    let resultIndex = 0;
+    let markNumber = 0;
+    for(const key in results) {
+        for (const subkey in results[key]) {
+            const curentCase = $("#case" + results[key][subkey]);
+            if (curentCase.hasClass('cross')) {
+                markList[key] = [];
+                break;
+            }
+            if (curentCase.hasClass('circle')
+            && -1 === markList[key].indexOf(results[key][subkey])) {
+                markList[key].push(results[key][subkey]);
+            }
+        }
+    }
+    for (const key in markList) {
+        if (markNumber < markList[key].length) {
+            markNumber = markList[key].length;
+            resultIndex = key;
+        }
+    }
+    return resultIndex;
+};
+
+const markPlayer = (e) => {
+    if ($(".circle").length === $(".cross").length) {
+        mark($(e.target), 'circle');
+    }
+};
+
+const mark = (target, shape) => {
+    if (true === target.hasClass(shape)) {   
+        return;
+    }
+    target.addClass([shape, 'mark']);
+    if (hasWin(shape)) {
+        terminate(shape);
+    } else if (9 === $(".mark").length) {
+        terminate();
+    }
+     else if ('circle' === shape) {
+        timeoutId = setTimeout(markCPU, 1000);
     }
 };
 
@@ -31,14 +82,36 @@ const hasWin = (shape) => {
     return false;
 };
 
+const terminate = (shape) => {
+    clearTimeout(timeoutId);
+    disable();
+    chronoPause();
+    btnToogle(btnResume, btnStart);
+    if ('circle' === shape) {
+        counterPlayer = counterPlayer + 1;
+        scorePlayer.text(counterPlayer);
+    } else if ('cross' === shape){
+        counterCPU = counterCPU + 1;
+        scoreCPU.text(counterCPU)
+    }
+};
+
+const start = () => {
+    $(".case").removeClass(["circle", "cross", "mark"]);
+    for (const key in results) {
+        markList.push([]);
+    }
+    enable();
+};
+
 const enable = () => {
-    $(".case").on("click", mark);
+    $(".case").on("click", markPlayer);
 };
 
 const disable = () => {
-    $(".case").off("click", mark);
+    $(".case").off("click", markPlayer);
 };
 
-$("#timerStart").on("click", enable);
+$("#timerStart").on("click", start);
 $("#timerPause").on("click", disable);
 $("#timerResume").on("click", enable);

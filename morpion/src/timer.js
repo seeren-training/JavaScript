@@ -13,12 +13,14 @@ const btnToogle = (current, next) => {
 };
 
 const increment = () => {
-    secondPast = secondPast + 1;
     chrono.text(new Date(secondPast * 1000).toISOString().substr(14, 5));
+    secondPast = secondPast + 1;
 };
 
 const chronoStart = () => {
     btnToogle(btnStart, btnResume);
+    secondPast = 0;
+    increment();
     chronoResume();
 };
 
