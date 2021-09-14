@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript ECMA</title>
+    <link type="text/css" rel="stylesheet" href="./build/material-icons.css">
+    <link type="text/css" rel="stylesheet" href="./build/theme.css">
+    <link type="text/css" rel="stylesheet" href="./build/ui-design.css">
+    <link type="text/css" rel="stylesheet" href="./build/weather.css">
+</head>
+
+<body>
+    <location class="w-12 mdl-layout mdl-js-layout">
+        <h4 class="grey-50 w-12 center mdl-layout-title">
+            <city>
+                <div class="w-12 top-0 mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                <span class="smaller icon material-icons">place</span> Paris
+            </city>
+        </h4>
+        <cities class="mdl-layout__drawer">
+            <span class="center mdl-layout-title">Cities</span>
+            <nav class="mdl-navigation ui grey-900">
+                <a class="bg-grey-300 mdl-navigation__link">
+                    Paris <span class="pink-500 icon material-icons">place</span>
+                </a>
+                <a class="mdl-navigation__link">
+                    Foo <span class="icon material-icons">highlight_off</span>
+                </a>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="sample6" placeholder="City">
+                        <label class="mdl-textfield__label" fcitiesor="sample-expandable">Expandable Input</label>
+                    </div>
+                </div>
+            </nav>
+            <label class="mdl-button mdl-js-button mdl-button--icon mdl-button--fab mdl-button--colored" for="sample6">
+                <i class="material-icons">add</i>
+            </label>
+            <br />
+            &nbsp;
+        </cities>
+    </location>
+    <climat class="mdl-layout__content day">
+        <temperature class="block w-12 vh-4 grey-50 v-middle">
+            <span class="inline-block w-12 h-1 v-middle"></span>
+            <span class="inline-block w-1 h-4 v-middle"></span>
+            <div class="w-12 v-center center">
+                <span class="font-light font-4">33<span class="lighter">°</span></span>
+                <br>
+                <br>
+                <span class="block w-12 font-1-25">Description</span>
+            </div>
+        </temperature>
+        <humidity class="block w-12 vh-3 grey-50">
+            <span class="inline-block fix w-1 vh-3 v-middle"></span>
+            <div class="inline-block fix w-10 v-middle center">
+                <p class="inline-block w-4 fix">
+                    <span class="light icon material-icons">bubble_chart</span>
+                    <br>
+                    <span>20<span class="ui smaller"><span class="ui smaller"> %</span></span></span>
+                </p>
+                <p class="inline-block w-4 fix">
+                    <span class="light icon material-icons">toys</span>
+                    <br>
+                    <span>20<span class="smaller"><span class="smaller"> km/h</span></span></span>
+                </p>
+                <p class="inline-block w-4 fix">
+                    <span class="light icon material-icons">import_export</span>
+                    <br>
+                    <span>20</span>
+                </p>
+            </div>
+        </humidity>
+        <pollution class="w-12 h-max-4">
+            <ul class="h-4 mdl-list grey-50">
+                <div class="w-12 center grey-50 mdl-list__item">
+                    <span class="lighter left w-5  mdl-list__item-primary-content">
+                        Air Quality
+                    </span>
+                    <div class="w-3 w-sm-2 right">
+
+                        <span class="ui bigger">
+                            40
+                        </span>
+                        <span class="icon material-icons">
+                            thumb_down
+                        </span>
+                    </div>
+                </div>
+                <div class="w-12 center grey-50 mdl-list__item">
+                    <span class="left w-5 mdl-list__item-primary-content">
+                        Fine Particle
+                    </span>
+                    <div class="w-3 w-sm-2 right">
+                        <span>
+                            43
+                        </span>
+                        <span class="icon material-icons">
+                            autorenew
+                        </span>
+                    </div>
+                </div>
+                <div class="w-12 center grey-50 mdl-list__item">
+                    <span class="left w-5 w-sm-5 mdl-list__item-primary-content">
+                        Ozone
+                    </span>
+                    <div class="w3 w-sm-2 right">
+                        <span>
+                            200
+                        </span>
+                        <span class="icon material-icons">
+                            thumb_up
+                        </span>
+                    </div>
+                </div>
+            </ul>
+        </pollution>
+    </climat>
+    <script type="text/javascript" src="./build/material.js"></script>
+</body>
+
+</html>
