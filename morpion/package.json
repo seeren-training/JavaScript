@@ -1,0 +1,17 @@
+{
+  "name": "morpion",
+  "version": "1.0.0",
+  "description": "Les intégrateur ont bien travaillé sur l'affichage d'un jeu de morpion mais leur compétence s'arrête là: ils emettent le souhaite suivant pour l'interface:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cyril",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.1.1",
+    "jquery": "^3.6.0",
+    "liquify-js": "^1.0.4",
+    "normalize.css": "^8.0.1"
+  }
+}
