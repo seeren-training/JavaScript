@@ -17,22 +17,10 @@ if ("John" === "Doe" || "Doe" !== "Bill") {
 }
 
 // Boucle
-// Récupérer la taille d'un tableau
-// monArray.length
 for (let i = 0; index < monArray.length; i++) {
 }
 
 // Point n'est plus l'opérateur de concatenation
 console.log("Hello" + "World");
 // Le point est un opérateur pour accéder à des propriétés
-// count()
-// Est remplacé par .length
-// monArray.length
-
-
-
-
-
-
-
-
+// count($monArray) est remplacé par monArray.length
