@@ -1,6 +1,4 @@
-
-
-
+const navbar = $(".navbar");
 let id = null;
 let i = 0;
 
@@ -13,23 +11,6 @@ const sayHello = () => {
     }
 };
 
-
-// 3 - Je l'invoque récursivement via les timers
-id = setInterval(sayHello, 2000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const sayHelloTo = (firstName) => {
     console.log("Hello " + firstName);
 };
@@ -39,9 +20,10 @@ sayHello();
 sayHelloTo("John");
 sayHelloTo("Bob");
 
-const navbar = $(".navbar");
 
 // 2 - Je l'invoque evenementiellement
 navbar.on("click", sayHello);
 
+// 3 - Je l'invoque récursivement via les timers
+id = setInterval(sayHello, 2000);
 
