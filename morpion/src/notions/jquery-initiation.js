@@ -9,10 +9,26 @@ navBarBrand.addClass('foo');
 navBarBrand.toggleClass('foo');
 navBarBrand.removeClass('foo');
 
-// Ajouter un évènement
-const maFonction = () => {
-    console.log('click');
+
+const monAutreFonction = () => {
+    console.log('Autre click');
+};
+
+navBarBrand.on('click', monAutreFonction);
+
+
+
+
+
+
+// Définire la cible de l'évènement
+const maFonction = (e) => {
+    // Il faut le convertir en élément jQuery
+    const target = $(e.target);
+    console.log(target);
 };
 navBarBrand.on('click', maFonction);
 
-// Cibler la cible de l'évènement
+
+
+

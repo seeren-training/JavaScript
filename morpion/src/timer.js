@@ -13,7 +13,7 @@ const increment = () => {
 };
 
 const toggleBtn = (on, off) => {
-    const classes = 'd-block d-non';
+    const classes = 'd-block d-none';
     on.toggleClass(classes);
     off.toggleClass(classes);
 };
