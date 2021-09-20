@@ -11,6 +11,7 @@ const sayHello = () => {
     }
 };
 
+// Une fonction peut recevoir un ou plusieurs arguments séparés par une virgule
 const sayHelloTo = (firstName) => {
     console.log("Hello " + firstName);
 };
@@ -20,10 +21,15 @@ sayHello();
 sayHelloTo("John");
 sayHelloTo("Bob");
 
-
 // 2 - Je l'invoque evenementiellement
 navbar.on("click", sayHello);
 
 // 3 - Je l'invoque récursivement via les timers
 id = setInterval(sayHello, 2000);
 
+// Une fonction peut renvoyer une valeur
+const getTTC = (priceHT) => {
+    return priceHT + (priceHT * .2);
+};
+
+const priceTTC = getTTC(100);

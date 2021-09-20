@@ -9,17 +9,12 @@ navBarBrand.addClass('foo');
 navBarBrand.toggleClass('foo');
 navBarBrand.removeClass('foo');
 
-
 const monAutreFonction = () => {
     console.log('Autre click');
 };
 
+// Ajouter un écouteur
 navBarBrand.on('click', monAutreFonction);
-
-
-
-
-
 
 // Définire la cible de l'évènement
 const maFonction = (e) => {
@@ -27,6 +22,7 @@ const maFonction = (e) => {
     const target = $(e.target);
     console.log(target);
 };
+
 navBarBrand.on('click', maFonction);
 
 
