@@ -16,8 +16,8 @@ for (let i = 0; i < actionList.length; i++) {
 }
 
 // Boucle for in
-for (const i in caseList) {
-    console.log(caseList[i]);
+for (const i in actionList) {
+    console.log(actionList[i]);
 }
 
 // Boucle for of
