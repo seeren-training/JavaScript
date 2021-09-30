@@ -2,7 +2,8 @@ const btnStart = $("#timerStart");
 const btnPause = $("#timerPause");
 const btnResume = $("#timerResume");
 const chrono = $("#timerTime");
-let secondPast = 0;
+
+let secondPast = null;
 let intervalId = null;
 
 const btnToogle = (current, next) => {
@@ -26,12 +27,16 @@ const chronoStart = () => {
 
 const chronoPause = () => {
     btnToogle(btnPause, btnResume);
-    clearInterval(intervalId);
+    chronoStop();
 };
 
 const chronoResume = () => {
     btnToogle(btnResume, btnPause);
     intervalId = setInterval(increment, 1000);
+};
+
+const chronoStop = () => {
+    clearInterval(intervalId);
 };
 
 btnStart.on("click", chronoStart);

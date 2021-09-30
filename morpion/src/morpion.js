@@ -1,6 +1,3 @@
-let counterPlayer = 0;
-let counterCPU = 0;
-let timeoutId = 0;
 const scorePlayer = $("#scorePlayer");
 const scoreCPU = $("#scoreCPU");
 const markList = [];
@@ -14,6 +11,10 @@ const results = [
     [0, 4, 8],
     [2, 4, 6],
 ];
+
+let counterPlayer = 0;
+let counterCPU = 0;
+let timeoutId = 0;
 
 const markCPU = () => {
     let resultIndex = getResultsTarget();
@@ -65,9 +66,8 @@ const mark = (target, shape) => {
         terminate(shape);
     } else if (9 === $(".mark").length) {
         terminate();
-    }
-     else if ('circle' === shape) {
-        timeoutId = setTimeout(markCPU, 1000);
+    } else if ('circle' === shape) {
+        timeoutId = setTimeout(markCPU, 2000);
     }
 };
 
@@ -83,7 +83,6 @@ const hasWin = (shape) => {
 };
 
 const terminate = (shape) => {
-    clearTimeout(timeoutId);
     disable();
     chronoPause();
     btnToogle(btnResume, btnStart);
@@ -97,6 +96,7 @@ const terminate = (shape) => {
 };
 
 const start = () => {
+    markList.splice(0);
     $(".case").removeClass(["circle", "cross", "mark"]);
     for (const key in results) {
         markList.push([]);
@@ -106,9 +106,13 @@ const start = () => {
 
 const enable = () => {
     $(".case").on("click", markPlayer);
+    if ($(".circle").length > $(".cross").length) {
+        timeoutId = setTimeout(markCPU, 1000);
+    }
 };
 
 const disable = () => {
+    clearTimeout(timeoutId);
     $(".case").off("click", markPlayer);
 };
 
